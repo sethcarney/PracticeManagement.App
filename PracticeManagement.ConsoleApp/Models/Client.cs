@@ -21,10 +21,10 @@ namespace PracticeManagement.ConsoleApp.Models
                 clientNumber = value;
             }
         }
-       public Client( DateTime openDate, string name, string notes)
+       public Client( string name, string notes)
         {
             Id = ++numclients;
-            OpenDate = openDate;
+            OpenDate = DateTime.Now;
             isActive = true;
             Name = name;
             Notes = notes;

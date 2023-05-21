@@ -8,16 +8,36 @@ namespace PracticeManagement.ConsoleApp.Models
 {
     internal class Project
     {
-        public Project(int id, bool isActive, string shortName, string longName, int clientId, string clientName)
+        private static int projectNumber = 0;
+        public Project(string shortName, string longName)
         {
-            Id = id;
-            IsActive = isActive;
+            Id = ++projectNumber;
+            IsActive = true;
+            OpenDate = DateTime.Now;
             ShortName = shortName;
             LongName = longName;
-            ClientId = clientId;
-            ClientName = clientName;
+            ClientId = -1;
+            ClientName = "";
         }
 
+        //This function will return true on success, and false if the client is already set
+        public bool linkClient (int clientID)
+        {
+            if (this.ClientId == -1)
+            {
+                this.ClientId = clientID;
+
+                //Insert helper function that can query client name using id && verify it is real client
+
+                return true;
+            }
+            return false;
+        }
+
+        public void display ()
+        {
+            Console.WriteLine(this.Id + "\t" + this.ShortName + "\t" + this.LongName + "\t" + this.OpenDate.ToString()+ "\tLinked Client:"+this.ClientId+"\n");
+        }
         public int Id { get; private set; }
         public DateTime OpenDate { get; private set; }
         public DateTime ClosedDate { get; private set; }

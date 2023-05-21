@@ -21,20 +21,23 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     "l -> list all projects\n"+
                     "d -> delete project\n"+
                     "r -> remove client\n" +
+                    "link -> project + client\n"+
+                    "u -> update a client or project\n"+
                     "Enter your selection\n");
 
                 string input = Console.ReadLine();
+                Console.WriteLine("\n");
                 if (input == "q")
                     break;
 
                 if (input == "a")
                 {
-                    DateTime start = DateTime.Now;
+                    
                     Console.WriteLine("Enter name\n");
                     string Name = Console.ReadLine();
                     Console.WriteLine("Enter notes\n");
                     string Notes = Console.ReadLine();
-                    Client myClient = new Client(start, Name, Notes);
+                    Client myClient = new Client( Name, Notes);
                     clients.Add (myClient);
                     Console.WriteLine("Client successfully added\n");
                 }
@@ -45,7 +48,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                 else if (input == "r")
                 {
                     Console.WriteLine("Enter client number to delete\n");
-                    int delNum = Convert.ToInt32(Console.ReadLine());
+                    int delNum = Convert.ToInt32(Console.ReadLine());http://help.instructure.com/
                     var result = clients.Find(x => x.Id == delNum);
                     if (result == null)
                         Console.WriteLine("That id is not present");
@@ -63,6 +66,21 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     int delNum = Convert.ToInt32(Console.ReadLine());
                     projects.Find(x => x.Id == delNum);
                     Console.WriteLine("Successfully deleted");
+                }
+                else if ( input == "p")
+                {
+                    Console.WriteLine("Enter the short Name \n");
+                    string shortname = Console.ReadLine();
+                    Console.WriteLine("Enter the long Name \n");
+                    string longName = Console.ReadLine();
+
+                    Project newProj = new Project(shortname, longName);
+                    projects.Add(newProj);
+                    Console.WriteLine("Project added successfully\n");
+                }
+                else if ( input == "l")
+                {
+                    projects.ForEach(project => { project.display(); });
                 }
             }
             
