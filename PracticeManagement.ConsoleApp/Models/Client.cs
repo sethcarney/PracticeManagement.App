@@ -32,12 +32,12 @@ namespace PracticeManagement.ConsoleApp.Models
         public int Id { get; private set; }
 
         public DateTime OpenDate { get; private set; }
-        public DateTime ClosedDate { get; private set; }
+        public DateTime ClosedDate { get; set; }
 
-        public bool isActive { get; private set; }
+        public bool isActive { get; set; }
 
-        public string Name { get; private set; }
-        public string Notes { get; private set; }
+        public string Name { get; set; }
+        public string Notes { get;set; }
 
         public void display ()
         {

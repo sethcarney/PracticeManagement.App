@@ -42,8 +42,8 @@ namespace PracticeManagement.ConsoleApp.Models
         public DateTime OpenDate { get; private set; }
         public DateTime ClosedDate { get; private set; }
         public bool IsActive { get; private set; }
-        public string ShortName { get; private set; }
-        public string LongName { get; private set; }
+        public string ShortName { get; set; }
+        public string LongName { get; set; }
 
         public int ClientId { get; private set; }
         public string ClientName { get; private set;}
