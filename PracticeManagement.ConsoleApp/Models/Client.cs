@@ -6,43 +6,35 @@ using System.Threading.Tasks;
 
 namespace PracticeManagement.ConsoleApp.Models
 {
-  
-    internal class Client
+
+    public class Client
     {
-        private static int clientNumber = 0;
-        private int numclients
+        public Client(int id, string name, string notes)
         {
-            get
-            {
-                return clientNumber;
-            }
-            set
-            {
-                clientNumber = value;
-            }
-        }
-       public Client( string name, string notes)
-        {
-            Id = ++numclients;
+            Id = id;
             OpenDate = DateTime.Now;
             isActive = true;
             Name = name;
             Notes = notes;
         }
-        public int Id { get; private set; }
 
-        public DateTime OpenDate { get; private set; }
+        public Client()
+        {
+           Name = string.Empty;
+        }
+        public int Id { get; set; }
+
+        public DateTime OpenDate { get; set; }
         public DateTime ClosedDate { get; set; }
 
         public bool isActive { get; set; }
 
         public string Name { get; set; }
-        public string Notes { get;set; }
+        public string ? Notes { get; set; }
 
-        public void display ()
+        public override string ToString()
         {
-            Console.WriteLine(this.Id + "\t"+ this.Name + "\t"+ this.Notes + "\t" + this.OpenDate.ToString());
+            return $"{Id} . {Name} . {Notes}";
         }
-
     }
 }

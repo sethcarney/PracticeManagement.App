@@ -1,54 +1,96 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml.XPath;
 using PracticeManagement.ConsoleApp.Models;
 
 namespace PracticeManagement // Note: actual namespace depends on the project name.
 {
     internal class Program
     {
-      
+
         static public void Main(string[] args)
         {
-            List <Client> clients = new List <Client> ();
-            List <Project> projects = new List <Project> ();
+            List<Client> clients = new List<Client>();
+            List<Project> projects = new List<Project>();
 
+            while(true)
+            {
+                Console.WriteLine("C. Clients");
+                Console.WriteLine("P. Projects");
+                Console.WriteLine("Q. Quit");
+
+                String choice = Console.ReadLine() ?? String.Empty;
+                Console.WriteLine();
+                if (choice.Equals("C", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    clientMenu(clients);
+                }
+                else if (choice.Equals("P", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    projectMenu(projects);
+                }
+                else if (choice.Equals("Q",StringComparison.InvariantCultureIgnoreCase))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid menu selection");
+                }
+            }
+        }
+
+        public static void clientMenu(List<Client> clients)
+        { 
             while (true)
             {
-                Console.WriteLine(
-                    "a -> add Client\n" +
-                    "p -> add Project\n"+
-                    "c -> list all clients\n"+
-                    "l -> list all projects\n"+
-                    "d -> delete project\n"+
-                    "r -> remove client\n" +
-                    "link -> project + client\n"+
-                    "u -> update a client or project\n"+
-                    "Enter your selection\n");
+                Console.WriteLine("C. Create a Client");
+                Console.WriteLine("R. List Clients");
+                Console.WriteLine("U. Update a Client");
+                Console.WriteLine("D. Delete a Client");
+                Console.WriteLine("Q. Quit back to main menu");
 
-                string input = Console.ReadLine();
+
+                var input = Console.ReadLine() ?? string.Empty;
                 Console.WriteLine("\n");
-                if (input == "q")
+                //Quit if q or nothing
+                if (input == string.Empty || input.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
                     break;
 
-                if (input == "a")
+                if (input.Equals("C", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    
+                    Console.WriteLine("Enter a Id:\n");
+                    int id = int.Parse(Console.ReadLine() ?? "0");
                     Console.WriteLine("Enter name\n");
-                    string Name = Console.ReadLine();
+                    string Name = Console.ReadLine() ?? string.Empty;
                     Console.WriteLine("Enter notes\n");
-                    string Notes = Console.ReadLine();
-                    Client myClient = new Client( Name, Notes);
-                    clients.Add (myClient);
-                    Console.WriteLine("Client successfully added\n");
+                    string Notes = Console.ReadLine() ?? string.Empty;
+                    if (Name != string.Empty)
+                    {
+                        clients.Add(new Client
+                        {
+                            Id = id,
+                            Name = Name,
+                            Notes = Notes
+                        });
+                        Console.WriteLine("Client successfully added\n");
+                    }
+                    else
+                        Console.WriteLine("No name given\n");
+
                 }
-                else if (input == "c" )
+                else if (input.Equals("R", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    clients.ForEach(client => { client.display(); });
+                    clients.ForEach(Console.WriteLine);
+                    Console.WriteLine();
                 }
-                else if (input == "r")
+                else if (input.Equals("D", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Console.WriteLine("Enter client number to delete\n");
-                    int delNum = Convert.ToInt32(Console.ReadLine());http://help.instructure.com/
-                    var result = clients.Find(x => x.Id == delNum);
+                    clients.ForEach(Console.WriteLine);
+                    var delNum = Convert.ToInt32(Console.ReadLine() ?? "0");
+                    //var result = clients.Find(x => x.Id == delNum);
+                    var result = clients.FirstOrDefault(x => x.Id == delNum);
                     if (result == null)
                         Console.WriteLine("That id is not present");
                     else
@@ -56,36 +98,89 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                         clients.Remove(result);
                         Console.WriteLine("Successfully deleted");
                     }
-                    
+
 
                 }
-                else if (input == "d" )
+                else if (input.Equals("U", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Console.WriteLine("Enter client number to update\n");
+                    clients.ForEach(Console.WriteLine);
+                    var updateNum = Convert.ToInt32(Console.ReadLine() ?? "0");
+                    //var result = clients.Find(x => x.Id == delNum);
+                    var result = clients.FirstOrDefault(x => x.Id == updateNum);
+                    if (result == null)
+                        Console.WriteLine("That id is not present");
+                    else
+                    {
+                        Console.WriteLine("Enter new name\n");
+                        string Name = Console.ReadLine() ?? string.Empty;
+                        Console.WriteLine("Enter new notes\n");
+                        string Notes = Console.ReadLine() ?? string.Empty;
+                        if (Name != string.Empty)
+                        {
+                            result.Name = Name;
+                            result.Notes = Notes;
+                            Console.WriteLine("Client successfully updated\n");
+                        }
+                        else
+                            Console.WriteLine("No name given\n");
+                    }
+                }
+                else if (input.Equals("Q",StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return;
+                }
+                else
+                { Console.WriteLine("Invalid choice"); }
+            }
+        }
+
+        public static void projectMenu(List<Project>projects)
+        {
+            while (true)
+            {
+                Console.WriteLine("C. Create a Project");
+                Console.WriteLine("R. List Projects");
+                Console.WriteLine("U. Update a Project");
+                Console.WriteLine("D. Delete a Project");
+                Console.WriteLine("Q. Quit back to main menu");
+
+                string input = Console.ReadLine() ?? String.Empty;
+
+                if (input.Equals("C", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Console.WriteLine("Enter a Id:\n");
+                    int id = int.Parse(Console.ReadLine() ?? "0");
+                    Console.WriteLine("Enter short name");
+                    string shortName = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Enter long name");
+                    string longName = Console.ReadLine() ?? string.Empty;
+                    if (shortName != string.Empty && longName != string.Empty)
+                    {
+                        projects.Add(new Project
+                        {
+                            Id = id,
+                            ShortName = shortName,
+                            LongName = longName
+                        });
+                        Console.WriteLine("Project successfully added\n");
+                    }
+                    else
+                        Console.WriteLine("Invalid names given\n");
+
+                }
+                else if (input.Equals("R", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    projects.ForEach(Console.WriteLine);
+                    Console.WriteLine();
+                }
+                else if (input.Equals("D", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Console.WriteLine("Enter project number to delete\n");
-                    int delNum = Convert.ToInt32(Console.ReadLine());
-                    projects.Find(x => x.Id == delNum);
-                    Console.WriteLine("Successfully deleted");
-                }
-                else if ( input == "p")
-                {
-                    Console.WriteLine("Enter the short Name \n");
-                    string shortname = Console.ReadLine();
-                    Console.WriteLine("Enter the long Name \n");
-                    string longName = Console.ReadLine();
-
-                    Project newProj = new Project(shortname, longName);
-                    projects.Add(newProj);
-                    Console.WriteLine("Project added successfully\n");
-                }
-                else if ( input == "l")
-                {
-                    projects.ForEach(project => { project.display(); });
-                }
-                else if ( input == "d")
-                {
-                    Console.WriteLine("Enter client number to delete\n");
-                    int delNum = Convert.ToInt32(Console.ReadLine()); http://help.instructure.com/
-                    var result = projects.Find(x => x.Id == delNum);
+                    projects.ForEach(Console.WriteLine);
+                    var delNum = Convert.ToInt32(Console.ReadLine() ?? "0");
+                    //var result = clients.Find(x => x.Id == delNum);
+                    var result = projects.FirstOrDefault(x => x.Id == delNum);
                     if (result == null)
                         Console.WriteLine("That id is not present");
                     else
@@ -94,115 +189,49 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                         Console.WriteLine("Successfully deleted");
                     }
 
+
                 }
-                else if (input == "link")
+                else if (input.Equals("U", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine("Enter client Id\n");
-                    int clientNum = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Enter project Id\n");
-                    int projectNum = Convert.ToInt32(Console.ReadLine());
-                    var result = clients.Find(x => x.Id == clientNum);
-                    if (result == null) Console.WriteLine("Invalid client Id");
+                    Console.WriteLine("Enter project number to update");
+                    projects.ForEach(Console.WriteLine);
+                    var updateNum = Convert.ToInt32(Console.ReadLine() ?? "0");
+                    //var result = clients.Find(x => x.Id == delNum);
+                    var result = projects.FirstOrDefault(x => x.Id == updateNum);
+                    if (result == null)
+                        Console.WriteLine("That id is not present");
                     else
                     {
-                        var projectToChange = projects.Find(x => x.Id == projectNum);
-                        if (projectToChange == null) Console.WriteLine("Invalid project num");
-                        else
+                        Console.WriteLine("Enter new shortName");
+                        string shortName = Console.ReadLine() ?? string.Empty;
+                        Console.WriteLine("Enter new longName");
+                        string longName = Console.ReadLine() ?? string.Empty;
+                        if (shortName != string.Empty && longName != string.Empty)
                         {
-                            projectToChange.linkClient(result.Id);
-                            Console.WriteLine("Project successfully linked.\n");
-                        }
+                            Console.WriteLine("add a client id:");
+                            int linkedClient = Convert.ToInt32(Console.ReadLine() ?? "0");
+                            result.ShortName = shortName;
+                            result.LongName = longName;
+                            result.ClientId = linkedClient;
 
+                            Console.WriteLine("Project successfully updated\n");
+                        }
+                        else
+                            Console.WriteLine("Invalid fields given");
                     }
                 }
-                else if (input == "u")
+                else if (input.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine("Would you like to update project or client (p or c)\n");
-                    string choice = Console.ReadLine();
-                    if (choice == "c")
-                    {
-                        Console.WriteLine("which client would you like to update (provide id)\n");
-                        int currentID = Convert.ToInt32(Console.ReadLine());
-                        var result = clients.Find(x => x.Id == currentID);
-                        if (result == null) Console.WriteLine("That client does not exist !\n");
-                        else
-                        {
-                            Console.WriteLine("What member would you like to change\n"
-                                +"1 : Name\n"
-                                +"2 : Notes\n");
-
-
-                            int updatefield = Convert.ToInt32(Console.ReadLine());
-
-                            Console.WriteLine("Enter the new value\n");
-                            string newVal = Console.ReadLine();
-                            if (newVal != null)
-                            {
-                                if (updatefield == 1)
-                                {
-                                    result.Name = newVal;
-                                }
-                                else if (updatefield == 2)
-                                {
-                                    result.Notes = newVal;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Invalid request\n");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid request\n");
-                            }    
-                        }
-
-
-
-                    }
-                    else if (choice == "p")
-                    {
-                        Console.WriteLine("which project would you like to update (provide id)\n");
-                        int currentID = Convert.ToInt32(Console.ReadLine());
-                        var result = projects.Find(x => x.Id == currentID);
-                        if (result == null) Console.WriteLine("That client does not exist !\n");
-                        else
-                        {
-                            Console.WriteLine("What member would you like to change\n"
-                                + "1 : Short Name\n"
-                                + "2 : Long Name\n");
-
-
-                            int updatefield = Convert.ToInt32(Console.ReadLine());
-
-                            Console.WriteLine("Enter the new value\n");
-                            string newVal = Console.ReadLine();
-                            if (newVal != null)
-                            {
-                                if (updatefield == 1)
-                                {
-                                    result.ShortName = newVal;
-                                }
-                                else if (updatefield == 2)
-                                {
-                                    result.LongName = newVal;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Invalid request\n");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid request\n");
-                            }
-                        }
-                    }
+                    return;
                 }
+                else
+                { Console.WriteLine("Invalid choice"); }
+
+                Console.WriteLine();
+            }
+        }
+              
             }
             
            
         }
-
-    }
-}

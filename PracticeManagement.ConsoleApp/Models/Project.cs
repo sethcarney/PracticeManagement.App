@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PracticeManagement.ConsoleApp.Models
 {
     internal class Project
     {
-        private static int projectNumber = 0;
-        public Project(string shortName, string longName)
+        public Project(int id,string shortName, string longName)
         {
-            Id = ++projectNumber;
+            Id = id;
             IsActive = true;
             OpenDate = DateTime.Now;
             ShortName = shortName;
             LongName = longName;
             ClientId = -1;
             ClientName = "";
+        }
+
+        public Project() 
+        {
+            ShortName = String.Empty;
+            LongName = String.Empty;
+            ClientName = String.Empty;
+            ClientId= -1;
         }
 
         //This function will return true on success, and false if the client is already set
@@ -34,18 +42,18 @@ namespace PracticeManagement.ConsoleApp.Models
             return false;
         }
 
-        public void display ()
-        {
-            Console.WriteLine(this.Id + "\t" + this.ShortName + "\t" + this.LongName + "\t" + this.OpenDate.ToString()+ "\tLinked Client:"+this.ClientId+"\n");
-        }
-        public int Id { get; private set; }
-        public DateTime OpenDate { get; private set; }
-        public DateTime ClosedDate { get; private set; }
-        public bool IsActive { get; private set; }
+        public int Id { get;  set; }
+        public DateTime OpenDate { get;  set; }
+        public DateTime ClosedDate { get;  set; }
+        public bool IsActive { get;  set; }
         public string ShortName { get; set; }
         public string LongName { get; set; }
 
-        public int ClientId { get; private set; }
-        public string ClientName { get; private set;}
+        public int ClientId { get;  set; }
+        public string ClientName { get;  set;}
+        public override string ToString()
+        {
+            return $"{Id} . {ShortName} . {LongName} . {ClientId}";
+        }
     }
 }
