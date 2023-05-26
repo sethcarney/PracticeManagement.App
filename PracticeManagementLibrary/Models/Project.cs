@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace PracticeManagement.ConsoleApp.Models
 {
-    internal class Project
+    public class Project
     {
         public Project(int id,string shortName, string longName)
         {
