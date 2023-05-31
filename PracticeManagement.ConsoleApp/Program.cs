@@ -1,8 +1,5 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml.XPath;
-using PracticeManagement.ConsoleApp.Models;
-
+﻿using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
 namespace PracticeManagement // Note: actual namespace depends on the project name.
 {
     internal class Program
@@ -10,9 +7,8 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
 
         static public void Main(string[] args)
         {
-            List<Client> clients = new List<Client>();
             List<Project> projects = new List<Project>();
-
+            var myClientService = ClientService.Current;
             while(true)
             {
                 Console.WriteLine("C. Clients");
@@ -23,7 +19,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                 Console.WriteLine();
                 if (choice.Equals("C", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    clientMenu(clients);
+                    clientMenu();
                 }
                 else if (choice.Equals("P", StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -40,8 +36,9 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
             }
         }
 
-        public static void clientMenu(List<Client> clients)
-        { 
+        public static void clientMenu()
+        {
+            var myClientService = ClientService.Current;
             while (true)
             {
                 Console.WriteLine("C. Create a Client");
@@ -67,7 +64,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     string Notes = Console.ReadLine() ?? string.Empty;
                     if (Name != string.Empty)
                     {
-                        clients.Add(new Client
+                        myClientService.Add(new Client
                         {
                             Id = id,
                             Name = Name,
@@ -81,33 +78,26 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                 }
                 else if (input.Equals("R", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    clients.ForEach(Console.WriteLine);
+                    myClientService.Read();
                     Console.WriteLine();
                 }
                 else if (input.Equals("D", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Console.WriteLine("Enter client number to delete\n");
-                    clients.ForEach(Console.WriteLine);
+                    myClientService.Read();
                     var delNum = Convert.ToInt32(Console.ReadLine() ?? "0");
                     //var result = clients.Find(x => x.Id == delNum);
-                    var result = clients.FirstOrDefault(x => x.Id == delNum);
-                    if (result == null)
-                        Console.WriteLine("That id is not present");
-                    else
-                    {
-                        clients.Remove(result);
-                        Console.WriteLine("Successfully deleted");
-                    }
+                    myClientService.Delete(delNum);
 
 
                 }
                 else if (input.Equals("U", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Console.WriteLine("Enter client number to update\n");
-                    clients.ForEach(Console.WriteLine);
+                    myClientService.Read();
                     var updateNum = Convert.ToInt32(Console.ReadLine() ?? "0");
                     //var result = clients.Find(x => x.Id == delNum);
-                    var result = clients.FirstOrDefault(x => x.Id == updateNum);
+                    var result = myClientService.Get(updateNum);
                     if (result == null)
                         Console.WriteLine("That id is not present");
                     else

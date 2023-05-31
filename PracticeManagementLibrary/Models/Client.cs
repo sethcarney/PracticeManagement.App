@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PracticeManagement.ConsoleApp.Models
+namespace PracticeManagement.Library.Models
 {
 
     public class Client
