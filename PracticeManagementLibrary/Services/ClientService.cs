@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Services
@@ -32,6 +33,23 @@ namespace PracticeManagement.Library.Services
         private ClientService() 
         {
             clients = new List<Client>();
+            clients.Add(new Client
+                        {
+                            Id = 1,
+                            Name = "BOB",
+                            Notes = "Is cool"
+                        });
+            clients.Add(new Client
+            {
+                Id = 1,
+                Name = "Susan",
+                Notes = "Is even cooler"
+            });
+        }
+
+        public List<Client> currentClients
+        {
+            get { return clients; }
         }
 
         public Client? Get(int id)
@@ -54,6 +72,11 @@ namespace PracticeManagement.Library.Services
             {
                 clients.Remove(toRemove);
             }
+        }
+
+        public void Delete(Client s)
+        {
+            Delete(s.Id);
         }
         public void Read()
         {

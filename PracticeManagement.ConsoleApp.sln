@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeManagement.ConsoleA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeManagement.Library", "PracticeManagementLibrary\PracticeManagement.Library.csproj", "{74D37E86-93B3-4D98-A917-CD32FCA1018C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeManagement.MAUI", "PracticeManagement.MAUI\PracticeManagement.MAUI.csproj", "{98E29998-2484-4854-82F3-17CD20E0ABA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{74D37E86-93B3-4D98-A917-CD32FCA1018C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74D37E86-93B3-4D98-A917-CD32FCA1018C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74D37E86-93B3-4D98-A917-CD32FCA1018C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E29998-2484-4854-82F3-17CD20E0ABA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E29998-2484-4854-82F3-17CD20E0ABA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E29998-2484-4854-82F3-17CD20E0ABA1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{98E29998-2484-4854-82F3-17CD20E0ABA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E29998-2484-4854-82F3-17CD20E0ABA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E29998-2484-4854-82F3-17CD20E0ABA1}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
