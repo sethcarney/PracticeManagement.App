@@ -16,14 +16,15 @@ namespace PracticeManagement.MAUI
 
         
      
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Search_Clicked(object sender, EventArgs e)
         {
-            //(BindingContext as MainViewModel).Test1 = "Clicked";
+           (BindingContext as MainViewModel).Search();
         }
 
         private void Delete_Clicked(object sender, EventArgs e)
         {
             (BindingContext as MainViewModel).Delete();
         }
+
     }
 }

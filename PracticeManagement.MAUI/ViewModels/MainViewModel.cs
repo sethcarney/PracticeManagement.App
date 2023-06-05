@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,11 +14,13 @@ namespace PracticeManagement.MAUI.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         public Client SelectedClient { get; set; }
-        public List<Client> Clients
+        public ObservableCollection<Client> Clients
         {
             get
             {
-                return ClientService.Current.currentClients;
+                if(string.IsNullOrEmpty(Query))
+                    return new ObservableCollection<Client>(ClientService.Current.currentClients);
+                return new ObservableCollection<Client>(ClientService.Current.Search(Query));
             }
         }
 
@@ -28,6 +31,15 @@ namespace PracticeManagement.MAUI.ViewModels
                 return;
             }
             ClientService.Current.Delete(SelectedClient);
+            NotifyPropertyChanged("Clients");
+        }
+
+
+        public string Query { get; set; }
+
+        public void Search()
+        {
+            NotifyPropertyChanged("Clients");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

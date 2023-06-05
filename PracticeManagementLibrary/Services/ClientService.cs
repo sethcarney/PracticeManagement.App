@@ -78,6 +78,12 @@ namespace PracticeManagement.Library.Services
         {
             Delete(s.Id);
         }
+
+        public List<Client> Search (string query)
+        {
+            return clients.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+        }
+
         public void Read()
         {
             clients.ForEach(Console.WriteLine);

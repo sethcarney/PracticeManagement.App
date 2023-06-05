@@ -18,13 +18,13 @@
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Entry Grid.Column="0"  Text="Placeholder" ></Entry>
-                <Button Grid.Column="1" Text="Search" Clicked="Button_Clicked"></Button>
+                <Entry Grid.Column="0"  Text="{Binding Path=Query, Mode=TwoWay}" TextChanged="Search_Clicked"></Entry>
+                <Button Grid.Column="1" Text="Search" Clicked="Search_Clicked"></Button>
             </Grid>
 
             <Grid Grid.Row="1">
                 <ListView ItemsSource="{Binding Path=Clients}"
-                          SelectedItem="{Binding Path=SelectedStudent, Mode=TwoWay}">
+                          SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}">
                     
                 </ListView>
             </Grid>
