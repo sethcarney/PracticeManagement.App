@@ -44,8 +44,8 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             else
             {
-                var newestClient = new Client { Name = UpdatedName, Notes = UpdatedNotes };
-                ClientService.Current.Add(newestClient);
+                SelectedClient = new Client { Name = UpdatedName, Notes = UpdatedNotes };
+                
             }
         }
 

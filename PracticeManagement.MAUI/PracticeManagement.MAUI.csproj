@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
@@ -57,19 +58,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\ClientViewDetail.xaml.cs">
-	    <DependentUpon>ClientViewDetail.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\ClientsView.xaml.cs">
 	    <DependentUpon>ClientsView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Sample.xaml.cs">
+	    <DependentUpon>Sample.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\ClientViewDetail.xaml">
+	  <MauiXaml Update="Views\ClientsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ClientsView.xaml">
+	  <MauiXaml Update="Views\Sample.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
