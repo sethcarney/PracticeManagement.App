@@ -13,7 +13,7 @@ namespace PracticeManagement.Library.Services
         private static ClientService? instance;
         private List<Client> clients;
         private static object _lock = new object();
-        
+        private static int _counter = 0;
         public static ClientService Current
         {
             get
@@ -58,9 +58,11 @@ namespace PracticeManagement.Library.Services
         }
 
         public void Add(Client? client)
-        {
+        {   
+
             if(client != null)
             {
+                client.Id = _counter++;
                 clients.Add(client);
             }
         }

@@ -12,19 +12,16 @@ namespace PracticeManagement.MAUI
         {
             InitializeComponent();
             BindingContext = new MainViewModel();
+           
         }
 
         
      
-        private void Search_Clicked(object sender, EventArgs e)
-        {
-           (BindingContext as MainViewModel).Search();
-        }
 
-        private void Delete_Clicked(object sender, EventArgs e)
+        private void ClientView_Clicked(object sender, EventArgs e)
         {
-            (BindingContext as MainViewModel).Delete();
-        }
+            Shell.Current.GoToAsync("//Clients");
 
+        }
     }
 }

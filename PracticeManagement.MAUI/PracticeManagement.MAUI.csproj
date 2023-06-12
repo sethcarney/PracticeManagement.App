@@ -56,4 +56,22 @@
 	  <ProjectReference Include="..\PracticeManagementLibrary\PracticeManagement.Library.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\ClientViewDetail.xaml.cs">
+	    <DependentUpon>ClientViewDetail.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ClientsView.xaml.cs">
+	    <DependentUpon>ClientsView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\ClientViewDetail.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ClientsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
