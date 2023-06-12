@@ -33,7 +33,8 @@ namespace PracticeManagement.Library.Services
         private ClientService() 
         {
             clients = new List<Client>();
-            clients.Add(new Client
+            /*
+             * clients.Add(new Client
                         {
                             Id = 1,
                             Name = "BOB",
@@ -45,6 +46,7 @@ namespace PracticeManagement.Library.Services
                 Name = "Susan",
                 Notes = "Is even cooler"
             });
+            */
         }
 
         public List<Client> currentClients

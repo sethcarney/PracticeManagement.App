@@ -18,7 +18,7 @@ namespace PracticeManagement.MAUI.ViewModels
         public string? UpdatedName { get; set; }
         public string? UpdatedNotes { get; set; }
 
-        public ClientViewDetailModel(Client? currentClient) 
+        public ClientViewDetailModel(Client currentClient) 
         {
             SelectedClient = currentClient;
             if (SelectedClient != null)
@@ -28,11 +28,24 @@ namespace PracticeManagement.MAUI.ViewModels
             }
         }
 
+        public ClientViewDetailModel( )
+        {
+            
+            UpdatedName = "";
+            UpdatedNotes = "";
+            
+        }
+
         public void Update()
         { if(SelectedClient != null)
             { 
                SelectedClient.Name = UpdatedName;
                SelectedClient.Notes = UpdatedNotes;
+            }
+            else
+            {
+                var newestClient = new Client { Name = UpdatedName, Notes = UpdatedNotes };
+                ClientService.Current.Add(newestClient);
             }
         }
 

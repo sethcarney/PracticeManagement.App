@@ -29,9 +29,15 @@ namespace PracticeManagement.MAUI.Views
                 (BindingContext as ClientsViewViewModel).Delete();
         }
 
-        private async void Modify_Clicked(object sender, EventArgs e)
+        private async void Add_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ClientViewDetail());
+            (BindingContext as ClientsViewViewModel).Reset();
+        }
+        private async void Edit_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new ClientViewDetail((BindingContext as ClientsViewViewModel).getCurrentClient()));
+            (BindingContext as ClientsViewViewModel).Reset(); 
             
         }
     }

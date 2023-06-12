@@ -8,10 +8,16 @@ namespace PracticeManagement.MAUI.Views
     public partial class ClientViewDetail : ContentPage
     {
   
-        public ClientViewDetail(Client? currentClient)
+        public ClientViewDetail(Client currentClient)
         {
             InitializeComponent();
             BindingContext = new ClientViewDetailModel(currentClient);
+        }
+
+        public ClientViewDetail()
+        {
+            InitializeComponent();
+            BindingContext = new ClientViewDetailModel();
         }
 
         private async void Submit_Clicked(object sender, EventArgs e)

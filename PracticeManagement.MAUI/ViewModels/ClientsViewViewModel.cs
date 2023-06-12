@@ -39,6 +39,12 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged("Clients");
         }
 
+        public void Reset()
+        {
+            Query = "";
+            NotifyPropertyChanged("Clients");
+        }
+
 
         public string Query { get; set; }
 

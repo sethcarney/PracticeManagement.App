@@ -9,9 +9,8 @@ namespace PracticeManagement.Library.Models
 
     public class Client
     {
-        public Client(int id, string name, string notes)
+        public Client(string name, string notes)
         {
-            Id = id;
             OpenDate = DateTime.Now;
             isActive = true;
             Name = name;
