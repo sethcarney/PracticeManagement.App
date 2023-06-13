@@ -10,6 +10,8 @@
             VerticalOptions="Center">
             <Button Text="Client View"
                    Clicked="ClientView_Clicked"></Button>
+            <Button Text="Project View"
+                    Clicked="ProjectView_Clicked"></Button>
             
             
         </VerticalStackLayout>

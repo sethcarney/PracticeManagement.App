@@ -8,13 +8,13 @@ using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Services
 {
-    public class ClientService
+    public class ProjectService
     {
-        private static ClientService? instance;
-        private List<Client> clients;
+        private static ProjectService? instance;
+        private List<Project> projects;
         private static object _lock = new object();
         private static int _counter = 1;
-        public static ClientService Current
+        public static ProjectService Current
         {
             get
             {
@@ -23,24 +23,24 @@ namespace PracticeManagement.Library.Services
                 {
                     if (instance == null)
                     {
-                        instance = new ClientService();
+                        instance = new ProjectService();
                     }
                 }
                 return instance;
             }
         }
 
-        private ClientService() 
+        private ProjectService() 
         {
-            clients = new List<Client>();
+            projects = new List<Project>();
             /*
-             * clients.Add(new Client
+             * projects.Add(new Project
                         {
                             Id = 1,
                             Name = "BOB",
                             Notes = "Is cool"
                         });
-            clients.Add(new Client
+            projects.Add(new Project
             {
                 Id = 1,
                 Name = "Susan",
@@ -49,23 +49,23 @@ namespace PracticeManagement.Library.Services
             */
         }
 
-        public List<Client> currentClients
+        public List<Project> currentProjects
         {
-            get { return clients; }
+            get { return projects; }
         }
 
-        public Client? Get(int id)
+        public Project? Get(int id)
         {
-            return clients.FirstOrDefault(e => e.Id == id);
+            return projects.FirstOrDefault(e => e.Id == id);
         }
 
-        public void Add(Client? client)
+        public void Add(Project? Project)
         {   
 
-            if(client != null)
+            if(Project != null)
             {
-                client.Id = _counter++;
-                clients.Add(client);
+                Project.Id = _counter++;
+                projects.Add(Project);
             }
         }
 
@@ -74,23 +74,23 @@ namespace PracticeManagement.Library.Services
             var toRemove = Get(id);
             if (toRemove != null)
             {
-                clients.Remove(toRemove);
+                projects.Remove(toRemove);
             }
         }
 
-        public void Delete(Client s)
+        public void Delete(Project s)
         {
             Delete(s.Id);
         }
 
-        public List<Client> Search (string query)
+        public List<Project> Search (string query)
         {
-            return clients.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            return projects.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
         public void Read()
         {
-            clients.ForEach(Console.WriteLine);
+            projects.ForEach(Console.WriteLine);
         }
     }
 }

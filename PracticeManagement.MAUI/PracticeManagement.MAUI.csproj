@@ -58,19 +58,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\ProjectViewDetail.xaml.cs">
+	    <DependentUpon>ProjectViewDetail.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ProjectsView.xaml.cs">
+	    <DependentUpon>ProjectsView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ClientsView.xaml.cs">
 	    <DependentUpon>ClientsView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Sample.xaml.cs">
-	    <DependentUpon>Sample.xaml</DependentUpon>
+	  <Compile Update="Views\ClientViewDetail.xaml.cs">
+	    <DependentUpon>ClientViewDetail.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ProjectViewDetail.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProjectsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ClientsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Sample.xaml">
+	  <MauiXaml Update="Views\ClientViewDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

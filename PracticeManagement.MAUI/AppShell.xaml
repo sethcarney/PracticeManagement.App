@@ -15,7 +15,11 @@
         Title="Clients"
         ContentTemplate="{DataTemplate local1:ClientsView}"
         Route="Clients" />
-    
-    
+    <ShellContent
+        Title="Projects"
+        ContentTemplate="{DataTemplate local1:ProjectsView}"
+        Route="Projects" />
+
+
 
 </Shell>

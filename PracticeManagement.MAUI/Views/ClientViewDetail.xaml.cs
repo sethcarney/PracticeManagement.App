@@ -4,32 +4,30 @@ using PracticeManagement.Library.Models;
 using PracticeManagement.MAUI.ViewModels;
 
 
-public partial class Sample : Popup
+public partial class ClientViewDetail : Popup
 {
-	public Sample(Client? currentClient)
+	public ClientViewDetail(Client? currentClient)
 	{
 		InitializeComponent();
 		BindingContext = new ClientViewDetailModel(currentClient);
-
 	}
 
 
-  
-  
-
-    void OnYesButtonClicked(object? sender, EventArgs e) => Close(true);
-
-    void OnNoButtonClicked(object? sender, EventArgs e) => Close(false);
-
     private void Cancel_Clicked(object sender, EventArgs e)
     {
+        //Return false to represent no change
         Close(false);
-
     }
 
     private void Submit_Clicked(object sender, EventArgs e)
     {
+        //Update with new values
         (BindingContext as ClientViewDetailModel).Update();
-        Close((BindingContext as ClientViewDetailModel).SelectedClient);
+        //Return new client if created
+        if((BindingContext as ClientViewDetailModel).createNew)
+            Close((BindingContext as ClientViewDetailModel).SelectedClient);
+        //Return true if successfully updated
+        else
+            Close(true);
     }
 }

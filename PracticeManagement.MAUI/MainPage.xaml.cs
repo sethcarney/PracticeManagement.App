@@ -23,5 +23,10 @@ namespace PracticeManagement.MAUI
             Shell.Current.GoToAsync("//Clients");
 
         }
+
+        private void ProjectView_Clicked(Object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Projects");
+        }
     }
 }
