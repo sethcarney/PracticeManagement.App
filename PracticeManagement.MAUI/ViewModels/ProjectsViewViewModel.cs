@@ -11,24 +11,47 @@ using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
 
+
 namespace PracticeManagement.MAUI.ViewModels
 {
     public class ProjectsViewViewModel : INotifyPropertyChanged
     {
         public Project SelectedProject { get; set; }
 
+        public SearchFilters Filters { get; set; }
 
+        public ProjectsViewViewModel()
+        {
+            Filters = new SearchFilters();
+        }
         public ObservableCollection<Project> Projects
         {
             get
             {
+                List<Project> filtersApplied = ProjectService.Current.applyFilters(Filters);
                 if(string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Project>(ProjectService.Current.currentProjects);
-                return new ObservableCollection<Project>(ProjectService.Current.Search(Query));
+                    return new ObservableCollection<Project>(filtersApplied);
+                return new ObservableCollection<Project>(ProjectService.Current.Search(filtersApplied,Query));
             }
         }
 
-        public Project? getCurrentClient() { return SelectedProject; }
+        public void switchClosedFilter(Button button)
+        {
+            var firstColor = button.BackgroundColor;
+            if (Filters.showClosed)
+            {
+                button.BackgroundColor = Colors.Gray;
+                Filters.showClosed = false;
+
+            }
+            else
+            {
+                button.BackgroundColor = Colors.MediumSeaGreen;
+                Filters.showClosed = true;
+            }
+            NotifyPropertyChanged("Projects");
+        }
+
         public void Delete()
         {
             if (SelectedProject == null)

@@ -12,7 +12,7 @@ namespace PracticeManagement.Library.Models
         
         public Project(string shortName, string longName, Client attachedClient)
         {
-            IsActive = true;
+            isActive = true;
             OpenDate = DateTime.Now;
             ShortName = shortName;
             LongName = longName;
@@ -24,14 +24,22 @@ namespace PracticeManagement.Library.Models
         public int Id { get;  set; }
         public DateTime OpenDate { get;  set; }
         public DateTime ClosedDate { get;  set; }
-        public bool IsActive { get;  set; }
+        public bool isActive { get;  set; }
         public string ShortName { get; set; }
         public string LongName { get; set; }
 
         public Client Client { get;  set; }
+
+        public string printVal 
+        { 
+            get
+            {
+                return $"[{ShortName}] - {LongName}\n {Client.Name}";
+            } 
+        }
         public override string ToString()
         {
-            return $"({ShortName})  {LongName} - {Client.Name}";
+            return printVal;
         }
     }
 }

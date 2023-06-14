@@ -80,7 +80,7 @@ namespace PracticeManagement.Library.Services
         {
             foreach (var project in client.Projects)
             {
-                if (project.IsActive)
+                if (project.isActive)
                     return false;
             }
 

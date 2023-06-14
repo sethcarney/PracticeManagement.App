@@ -64,12 +64,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     string Notes = Console.ReadLine() ?? string.Empty;
                     if (Name != string.Empty)
                     {
-                        myClientService.Add(new Client
-                        {
-                            Id = id,
-                            Name = Name,
-                            Notes = Notes
-                        });
+                        myClientService.Add(new Client(Name,Notes));
                         Console.WriteLine("Client successfully added\n");
                     }
                     else
@@ -147,12 +142,8 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     string longName = Console.ReadLine() ?? string.Empty;
                     if (shortName != string.Empty && longName != string.Empty)
                     {
-                        projects.Add(new Project
-                        {
-                            Id = id,
-                            ShortName = shortName,
-                            LongName = longName
-                        });
+                        projects.Add(new Project(shortName, longName, new Client("Fake","Notes")));
+                     
                         Console.WriteLine("Project successfully added\n");
                     }
                     else
@@ -202,7 +193,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                             int linkedClient = Convert.ToInt32(Console.ReadLine() ?? "0");
                             result.ShortName = shortName;
                             result.LongName = longName;
-                            result.ClientId = linkedClient;
+                           
 
                             Console.WriteLine("Project successfully updated\n");
                         }

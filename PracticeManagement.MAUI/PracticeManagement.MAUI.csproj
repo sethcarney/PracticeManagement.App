@@ -54,7 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PracticeManagementLibrary\PracticeManagement.Library.csproj" />
+	  <ProjectReference Include="..\PracticeManagement.Library\PracticeManagement.Library.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

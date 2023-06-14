@@ -84,9 +84,14 @@ namespace PracticeManagement.Library.Services
             Delete(s.Id);
         }
 
-        public List<Project> Search (string query)
+        public List<Project> Search (List<Project> filtered, string query)
         {
-            return projects.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            return filtered.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.Client.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ).ToList();
+        }
+        public List<Project> applyFilters(SearchFilters filter)
+        {
+            List<Project> closedFilter = projects.Where(s => s.isActive != filter.showClosed).ToList();
+            return closedFilter;
         }
 
         public void Read()

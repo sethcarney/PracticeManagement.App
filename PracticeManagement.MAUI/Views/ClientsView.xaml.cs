@@ -115,5 +115,10 @@ namespace PracticeManagement.MAUI.Views
 
             return true;
         }
+
+        private void ProjectMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Projects");
+        }
     }
 }

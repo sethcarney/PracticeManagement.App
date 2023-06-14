@@ -94,5 +94,15 @@ namespace PracticeManagement.MAUI.Views
             return true;
         }
 
+        private void ClosedFilter_Clicked(object sender, EventArgs e)
+        {
+            (BindingContext as ProjectsViewViewModel).switchClosedFilter((Button)sender);
+        }
+
+        private void ClientMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Clients");
+        }
+
     }
 }

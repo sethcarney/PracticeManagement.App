@@ -19,6 +19,11 @@ public partial class ProjectViewDetail : Popup
         Close(false);
     }
 
+    private void ClosedFilter_Clicked(object sender, EventArgs e)
+    {
+        (BindingContext as ProjectsViewViewModel).switchClosedFilter((Button)sender);
+    }
+
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
