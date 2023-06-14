@@ -103,6 +103,17 @@ namespace PracticeManagement.MAUI.Views
         {
             Shell.Current.GoToAsync("//Clients");
         }
+       
+
+        private void EmployeesMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Employees");
+        }
+
+        private void HoursMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Hours");
+        }
 
     }
 }

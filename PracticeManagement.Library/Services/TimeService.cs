@@ -35,7 +35,7 @@ namespace PracticeManagement.Library.Services
             times = new List<Time>();
         }
 
-        public List<Time> currentClients
+        public List<Time> currentTimes
         {
             get { return times; }
         }

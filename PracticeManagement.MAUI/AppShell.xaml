@@ -23,6 +23,11 @@
         Title="Employees"
         ContentTemplate="{DataTemplate local1:EmployeesView}"
         Route="Employees"/>
+    <ShellContent
+        Title="Hours"
+        ContentTemplate="{DataTemplate local1:TimesView}"
+        Route="Hours"/>
+   
 
 
 

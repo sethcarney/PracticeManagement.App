@@ -8,6 +8,10 @@
             <MenuFlyoutItem Text="Clients"/>
             <MenuFlyoutItem Text="Projects" Clicked="ProjectMenu_Clicked"/>
         </MenuBarItem>
+        <MenuBarItem Text="Time Tracking">
+            <MenuFlyoutItem Text="Employees" Clicked="EmployeesMenu_Clicked"></MenuFlyoutItem>
+            <MenuFlyoutItem Text="Hours" Clicked="HoursMenu_Clicked"></MenuFlyoutItem>
+        </MenuBarItem>
        
     </ContentPage.MenuBarItems>
 

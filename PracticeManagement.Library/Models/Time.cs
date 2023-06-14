@@ -19,11 +19,9 @@ namespace PracticeManagement.Library.Models
 
         public int EmployeeId { get; set; }
 
-        Time (int id, int projectId, int employeeId, string narrative, DateTime date)
+        public Time ( string narrative, DateTime date)
         {
-            Id = id;
-            ProjectId = projectId;
-            EmployeeId = employeeId;
+           
             Narrative = narrative;
             Date = date;
         }

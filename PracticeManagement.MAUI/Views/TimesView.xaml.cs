@@ -7,27 +7,27 @@ using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.Views
 {
-    public partial class EmployeesView : ContentPage
+    public partial class TimesView : ContentPage
     {
   
-        public EmployeesView()
+        public TimesView()
         {
             InitializeComponent();
-            BindingContext = new EmployeesViewViewModel();
+            BindingContext = new TimesViewViewModel();
         }
 
         
      
         private void Search_Clicked(object sender, EventArgs e)
         {
-           (BindingContext as EmployeesViewViewModel).Search();
+           (BindingContext as TimesViewViewModel).Search();
         }
 
         private async void Delete_Clicked(object sender, EventArgs e)
         {
-            bool choice = await DisplayAlert("Alert", "Are you sure you would like to delete this Employee?", "Yes", "No");
+            bool choice = await DisplayAlert("Alert", "Are you sure you would like to delete this Time?", "Yes", "No");
             if(choice)
-                (BindingContext as EmployeesViewViewModel).Delete();
+                (BindingContext as TimesViewViewModel).Delete();
         }
 
         private async void Add_Clicked(object sender, EventArgs e)
@@ -38,32 +38,32 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            Employee toEdit = (BindingContext as EmployeesViewViewModel).SelectedEmployee;
+            Time toEdit = (BindingContext as TimesViewViewModel).SelectedTime;
             if (toEdit != null)
             {
                 await DisplayPopup(false);
             }
             else
-                await DisplayAlert("Alert", "Please select a Employee to edit", "Yes");
+                await DisplayAlert("Alert", "Please select a Time to edit", "Yes");
 
 
         }
 
-        public async Task DisplayPopup(bool addEmployee)
+        public async Task DisplayPopup(bool addTime)
         {
-            Employee currentEmployee = (BindingContext as EmployeesViewViewModel).SelectedEmployee;
-            EmployeeViewDetail popup;
-            if (addEmployee == true)
-                popup = new EmployeeViewDetail(null);
+            Time currentTime = (BindingContext as TimesViewViewModel).SelectedTime;
+            TimeViewDetail popup;
+            if (addTime == true)
+                popup = new TimeViewDetail(null);
             else
-                popup = new EmployeeViewDetail(currentEmployee);
+                popup = new TimeViewDetail(currentTime);
 
             var result = await this.ShowPopupAsync(popup);
 
-            if (result is Employee)
+            if (result is Time)
             {
-                Employee newEmployee = result as Employee;
-                EmployeeService.Current.Add(newEmployee);
+                Time newTime = result as Time;
+                TimeService.Current.Add(newTime);
             }
             else if(result is bool)
             {
@@ -72,10 +72,11 @@ namespace PracticeManagement.MAUI.Views
                     return;
 
             }
-            (BindingContext as EmployeesViewViewModel).Reset();
+            (BindingContext as TimesViewViewModel).Reset();
 
             
         }
+
 
         private void ClientMenu_Clicked(object sender, EventArgs e)
         {
@@ -86,11 +87,12 @@ namespace PracticeManagement.MAUI.Views
             Shell.Current.GoToAsync("//Projects");
         }
 
+        private void EmployeesMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Employees");
+        }
+
         
 
-        private void HoursMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Hours");
-        }
     }
 }
