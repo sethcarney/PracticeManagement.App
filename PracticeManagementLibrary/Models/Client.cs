@@ -31,10 +31,11 @@ namespace PracticeManagement.Library.Models
         public string Name { get; set; }
         public string ? Notes { get; set; }
 
+        public string printVal { get { return $"{Name} - {Notes}"; } }
         public List<Project> Projects { get; set; }
         public override string ToString()
         {
-            return $"{Name} - {Notes}";
+            return printVal;
         }
     }
 }

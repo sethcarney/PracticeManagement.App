@@ -28,7 +28,7 @@
                     <Entry  Text="{Binding Path=UpdatedLongName, Mode=TwoWay}"></Entry>
 					<Picker Title="Select a Client"
         ItemsSource="{Binding Clients}"
-        ItemDisplayBinding="{Binding Name} -> {Binding Notes}"
+        ItemDisplayBinding="{Binding printVal}"
         SelectedItem="{Binding SelectedClient}" />
 					
 					
