@@ -15,9 +15,6 @@ namespace PracticeManagement.MAUI
            
         }
 
-        
-     
-
         private void ClientView_Clicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//Clients");
@@ -27,6 +24,16 @@ namespace PracticeManagement.MAUI
         private void ProjectView_Clicked(Object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//Projects");
+        }
+
+        private void Employee_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Employees");
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

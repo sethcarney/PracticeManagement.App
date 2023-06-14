@@ -58,6 +58,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\EmployeesView.xaml.cs">
+	    <DependentUpon>EmployeesView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EmployeeViewDetail.xaml.cs">
+	    <DependentUpon>EmployeeViewDetail.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ProjectViewDetail.xaml.cs">
 	    <DependentUpon>ProjectViewDetail.xaml</DependentUpon>
 	  </Compile>
@@ -73,6 +79,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\EmployeesView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EmployeeViewDetail.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ProjectViewDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

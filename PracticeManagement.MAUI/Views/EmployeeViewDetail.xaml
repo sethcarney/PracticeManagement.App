@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticeManagement.MAUI.Views.EmployeeViewDetail"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui">
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
+                    <Label  Text="Name :"></Label>
+                    <Label  Text="Notes :"></Label>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
+                    <Entry  Text="{Binding Path=UpdatedName, Mode=TwoWay}"></Entry>
+                    <Entry  Text="{Binding Path=UpdatedRate, Mode=TwoWay}"></Entry>
+                </VerticalStackLayout>
+
+            </Grid>
+
+
+            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+
+                <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
+                <Button   Text="Submit" Clicked="Submit_Clicked"></Button>
+            </HorizontalStackLayout>
+            
+
+            
+               
+             
+            
+                
+            </Grid>
+
+    
+    </ScrollView>
+</mct:Popup>

@@ -12,6 +12,10 @@
                    Clicked="ClientView_Clicked"></Button>
             <Button Text="Project View"
                     Clicked="ProjectView_Clicked"></Button>
+            <Button Text="Employee's"
+                    Clicked="Employee_Clicked"></Button>
+            <Button Text="Timesheets"
+                    Clicked="Button_Clicked_1"></Button>
             
             
         </VerticalStackLayout>

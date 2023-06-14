@@ -9,12 +9,11 @@ namespace PracticeManagement.Library.Models
     public class Employee
     {
 
-        string Name { get; set; }
-        double Rate { get; set; }
-        int Id { get; set; }    
-        public Employee(int id,string name, double rate ) 
+        public string Name { get; set; }
+        public double Rate { get; set; }
+        public int Id { get; set; }    
+        public Employee(string name, double rate ) 
         {
-            this.Id = id;
             this.Name = name;   
             this.Rate = rate;
         }
