@@ -17,25 +17,50 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Client SelectedClient { get; set; }
 
+        public SearchFilters Filters { get; set; }
+
+        public ClientsViewViewModel() 
+        {
+            Filters = new SearchFilters();
+        }
+
+        public void switchClosedFilter(Button button)
+        {
+            var firstColor = button.BackgroundColor;
+            if(Filters.showClosed)
+            {
+                button.BackgroundColor = Colors.Gray;
+                Filters.showClosed = false;
+
+            }
+            else
+            {
+                button.BackgroundColor = Colors.MediumSeaGreen;
+                Filters.showClosed = true;
+            }
+            NotifyPropertyChanged("Clients");
+        }
 
         public ObservableCollection<Client> Clients
         {
             get
             {
-                if(string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Client>(ClientService.Current.currentClients);
-                return new ObservableCollection<Client>(ClientService.Current.Search(Query));
+                List<Client> filtersApplied = ClientService.Current.applyFilters(Filters);
+                if (string.IsNullOrEmpty(Query))
+                    return new ObservableCollection<Client>(filtersApplied);
+                return new ObservableCollection<Client>(ClientService.Current.Search(filtersApplied,Query));
             }
         }
 
 
         public bool Close()
         {
-            if (SelectedClient != null)
+            if (SelectedClient == null)
                 return false;
             
             bool result = ClientService.Current.Close(SelectedClient);
-            NotifyPropertyChanged("Clients");
+            if (result)
+                NotifyPropertyChanged("Clients");
             return result;
         }
         public void Delete()

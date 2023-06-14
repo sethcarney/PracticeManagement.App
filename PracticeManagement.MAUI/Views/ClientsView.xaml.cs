@@ -25,14 +25,29 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Close_Clicked(object sender, EventArgs e)
         {
-            bool choice = await DisplayAlert("Alert", "Are you sure you would like to close this client?", "Yes", "No");
-
+            if(verifyClientSelected() == false)
+            {
+                return;
+            }
+            bool choice = await DisplayAlert("Confirm", "Are you sure you would like to close this client?", "Yes", "No");
             bool result = (BindingContext as ClientsViewViewModel).Close();
+            if (result)
+            {
+                await DisplayAlert("Success", "Client closed successfully", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Alert", "Unable to close client. Please ensure that there are no active projects linked to that client.", "OK");
+            }
         }
         private async void Delete_Clicked(object sender, EventArgs e)
         {
-            bool choice = await DisplayAlert("Alert", "Are you sure you would like to delete this client?", "Yes", "No");
-            if(choice)
+            if (verifyClientSelected() == false)
+            {
+                return;
+            }
+            bool choice = await DisplayAlert("Confirm", "Are you sure you would like to delete this client?", "Yes", "No");
+            if (choice)
                 (BindingContext as ClientsViewViewModel).Delete();
         }
 
@@ -44,15 +59,12 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            Client toEdit = (BindingContext as ClientsViewViewModel).SelectedClient;
-            if (toEdit != null)
+            if(verifyClientSelected() == false)
             {
-                await DisplayPopup(false);
+                return;
             }
-            else
-                await DisplayAlert("Alert", "Please select a client to edit", "Yes");
 
-
+            await DisplayPopup(false);
         }
 
         public async Task DisplayPopup(bool addClient)
@@ -86,6 +98,22 @@ namespace PracticeManagement.MAUI.Views
         private void Back_Clicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//MainPage");
+        }
+
+        private void ClosedFilter_Clicked(object sender, EventArgs e)
+        {
+            (BindingContext as ClientsViewViewModel).switchClosedFilter((Button)sender); 
+        }
+
+        private bool verifyClientSelected()
+        {
+            if ((BindingContext as ClientsViewViewModel).SelectedClient == null)
+            {
+                DisplayAlert("Alert", "Please select a client in order to perform this operation", "OK");
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public Client ? SelectedClient { get; set; }
 
+        public bool createNew { get; set; }
 
         public List <Client> Clients
         {
@@ -29,8 +30,7 @@ namespace PracticeManagement.MAUI.ViewModels
             }
         }
 
-        public bool createNew { get; set; }
-
+        
         public ProjectViewDetailModel(Project? currentProject) 
         {
             SelectedProject = currentProject;
@@ -38,6 +38,7 @@ namespace PracticeManagement.MAUI.ViewModels
             {
                 UpdatedShortName = SelectedProject.ShortName;
                 UpdatedLongName = SelectedProject.LongName;
+                SelectedClient = currentProject.Client;
                 createNew = false;
             }
             else
@@ -45,22 +46,35 @@ namespace PracticeManagement.MAUI.ViewModels
                 UpdatedShortName = "";
                 UpdatedLongName = "";
                 createNew = true;
+            
             }
         }
 
-        public void Update()
+        public bool VerifyandUpdate()
         { 
+            if(SelectedClient == null)
+            {
+                return false;
+            }
             if(SelectedProject != null)
             { 
                SelectedProject.ShortName = UpdatedShortName;
                SelectedProject.LongName = UpdatedLongName;
+               SelectedProject.Client = SelectedClient;
             }
             else
             {
                 SelectedProject = new Project (UpdatedShortName, UpdatedLongName, SelectedClient);
             }
+            return true;
         }
 
-  
+        private void Client_Changed(object sender, EventArgs e)
+        {
+            //Return false to represent no change
+            var test = new Object { };
+        }
+
+
     }
 }

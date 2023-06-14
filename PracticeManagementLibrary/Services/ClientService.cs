@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,12 @@ namespace PracticeManagement.Library.Services
             get { return clients; }
         }
 
+        public List<Client> applyFilters (SearchFilters filter)
+        {
+            List<Client> closedFilter = clients.Where(s => s.isActive != filter.showClosed).ToList();
+            return closedFilter;
+        }
+
         public Client? Get(int id)
         {
             return clients.FirstOrDefault(e => e.Id == id);
@@ -93,9 +100,9 @@ namespace PracticeManagement.Library.Services
             Delete(s.Id);
         }
 
-        public List<Client> Search (string query)
+        public List<Client> Search (List<Client> currentContext,string query)
         {
-            return clients.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            return currentContext.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
         public void Read()

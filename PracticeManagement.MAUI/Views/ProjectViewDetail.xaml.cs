@@ -22,7 +22,7 @@ public partial class ProjectViewDetail : Popup
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        (BindingContext as ProjectViewDetailModel).Update();
+        (BindingContext as ProjectViewDetailModel).VerifyandUpdate();
         //Return new client if created
         if((BindingContext as ProjectViewDetailModel).createNew)
             Close((BindingContext as ProjectViewDetailModel).SelectedProject);
@@ -40,7 +40,7 @@ public partial class ProjectViewDetail : Popup
         if (selectedIndex != -1)
         {
             Client current = (Client) picker.SelectedItem;
-            (BindingContext as ProjectViewDetailModel).SelectedClient = current;
+            (BindingContext as ProjectViewDetailModel).SelectedProject.Client = current;
         }
     }
 }

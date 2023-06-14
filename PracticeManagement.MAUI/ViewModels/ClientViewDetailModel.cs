@@ -46,7 +46,8 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             else
             {
-                SelectedClient = new Client { Name = UpdatedName, Notes = UpdatedNotes };
+                
+                SelectedClient = new Client (UpdatedName,UpdatedNotes);
             }
         }
 

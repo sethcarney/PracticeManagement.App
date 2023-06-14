@@ -15,12 +15,10 @@ namespace PracticeManagement.Library.Models
             isActive = true;
             Name = name;
             Notes = notes;
+            Projects = new List<Project>();
         }
 
-        public Client()
-        {
-           Name = string.Empty;
-        }
+       
         public int Id { get; set; }
 
         public DateTime OpenDate { get; set; }
