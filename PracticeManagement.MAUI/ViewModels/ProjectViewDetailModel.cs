@@ -53,18 +53,25 @@ namespace PracticeManagement.MAUI.ViewModels
         public bool VerifyandUpdate()
         { 
             if(SelectedClient == null)
-            {
-                return false;
-            }
+               return false;
+            
+
+
             if(SelectedProject != null)
             { 
                SelectedProject.ShortName = UpdatedShortName;
                SelectedProject.LongName = UpdatedLongName;
-               SelectedProject.Client = SelectedClient;
+                if (!SelectedClient.Equals(SelectedProject.Client))
+                {
+                    SelectedProject.Client.Projects.Remove(SelectedProject);
+                    SelectedProject.Client = SelectedClient;
+                    SelectedClient.Projects.Add(SelectedProject);
+                }
             }
             else
             {
                 SelectedProject = new Project (UpdatedShortName, UpdatedLongName, SelectedClient);
+                SelectedClient.Projects.Add(SelectedProject);
             }
             return true;
         }
