@@ -8,29 +8,35 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
+				<RowDefinition/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="8*"/>
-                </Grid.ColumnDefinitions>
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="8*"/>
+				</Grid.ColumnDefinitions>
 
-                <VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
-                    <Label  Text="Name :"></Label>
-                    <Label  Text="Notes :"></Label>
-                </VerticalStackLayout>
+				<VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
+					<Label  Text="Name :"></Label>
+					<Label  Text="Notes :"></Label>
+				</VerticalStackLayout>
 
-                <VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
-                    <Entry  Text="{Binding Path=UpdatedName, Mode=TwoWay}"></Entry>
-                    <Entry  Text="{Binding Path=UpdatedNotes, Mode=TwoWay}"></Entry>
-                </VerticalStackLayout>
+				<VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
+					<Entry  Text="{Binding Path=UpdatedName, Mode=TwoWay}"></Entry>
+					<Entry  Text="{Binding Path=UpdatedNotes, Mode=TwoWay}"></Entry>
+				</VerticalStackLayout>
 
-            </Grid>
+			</Grid>
+
+			<VerticalStackLayout Grid.Row="1" Spacing="20" HorizontalOptions="Center">
+				<Label Text ="Projects"></Label>
+				<ListView ItemsSource="{Binding Path=linkedProjects}"></ListView>
+			</VerticalStackLayout>
 
 
-            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
 
                 <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
                 <Button   Text="Submit" Clicked="Submit_Clicked"></Button>
