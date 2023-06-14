@@ -28,7 +28,16 @@ namespace PracticeManagement.MAUI.ViewModels
             }
         }
 
-        public Client? getCurrentClient() { return SelectedClient; }
+
+        public bool Close()
+        {
+            if (SelectedClient != null)
+                return false;
+            
+            bool result = ClientService.Current.Close(SelectedClient);
+            NotifyPropertyChanged("Clients");
+            return result;
+        }
         public void Delete()
         {
             if (SelectedClient == null)

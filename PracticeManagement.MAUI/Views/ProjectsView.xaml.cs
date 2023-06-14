@@ -76,6 +76,11 @@ namespace PracticeManagement.MAUI.Views
 
             
         }
-     
+
+        private void Back_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//MainPage");
+        }
+
     }
 }

@@ -23,6 +23,12 @@ namespace PracticeManagement.MAUI.Views
            (BindingContext as ClientsViewViewModel).Search();
         }
 
+        private async void Close_Clicked(object sender, EventArgs e)
+        {
+            bool choice = await DisplayAlert("Alert", "Are you sure you would like to close this client?", "Yes", "No");
+
+            bool result = (BindingContext as ClientsViewViewModel).Close();
+        }
         private async void Delete_Clicked(object sender, EventArgs e)
         {
             bool choice = await DisplayAlert("Alert", "Are you sure you would like to delete this client?", "Yes", "No");
@@ -76,6 +82,10 @@ namespace PracticeManagement.MAUI.Views
 
             
         }
-     
+
+        private void Back_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//MainPage");
+        }
     }
 }

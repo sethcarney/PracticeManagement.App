@@ -7,7 +7,7 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="9*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -18,13 +18,20 @@
                 </Grid.ColumnDefinitions>
 
                 <VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
-                    <Label  Text="Name :"></Label>
-                    <Label  Text="Notes :"></Label>
+                    <Label  Text="Short Name :"></Label>
+                    <Label  Text="Long Name :"></Label>
+					<Label  Text="Client :"></Label>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
                     <Entry  Text="{Binding Path=UpdatedShortName, Mode=TwoWay}"></Entry>
                     <Entry  Text="{Binding Path=UpdatedLongName, Mode=TwoWay}"></Entry>
+					<Picker Title="Select a Client"
+        ItemsSource="{Binding Clients}"
+        ItemDisplayBinding="{Binding Name} -> {Binding Notes}"
+        SelectedItem="{Binding SelectedClient}" />
+					
+					
                 </VerticalStackLayout>
 
             </Grid>

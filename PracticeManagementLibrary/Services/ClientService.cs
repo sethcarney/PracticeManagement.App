@@ -69,6 +69,16 @@ namespace PracticeManagement.Library.Services
             }
         }
 
+        public bool Close(Client client)
+        {
+            foreach (var project in client.Projects)
+            {
+                if (project.IsActive)
+                    return false;
+            }
+
+            client.isActive = false; return true;
+        }
         public void Delete(int id)
         {
             var toRemove = Get(id);

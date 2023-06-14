@@ -30,4 +30,17 @@ public partial class ProjectViewDetail : Popup
         else
             Close(true);
     }
+
+
+    void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex != -1)
+        {
+            Client current = (Client) picker.SelectedItem;
+            (BindingContext as ProjectViewDetailModel).SelectedClient = current;
+        }
+    }
 }

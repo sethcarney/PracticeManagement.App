@@ -18,6 +18,17 @@ namespace PracticeManagement.MAUI.ViewModels
         public string? UpdatedShortName { get; set; }
         public string? UpdatedLongName { get; set; }
 
+        public Client ? SelectedClient { get; set; }
+
+
+        public List <Client> Clients
+        {
+            get
+            {
+                    return new List<Client>(ClientService.Current.currentClients);
+            }
+        }
+
         public bool createNew { get; set; }
 
         public ProjectViewDetailModel(Project? currentProject) 
@@ -46,7 +57,7 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             else
             {
-                SelectedProject = new Project { ShortName = UpdatedShortName, LongName = UpdatedLongName };
+                SelectedProject = new Project (UpdatedShortName, UpdatedLongName, SelectedClient);
             }
         }
 

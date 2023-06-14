@@ -54,6 +54,7 @@ namespace PracticeManagement.Library.Services
             get { return projects; }
         }
 
+        
         public Project? Get(int id)
         {
             return projects.FirstOrDefault(e => e.Id == id);
