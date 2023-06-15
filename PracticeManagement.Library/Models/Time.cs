@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PracticeManagement.Library.Models
 {
     public class Time
@@ -19,11 +20,24 @@ namespace PracticeManagement.Library.Models
 
         public int EmployeeId { get; set; }
 
-        public Time ( string narrative, DateTime date)
+        public Time ( string narrative, DateTime date, double hrs)
         {
            
             Narrative = narrative;
             Date = date;
+            Hours = hrs;
+        }
+
+        public string prettyHours
+        {
+            get
+            {
+                return String.Format("{0:0.0}", Hours) + "hrs";
+            }
+        }
+        public override string ToString()
+        {
+            return $" {Date.ToString()} {prettyHours} {Narrative} ";
         }
 
     }

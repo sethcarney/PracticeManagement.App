@@ -55,20 +55,27 @@ namespace PracticeManagement.MAUI.Views
                 popup = new ProjectViewDetail((BindingContext as ProjectsViewViewModel).SelectedProject);
 
             var result = await this.ShowPopupAsync(popup);
-
-            if (result is Project)
+            if (result != null)
             {
-                Project newProject = result as Project;
-                ProjectService.Current.Add(newProject);
-            }
-            else if(result is bool)
-            {
-                bool success = (bool)result;
-                if (success == false)
-                    return;
+                if (result is Project)
+                {
+                    Project newProject = result as Project;
+                    ProjectService.Current.Add(newProject);
+                }
+                else if (result is bool)
+                {
+                    bool success = (bool)result;
+                    if (success == false)
+                        await DisplayAlert("Alert", "Unable to edit/create project. Ensure a client has been selected.", "OK");
+
+                }
+                
+                (BindingContext as ProjectsViewViewModel).Reset();
+
+
 
             }
-            (BindingContext as ProjectsViewViewModel).Reset();
+           
 
             
         }
@@ -78,9 +85,20 @@ namespace PracticeManagement.MAUI.Views
             Shell.Current.GoToAsync("//MainPage");
         }
 
-        private void Close_Clicked(object sender, EventArgs e)
+        private async void Close_Clicked(object sender, EventArgs e)
         {
-            
+           
+            bool choice = await DisplayAlert("Confirm", "Are you sure you would like to close this project?", "Yes", "No");
+            bool result = (BindingContext as ProjectsViewViewModel).Close();
+            if (result)
+            {
+                await DisplayAlert("Success", "Project closed successfully", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Alert", "Unable to close client. Project was already closed.", "OK");
+            }
+
         }
 
         private bool verifyProjectSelected()

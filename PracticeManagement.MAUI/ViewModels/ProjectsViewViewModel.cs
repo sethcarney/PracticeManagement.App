@@ -24,6 +24,17 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             Filters = new SearchFilters();
         }
+
+        public bool Close()
+        {
+            if (SelectedProject == null)
+                return false;
+
+            bool result = ProjectService.Current.Close(SelectedProject);
+            if (result)
+                NotifyPropertyChanged("Projects");
+            return result;
+        }
         public ObservableCollection<Project> Projects
         {
             get

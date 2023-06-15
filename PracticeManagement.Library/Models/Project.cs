@@ -34,7 +34,7 @@ namespace PracticeManagement.Library.Models
         { 
             get
             {
-                return $"[{ShortName}] - {LongName}\n {Client.Name}";
+                return $"[{ShortName}] - {LongName}";
             } 
         }
         public override string ToString()

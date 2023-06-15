@@ -7,18 +7,18 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-				<RowDefinition/>
+                <RowDefinition Height="4*"/>
+				<RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
 			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
-					<ColumnDefinition Width="8*"/>
+					<ColumnDefinition Width="6*"/>
 				</Grid.ColumnDefinitions>
 
-				<VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
+				<VerticalStackLayout  Grid.Column="0" Margin="15" Spacing="33" Padding="0,10,0,0" >
 					<Label  Text="Name :"></Label>
 					<Label  Text="Notes :"></Label>
 				</VerticalStackLayout>
@@ -30,9 +30,20 @@
 
 			</Grid>
 
-			<VerticalStackLayout Grid.Row="1" Spacing="20" HorizontalOptions="Center">
+			<VerticalStackLayout Grid.Row="1" Spacing="10" HorizontalOptions="Center">
 				<Label Text ="Projects"></Label>
-				<ListView ItemsSource="{Binding Path=linkedProjects}"></ListView>
+
+				<ListView ItemsSource="{Binding Path=linkedProjects}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextCell Text="{Binding printVal}"
+                                      Detail="{Binding OpenDate}"/>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+
+				</ListView>
+
+
 			</VerticalStackLayout>
 
 

@@ -8,29 +8,34 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="6*"/>
+				<RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+			<DatePicker Grid.Row="0" Date="{Binding SelectedDate}" />
+            
+			<Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
 
                 <VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
-                    <Label  Text="Name :"></Label>
-                    <Label  Text="Notes :"></Label>
+                    <Label Text="Hours :" ></Label>
+					<Label Text="Narrative :"></Label>
+                     
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
-                    <Entry  Text="{Binding Path=UpdatedName, Mode=TwoWay}"></Entry>
-                    <Entry  Text="{Binding Path=UpdatedRate, Mode=TwoWay}"></Entry>
+                <VerticalStackLayout HorizontalOptions="FillAndExpand" Grid.Column="1" Margin="10" Spacing="20">
+					<Entry  Text="{Binding Path=UpdatedHours, Mode=TwoWay}"></Entry>
+                    <Entry  Text="{Binding Path=UpdatedNarrative, Mode=TwoWay}"></Entry>
+					
                 </VerticalStackLayout>
 
             </Grid>
 
 
-            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
 
                 <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
                 <Button   Text="Submit" Clicked="Submit_Clicked"></Button>

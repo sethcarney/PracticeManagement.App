@@ -16,7 +16,7 @@ public partial class ProjectViewDetail : Popup
     private void Cancel_Clicked(object sender, EventArgs e)
     {
         //Return false to represent no change
-        Close(false);
+        Close();
     }
 
     private void ClosedFilter_Clicked(object sender, EventArgs e)
@@ -27,13 +27,21 @@ public partial class ProjectViewDetail : Popup
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        (BindingContext as ProjectViewDetailModel).VerifyandUpdate();
-        //Return new client if created
-        if((BindingContext as ProjectViewDetailModel).createNew)
-            Close((BindingContext as ProjectViewDetailModel).SelectedProject);
-        //Return true if successfully updated
-        else
-            Close(true);
+        bool result = (BindingContext as ProjectViewDetailModel).VerifyandUpdate();
+
+        if (result)
+        {
+            //Return new client if created
+            if ((BindingContext as ProjectViewDetailModel).createNew)
+                Close((BindingContext as ProjectViewDetailModel).SelectedProject);
+            //Return true if successfully updated
+            else
+                Close(true);
+
+        }
+
+        Close(false);
+        
     }
 
 

@@ -44,7 +44,7 @@
                
                 
                 <ListView Grid.Column="0" ItemsSource="{Binding Path=Times}"
-                          SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}">
+                          SelectedItem="{Binding Path=SelectedTime, Mode=TwoWay}">
                     
                 </ListView>
 

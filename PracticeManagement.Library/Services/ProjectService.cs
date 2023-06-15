@@ -94,6 +94,16 @@ namespace PracticeManagement.Library.Services
             return closedFilter;
         }
 
+        public bool Close(Project proj)
+        {
+            if (proj.isActive)
+            {
+                proj.isActive = false;
+                return true;
+            }
+            return false;
+        }
+
         public void Read()
         {
             projects.ForEach(Console.WriteLine);

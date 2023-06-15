@@ -16,7 +16,7 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public Employee? SelectedEmployee { get; set; }
         public string? UpdatedName { get; set; }
-        public double? UpdatedRate { get; set; }
+        public string? UpdatedRate { get; set; }
 
         public bool createNew { get; set; }
 
@@ -26,28 +26,35 @@ namespace PracticeManagement.MAUI.ViewModels
             if (SelectedEmployee != null)
             {
                 UpdatedName = SelectedEmployee.Name;
-                UpdatedRate = SelectedEmployee.Rate;
+                UpdatedRate = SelectedEmployee.Rate.ToString();
                 createNew = false;
             }
             else
             {
                 UpdatedName = "";
-                UpdatedRate = 0.0;
+                UpdatedRate = "0.00";
                 createNew = true;
             }
         }
 
-        public void Update()
-        { 
+        public bool Update()
+        {
+            double holder;
+            var RateGiven = double.TryParse(UpdatedRate, out holder);
+            Math.Round(holder, 2, MidpointRounding.AwayFromZero);
+            if (RateGiven == false)
+                return false;
+
             if(SelectedEmployee != null)
             { 
                SelectedEmployee.Name = UpdatedName;
-               SelectedEmployee.Rate = (double)UpdatedRate;
+               SelectedEmployee.Rate = holder;
             }
             else
             {
-                SelectedEmployee = new Employee (UpdatedName,(double)UpdatedRate);
+                SelectedEmployee = new Employee (UpdatedName,holder);
             }
+            return true;
         }
 
   
