@@ -51,12 +51,7 @@
                 
                 <ListView Grid.Column="0" ItemsSource="{Binding Path=Projects}"
                           SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding printVal}"
-                                      Detail="{Binding Client.Name}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                   
                     
                 </ListView>
 

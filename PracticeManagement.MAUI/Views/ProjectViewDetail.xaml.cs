@@ -39,8 +39,8 @@ public partial class ProjectViewDetail : Popup
                 Close(true);
 
         }
-
-        Close(false);
+        else
+            Close(false);
         
     }
 

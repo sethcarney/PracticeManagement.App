@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		     xmlns:mynamespace="clr-namespace:PracticeManagement.MAUI.Views"
              x:Class="PracticeManagement.MAUI.Views.TimeViewDetail"
-             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui">
+		     
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+		        >
 
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+				<RowDefinition Height="6*"/>
 				<RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -30,12 +34,29 @@
 					<Entry  Text="{Binding Path=UpdatedHours, Mode=TwoWay}"></Entry>
                     <Entry  Text="{Binding Path=UpdatedNarrative, Mode=TwoWay}"></Entry>
 					
+					
+				
+					
                 </VerticalStackLayout>
 
             </Grid>
 
+			
+			<!--<mynamespace:ProjectSearch Grid.Row="2" >              </mynamespace:ProjectSearch> -->
+			<VerticalStackLayout Grid.Row="2">
+				<Picker Title="Select an Employee"
+                    ItemsSource="{Binding Employees}"
+                    ItemDisplayBinding="{Binding printVal}"
+                    SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+		            />
+				<Picker Title="Select a Project"
+				ItemsSource="{Binding Projects}"
+				ItemDisplayBinding="{Binding printVal}"
+				SelectedItem="{Binding SelectedProject, Mode=TwoWay}"
+		            />
+			</VerticalStackLayout>
 
-            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
+			<HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
 
                 <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
                 <Button   Text="Submit" Clicked="Submit_Clicked"></Button>

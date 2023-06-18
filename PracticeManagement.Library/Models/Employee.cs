@@ -18,16 +18,16 @@ namespace PracticeManagement.Library.Models
             this.Rate = rate;
         }
 
-        public string prettyRate
+        public string printVal
         {
             get
             {
-                return "$" + String.Format("{0:0.00}", Rate) + "/hr";
+                return Name + "$" + String.Format("{0:0.00}", Rate) + "/hr";
             }
         }
         public override string ToString()
         {
-            return $" {Name} {prettyRate}";
+            return printVal;
         }
     }
 }

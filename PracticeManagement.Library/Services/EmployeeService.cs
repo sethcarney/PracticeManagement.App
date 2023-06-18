@@ -59,6 +59,11 @@ namespace PracticeManagement.Library.Services
             return Employees.FirstOrDefault(e => e.Id == id);
         }
 
+        public Employee? Get(Employee employee)
+        {
+            return Employees.FirstOrDefault(e => e == employee);
+        }
+
         public void Add(Employee? Employee)
         {   
 

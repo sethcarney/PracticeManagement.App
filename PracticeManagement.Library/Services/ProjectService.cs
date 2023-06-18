@@ -60,6 +60,11 @@ namespace PracticeManagement.Library.Services
             return projects.FirstOrDefault(e => e.Id == id);
         }
 
+        public Project? Get(Project project)
+        {
+            return projects.FirstOrDefault(e => e == project);
+        }
+
         public void Add(Project? Project)
         {   
 

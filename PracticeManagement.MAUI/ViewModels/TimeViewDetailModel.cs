@@ -15,12 +15,30 @@ namespace PracticeManagement.MAUI.ViewModels
     {
 
         public Time? SelectedTime { get; set; }
-        public DateTime? UpdatedDate { get; set; }
+        public DateTime SelectedDate { get; set; }
         public string? UpdatedNarrative { get; set; }
 
         public string? UpdatedHours { get; set; }
-        DateTime SelectedDate { get; set; }
+    
         public bool createNew { get; set; }
+
+        public List<Employee> Employees
+        {
+            get
+            {
+                return EmployeeService.Current.currentEmployees;
+            }
+        }
+
+        public List<Project> Projects
+        {
+            get { return ProjectService.Current.currentProjects;}
+        }
+
+        public Employee SelectedEmployee { get; set; }
+     
+        public Project SelectedProject { get; set; }
+
 
         public TimeViewDetailModel(Time? currentTime) 
         {
@@ -30,6 +48,8 @@ namespace PracticeManagement.MAUI.ViewModels
                 SelectedDate = SelectedTime.Date;
                 UpdatedNarrative = SelectedTime.Narrative;
                 UpdatedHours = SelectedTime.Hours.ToString();
+                SelectedEmployee = EmployeeService.Current.Get(SelectedTime.EmployeeId);
+                SelectedProject = ProjectService.Current.Get(SelectedTime.ProjectId);
                 createNew = false;
             }
             else
@@ -52,10 +72,12 @@ namespace PracticeManagement.MAUI.ViewModels
                SelectedTime.Date = SelectedDate;
                 SelectedTime.Hours = holder;
                SelectedTime.Narrative = UpdatedNarrative;
+                SelectedTime.ProjectId = SelectedProject.Id;
+                SelectedTime.EmployeeId = SelectedEmployee.Id;
             }
             else
             {
-                SelectedTime = new Time(UpdatedNarrative,SelectedDate,holder);
+                SelectedTime = new Time(UpdatedNarrative,SelectedDate,holder,SelectedProject.Id,SelectedEmployee.Id);
             }
             return true;
         }

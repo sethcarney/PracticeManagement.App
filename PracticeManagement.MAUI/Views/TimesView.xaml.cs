@@ -58,6 +58,10 @@ namespace PracticeManagement.MAUI.Views
             else
                 popup = new TimeViewDetail(currentTime);
 
+            // Set the desired width and height of the popup window
+            popup.Size = new Size(400,700);
+       
+
             var result = await this.ShowPopupAsync(popup);
 
             if (result is Time)

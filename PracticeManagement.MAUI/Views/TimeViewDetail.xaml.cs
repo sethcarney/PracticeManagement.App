@@ -1,6 +1,7 @@
 namespace PracticeManagement.MAUI.Views;
 using CommunityToolkit.Maui.Views;
 using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
 using PracticeManagement.MAUI.ViewModels;
 
 
@@ -12,6 +13,7 @@ public partial class TimeViewDetail : Popup
 		BindingContext = new TimeViewDetailModel(currentTime);
 	}
 
+   
 
     private void Cancel_Clicked(object sender, EventArgs e)
     {

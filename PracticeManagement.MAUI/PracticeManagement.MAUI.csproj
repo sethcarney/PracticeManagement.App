@@ -58,6 +58,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\ProjectSearch.xaml.cs">
+	    <DependentUpon>ProjectSearch.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\TimeViewDetail.xaml.cs">
 	    <DependentUpon>TimeViewDetail.xaml</DependentUpon>
 	  </Compile>
@@ -85,6 +88,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ProjectSearch.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TimeViewDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
