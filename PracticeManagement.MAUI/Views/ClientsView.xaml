@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PracticeManagement.MAUI.Views.ClientsView">
+     
+    
     <ContentPage.MenuBarItems>
 
         <MenuBarItem Text="Home">
@@ -12,8 +14,14 @@
             <MenuFlyoutItem Text="Employees" Clicked="EmployeesMenu_Clicked"></MenuFlyoutItem>
             <MenuFlyoutItem Text="Hours" Clicked="HoursMenu_Clicked"></MenuFlyoutItem>
         </MenuBarItem>
-       
+
+        
+
     </ContentPage.MenuBarItems>
+
+    <Shell.TitleView>
+        <Label Text="Clients" HorizontalOptions="StartAndExpand"></Label>
+    </Shell.TitleView>
 
 
 
