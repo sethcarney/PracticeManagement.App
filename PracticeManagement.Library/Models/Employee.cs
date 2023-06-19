@@ -22,7 +22,7 @@ namespace PracticeManagement.Library.Models
         {
             get
             {
-                return Name + "$" + String.Format("{0:0.00}", Rate) + "/hr";
+                return Name + "\t$" + String.Format("{0:0.00}", Rate) + "/hr";
             }
         }
         public override string ToString()

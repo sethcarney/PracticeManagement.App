@@ -16,7 +16,7 @@ public partial class ProjectViewDetail : Popup
     private void Cancel_Clicked(object sender, EventArgs e)
     {
         //Return false to represent no change
-        Close();
+        Close(false);
     }
 
     private void ClosedFilter_Clicked(object sender, EventArgs e)
@@ -40,7 +40,7 @@ public partial class ProjectViewDetail : Popup
 
         }
         else
-            Close(false);
+            Close();
         
     }
 

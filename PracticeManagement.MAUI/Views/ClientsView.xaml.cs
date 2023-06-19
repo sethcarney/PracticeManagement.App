@@ -90,6 +90,11 @@ namespace PracticeManagement.MAUI.Views
                     return;
 
             }
+            else
+            {
+                await DisplayAlert("Alert","Unable to Add/Edit Client. Ensure all fields have been populated correctly","OK");
+                return;
+            }
             (BindingContext as ClientsViewViewModel).Reset();
 
             

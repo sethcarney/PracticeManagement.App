@@ -12,7 +12,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
-				<RowDefinition Height="6*"/>
+				<RowDefinition Height="3*"/>
+				<RowDefinition Height="2*"/>
 				<RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -20,11 +21,11 @@
             
 			<Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
 
-                <VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
+                <VerticalStackLayout  Grid.Column="0" Margin="20" Spacing="45">
                     <Label Text="Hours :" ></Label>
 					<Label Text="Narrative :"></Label>
                      
@@ -34,7 +35,6 @@
 					<Entry  Text="{Binding Path=UpdatedHours, Mode=TwoWay}"></Entry>
                     <Entry  Text="{Binding Path=UpdatedNarrative, Mode=TwoWay}"></Entry>
 					
-					
 				
 					
                 </VerticalStackLayout>
@@ -43,7 +43,7 @@
 
 			
 			<!--<mynamespace:ProjectSearch Grid.Row="2" >              </mynamespace:ProjectSearch> -->
-			<VerticalStackLayout Grid.Row="2">
+			<VerticalStackLayout Grid.Row="3">
 				<Picker Title="Select an Employee"
                     ItemsSource="{Binding Employees}"
                     ItemDisplayBinding="{Binding printVal}"
@@ -54,9 +54,12 @@
 				ItemDisplayBinding="{Binding printVal}"
 				SelectedItem="{Binding SelectedProject, Mode=TwoWay}"
 		            />
-			</VerticalStackLayout>
 
-			<HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
+
+			</VerticalStackLayout>
+			
+
+			<HorizontalStackLayout Grid.Row="4" HorizontalOptions="Center">
 
                 <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
                 <Button   Text="Submit" Clicked="Submit_Clicked"></Button>

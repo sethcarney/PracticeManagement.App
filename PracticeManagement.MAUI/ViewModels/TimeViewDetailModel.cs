@@ -65,7 +65,7 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             double holder;
             var RateGiven = double.TryParse(UpdatedHours, out holder);
-            if (RateGiven == false)
+            if (RateGiven == false || UpdatedNarrative == null || SelectedProject == null || SelectedEmployee == null )
                 return false;
             if (SelectedTime != null)
             { 

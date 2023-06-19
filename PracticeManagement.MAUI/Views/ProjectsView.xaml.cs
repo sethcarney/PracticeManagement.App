@@ -55,8 +55,7 @@ namespace PracticeManagement.MAUI.Views
                 popup = new ProjectViewDetail((BindingContext as ProjectsViewViewModel).SelectedProject);
 
             var result = await this.ShowPopupAsync(popup);
-            if (result != null)
-            {
+         
                 if (result is Project)
                 {
                     Project newProject = result as Project;
@@ -66,16 +65,20 @@ namespace PracticeManagement.MAUI.Views
                 {
                     bool success = (bool)result;
                     if (success == false)
-                        await DisplayAlert("Alert", "Unable to edit/create project. Ensure a client has been selected.", "OK");
+                        return;
 
+                }
+                else
+                {
+                    await DisplayAlert("Alert", "Unable to edit/create project. Ensure a client has been selected and all fields are populated.", "OK");
+                    return;
                 }
                 
                 (BindingContext as ProjectsViewViewModel).Reset();
 
 
 
-            }
-           
+                    
 
             
         }

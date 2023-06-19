@@ -59,7 +59,7 @@ namespace PracticeManagement.MAUI.Views
                 popup = new TimeViewDetail(currentTime);
 
             // Set the desired width and height of the popup window
-            popup.Size = new Size(400,700);
+            popup.Size = new Size(400,600);
        
 
             var result = await this.ShowPopupAsync(popup);
@@ -75,6 +75,11 @@ namespace PracticeManagement.MAUI.Views
                 if (success == false)
                     return;
 
+            }
+            else
+            {
+                await DisplayAlert("Alert", "Unable to add/edit timesheet properly. Please ensure all values have been specified.", "OK");
+                return;
             }
             (BindingContext as TimesViewViewModel).Reset();
 

@@ -7,19 +7,19 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
 
-                <VerticalStackLayout  Grid.Column="0" Margin="10" Spacing="30">
+                <VerticalStackLayout  Grid.Column="0" Margin="20" Spacing="45">
                     <Label  Text="Name :"></Label>
-                    <Label  Text="Notes :"></Label>
+                    <Label  Text="Pay Rate :"></Label>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">

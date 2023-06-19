@@ -52,7 +52,7 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public bool VerifyandUpdate()
         { 
-            if(SelectedClient == null)
+            if(SelectedClient == null || String.IsNullOrEmpty(UpdatedLongName) || String.IsNullOrEmpty(UpdatedShortName))
                return false;
             
 

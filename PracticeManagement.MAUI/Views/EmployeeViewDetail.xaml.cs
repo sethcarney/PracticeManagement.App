@@ -22,12 +22,18 @@ public partial class EmployeeViewDetail : Popup
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        (BindingContext as EmployeeViewDetailModel).Update();
+        bool success = (BindingContext as EmployeeViewDetailModel).Update();
         //Return new client if created
-        if((BindingContext as EmployeeViewDetailModel).createNew)
-            Close((BindingContext as EmployeeViewDetailModel).SelectedEmployee);
-        //Return true if successfully updated
+        if (success)
+        {
+            if ((BindingContext as EmployeeViewDetailModel).createNew)
+                Close((BindingContext as EmployeeViewDetailModel).SelectedEmployee);
+            //Return true if successfully updated
+            else
+                Close(true);
+
+        }
         else
-            Close(true);
+            Close();
     }
 }

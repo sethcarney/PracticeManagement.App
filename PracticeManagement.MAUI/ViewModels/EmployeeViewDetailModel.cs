@@ -42,7 +42,7 @@ namespace PracticeManagement.MAUI.ViewModels
             double holder;
             var RateGiven = double.TryParse(UpdatedRate, out holder);
             Math.Round(holder, 2, MidpointRounding.AwayFromZero);
-            if (RateGiven == false)
+            if (RateGiven == false || String.IsNullOrEmpty(UpdatedName))
                 return false;
 
             if(SelectedEmployee != null)

@@ -40,18 +40,22 @@ namespace PracticeManagement.MAUI.ViewModels
             }
         }
 
-        public void Update()
-        { 
+        public bool Update()
+        {
+            if (String.IsNullOrEmpty(UpdatedName))
+                return false;
+
             if(SelectedClient != null)
             { 
                SelectedClient.Name = UpdatedName;
                SelectedClient.Notes = UpdatedNotes;
             }
             else
-            {
-                
+            {    
                 SelectedClient = new Client (UpdatedName,UpdatedNotes);
             }
+
+            return true;
         }
 
   

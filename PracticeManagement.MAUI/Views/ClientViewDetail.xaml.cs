@@ -22,12 +22,17 @@ public partial class ClientViewDetail : Popup
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        (BindingContext as ClientViewDetailModel).Update();
+        bool success = (BindingContext as ClientViewDetailModel).Update();
         //Return new client if created
-        if((BindingContext as ClientViewDetailModel).createNew)
-            Close((BindingContext as ClientViewDetailModel).SelectedClient);
-        //Return true if successfully updated
+        if (success)
+        {
+            if ((BindingContext as ClientViewDetailModel).createNew)
+                Close((BindingContext as ClientViewDetailModel).SelectedClient);
+            //Return true if successfully updated
+            else
+                Close(true);
+        }
         else
-            Close(true);
+            Close();
     }
 }

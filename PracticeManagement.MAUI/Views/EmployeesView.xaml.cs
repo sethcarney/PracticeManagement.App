@@ -72,6 +72,10 @@ namespace PracticeManagement.MAUI.Views
                     return;
 
             }
+            else
+            {
+                await DisplayAlert("Alert", "Unable to add/edit Employee. Ensure all fields have been populated properly", "OK");
+            }
             (BindingContext as EmployeesViewViewModel).Reset();
 
             

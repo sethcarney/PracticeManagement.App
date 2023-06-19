@@ -24,12 +24,17 @@ public partial class TimeViewDetail : Popup
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        (BindingContext as TimeViewDetailModel).Update();
+        bool success = (BindingContext as TimeViewDetailModel).Update();
         //Return new client if created
-        if((BindingContext as TimeViewDetailModel).createNew)
-            Close((BindingContext as TimeViewDetailModel).SelectedTime);
-        //Return true if successfully updated
+        if (success)
+        {
+            if ((BindingContext as TimeViewDetailModel).createNew)
+                Close((BindingContext as TimeViewDetailModel).SelectedTime);
+            //Return true if successfully updated
+            else
+                Close(true);
+        }
         else
-            Close(true);
+        { Close(); }
     }
 }
