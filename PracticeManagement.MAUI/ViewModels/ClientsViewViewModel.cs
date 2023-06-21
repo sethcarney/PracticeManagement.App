@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
+using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.ViewModels
 {
@@ -41,14 +42,14 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged("Clients");
         }
 
-        public ObservableCollection<Client> Clients
+        public ObservableCollection<ClientViewModel> Clients
         {
             get
             {
                 List<Client> filtersApplied = ClientService.Current.applyFilters(Filters);
                 if (string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Client>(filtersApplied);
-                return new ObservableCollection<Client>(ClientService.Current.Search(filtersApplied,Query));
+                    return new ObservableCollection<ClientViewModel>(filtersApplied.Select(c => new ClientViewModel(c)).ToList());
+                return new ObservableCollection<ClientViewModel>(ClientService.Current.Search(filtersApplied,Query).Select(c => new ClientViewModel(c)).ToList());
             }
         }
 
@@ -63,14 +64,21 @@ namespace PracticeManagement.MAUI.ViewModels
                 NotifyPropertyChanged("Clients");
             return result;
         }
+
         public void Delete()
         {
-            if (SelectedClient == null)
+            if (SelectedClient != null)
             {
-                return;
+                ClientService.Current.Delete(SelectedClient.Id);
+                SelectedClient = null;
+                NotifyPropertyChanged(nameof(Clients));
+                NotifyPropertyChanged(nameof(SelectedClient));
             }
-            ClientService.Current.Delete(SelectedClient);
-            NotifyPropertyChanged("Clients");
+        }
+
+        public void RefreshClientList()
+        {
+            NotifyPropertyChanged(nameof(Clients));
         }
 
         public void Reset()

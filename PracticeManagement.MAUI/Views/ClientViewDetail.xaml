@@ -2,15 +2,16 @@
 <mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PracticeManagement.MAUI.Views.ClientViewDetail"
-             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui">
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+			>
 
-    <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
+	<ScrollView>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="4*"/>
 				<RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+				<RowDefinition Height="1*"/>
+			</Grid.RowDefinitions>
 
 			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
@@ -33,7 +34,7 @@
 			<VerticalStackLayout Grid.Row="1" Spacing="10" HorizontalOptions="Center">
 				<Label Text ="Projects"></Label>
 
-				<ListView ItemsSource="{Binding Path=linkedProjects}">
+				<ListView ItemsSource="{Binding Path= Model.Projects}">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<TextCell Text="{Binding printVal}"
@@ -47,20 +48,20 @@
 			</VerticalStackLayout>
 
 
-            <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
+			<HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
 
-                <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
-                <Button   Text="Submit" Clicked="Submit_Clicked"></Button>
-            </HorizontalStackLayout>
-            
+				<Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
+				<Button   Text="Submit" Clicked="Submit_Clicked"></Button>
+			</HorizontalStackLayout>
 
-            
-               
-             
-            
-                
-            </Grid>
 
-    
-    </ScrollView>
+
+
+
+
+
+		</Grid>
+
+
+	</ScrollView>
 </mct:Popup>

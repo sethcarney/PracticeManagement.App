@@ -6,13 +6,23 @@ namespace PracticeManagement.MAUI.Views;
 
 public partial class ProjectSearch : ContentView
 {
-	public ProjectSearch()
+
+
+ 
+    public ProjectSearch()
 	{
 		InitializeComponent();
         BindingContext = new ProjectSearchViewModel();
     }
 
-    
+
+    public static readonly BindableProperty SelectedProjectProp = BindableProperty.Create(nameof(SelectedProject), typeof(Project), typeof(ProjectSearch), default(Project));
+    public Project SelectedProject { 
+        get 
+        {
+            return (BindingContext as ProjectSearchViewModel).SelectedProject;
+        }
+       }
 
     private void Search_Clicked(object sender, EventArgs e)
     {

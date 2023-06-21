@@ -9,6 +9,10 @@ namespace PracticeManagement.Library.Models
 
     public class Client
     {
+        public Client()
+        {
+        }
+
         public Client(string name, string notes)
         {
             OpenDate = DateTime.Now;

@@ -3,36 +3,38 @@ using CommunityToolkit.Maui.Views;
 using PracticeManagement.Library.Models;
 using PracticeManagement.MAUI.ViewModels;
 
-
 public partial class ClientViewDetail : Popup
 {
 	public ClientViewDetail(Client? currentClient)
 	{
 		InitializeComponent();
-		BindingContext = new ClientViewDetailModel(currentClient);
+		BindingContext = new ClientViewModel (currentClient);
 	}
 
 
-    private void Cancel_Clicked(object sender, EventArgs e)
+    private    void Cancel_Clicked(object sender, EventArgs e)
     {
-        //Return false to represent no change
-        Close(false);
+        //await Navigation.PopModalAsync();
     }
 
-    private void Submit_Clicked(object sender, EventArgs e)
+    private   void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        bool success = (BindingContext as ClientViewDetailModel).Update();
+        (BindingContext as ClientViewModel).Update();
+        //await Navigation.PopModalAsync();
+        Close(true);
         //Return new client if created
+        /*
         if (success)
         {
-            if ((BindingContext as ClientViewDetailModel).createNew)
-                Close((BindingContext as ClientViewDetailModel).SelectedClient);
+            if ((BindingContext as ClientViewModel).createNew)
+               // Close((BindingContext as ClientViewModel).Model);
             //Return true if successfully updated
             else
-                Close(true);
+                //Close(true);
         }
         else
-            Close();
+            //Close();
+    */
     }
 }

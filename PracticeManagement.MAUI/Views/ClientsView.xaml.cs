@@ -1,4 +1,5 @@
 ﻿using System.Net.Security;
+using System.Net.Sockets;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
@@ -25,10 +26,7 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Close_Clicked(object sender, EventArgs e)
         {
-            if(verifyClientSelected() == false)
-            {
-                return;
-            }
+          
             bool choice = await DisplayAlert("Confirm", "Are you sure you would like to close this client?", "Yes", "No");
             bool result = (BindingContext as ClientsViewViewModel).Close();
             if (result)
@@ -40,31 +38,33 @@ namespace PracticeManagement.MAUI.Views
                 await DisplayAlert("Alert", "Unable to close client. Please ensure that there are no active projects linked to that client.", "OK");
             }
         }
-        private async void Delete_Clicked(object sender, EventArgs e)
+        private void Delete_Clicked(object sender, EventArgs e)
         {
-            if (verifyClientSelected() == false)
-            {
-                return;
-            }
-            bool choice = await DisplayAlert("Confirm", "Are you sure you would like to delete this client?", "Yes", "No");
-            if (choice)
-                (BindingContext as ClientsViewViewModel).Delete();
+            (BindingContext as ClientsViewViewModel).RefreshClientList();
         }
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await DisplayPopup(true);
-            
+      
+            ClientViewDetail popup = new ClientViewDetail(null);
+            //await Navigation.PushModalAsync(popup);
+            await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) => { (BindingContext as ClientsViewViewModel).RefreshClientList(); };
+           
+
         }
+
+       
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            if(verifyClientSelected() == false)
-            {
-                return;
-            }
+            var button = (Button)sender;
+            var cli = (ClientViewModel) button.BindingContext;
+            
+            ClientViewDetail popup = new ClientViewDetail(cli.Model);
+            await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) => { (BindingContext as ClientsViewViewModel).RefreshClientList(); };
 
-            await DisplayPopup(false);
         }
 
         public async Task DisplayPopup(bool addClient)
@@ -76,27 +76,7 @@ namespace PracticeManagement.MAUI.Views
             else
                 popup = new ClientViewDetail(currentClient);
 
-            var result = await this.ShowPopupAsync(popup);
-
-            if (result is Client)
-            {
-                Client newClient = result as Client;
-                ClientService.Current.Add(newClient);
-            }
-            else if(result is bool)
-            {
-                bool success = (bool)result;
-                if (success == false)
-                    return;
-
-            }
-            else
-            {
-                await DisplayAlert("Alert","Unable to Add/Edit Client. Ensure all fields have been populated correctly","OK");
-                return;
-            }
-            (BindingContext as ClientsViewViewModel).Reset();
-
+          //   await Navigation.PushModalAsync(popup);
             
         }
 
@@ -110,18 +90,7 @@ namespace PracticeManagement.MAUI.Views
             (BindingContext as ClientsViewViewModel).switchClosedFilter((Button)sender); 
         }
 
-        private bool verifyClientSelected()
-        {
-            if ((BindingContext as ClientsViewViewModel).SelectedClient == null)
-            {
-                DisplayAlert("Alert", "Please select a client in order to perform this operation", "OK");
-                return false;
-            }
-
-            return true;
-        }
-
-        
+         
         private void ProjectMenu_Clicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//Projects");

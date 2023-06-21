@@ -99,7 +99,7 @@ namespace PracticeManagement.MAUI.Views
             }
             else
             {
-                await DisplayAlert("Alert", "Unable to close client. Project was already closed.", "OK");
+                await DisplayAlert("Alert", "Unable to close project. Project was already closed.", "OK");
             }
 
         }

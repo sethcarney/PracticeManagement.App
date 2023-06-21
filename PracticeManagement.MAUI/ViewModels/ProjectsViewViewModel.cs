@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
@@ -23,6 +24,7 @@ namespace PracticeManagement.MAUI.ViewModels
         public ProjectsViewViewModel()
         {
             Filters = new SearchFilters();
+
         }
 
         public bool Close()
