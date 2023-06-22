@@ -65,17 +65,7 @@ namespace PracticeManagement.MAUI.ViewModels
             return result;
         }
 
-        public void Delete()
-        {
-            if (SelectedClient != null)
-            {
-                ClientService.Current.Delete(SelectedClient.Id);
-                SelectedClient = null;
-                NotifyPropertyChanged(nameof(Clients));
-                NotifyPropertyChanged(nameof(SelectedClient));
-            }
-        }
-
+     
         public void RefreshClientList()
         {
             NotifyPropertyChanged(nameof(Clients));

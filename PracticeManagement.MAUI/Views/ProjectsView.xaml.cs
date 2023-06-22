@@ -23,25 +23,26 @@ namespace PracticeManagement.MAUI.Views
            (BindingContext as ProjectsViewViewModel).Search();
         }
 
-        private async void Delete_Clicked(object sender, EventArgs e)
+        private  void Delete_Clicked(object sender, EventArgs e)
         {
-            if (verifyProjectSelected() == false)
-                return;
-
-            bool choice = await DisplayAlert("Alert", "Are you sure you would like to delete this Project?", "Yes", "No");
-            if(choice)
-                (BindingContext as ProjectsViewViewModel).Delete();
+            (BindingContext as ProjectsViewViewModel).RefreshProjectList();
         }
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await DisplayPopup(true);
+            ProjectViewDetail popup = new ProjectViewDetail(null);
+            bool result = (bool) await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) => {
+                if (result)
+                    (BindingContext as ProjectsViewViewModel).RefreshProjectList();
+                else
+                    DisplayAlert("Alert", "Alert unable to add Project", "OK");
+            };
         }
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            if (verifyProjectSelected() == false)
-                return;
+            
 
             await DisplayPopup(false);
         }
@@ -104,16 +105,7 @@ namespace PracticeManagement.MAUI.Views
 
         }
 
-        private bool verifyProjectSelected()
-        {
-            if ((BindingContext as ProjectsViewViewModel).SelectedProject == null)
-            {
-                DisplayAlert("Alert", "Please select a project in order to perform this operation", "OK");
-                return false;
-            }
-
-            return true;
-        }
+   
 
         private void ClosedFilter_Clicked(object sender, EventArgs e)
         {

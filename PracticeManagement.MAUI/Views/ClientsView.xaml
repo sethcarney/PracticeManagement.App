@@ -66,19 +66,21 @@
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="12*"/>
+                                        <ColumnDefinition  Width="12*"/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
-                                    <Button Grid.Column="1" 
-                                    Text="Delete" 
+                                    <Label Margin="15,0,0,0" VerticalOptions="CenterAndExpand" Grid.Column="0"  Text="{Binding Path=Display}"/>
+                                    <ImageButton Grid.Column="1" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
                                     Clicked="Delete_Clicked"/>
-                                    <Button Grid.Column="2"
-                                     Text="Edit"
-                                     Clicked="Edit_Clicked"/>
+                                    <ImageButton Grid.Column="2" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                     Source="pen_to_square.png"
+                                     Clicked="Edit_Clicked">
+                                      
+                                    </ImageButton>
 
                                 </Grid>
                             </ViewCell>

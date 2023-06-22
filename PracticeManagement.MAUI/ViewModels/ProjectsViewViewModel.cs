@@ -37,14 +37,14 @@ namespace PracticeManagement.MAUI.ViewModels
                 NotifyPropertyChanged("Projects");
             return result;
         }
-        public ObservableCollection<Project> Projects
+        public ObservableCollection<ProjectViewModel> Projects
         {
             get
             {
                 List<Project> filtersApplied = ProjectService.Current.applyFilters(Filters);
                 if(string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Project>(filtersApplied);
-                return new ObservableCollection<Project>(ProjectService.Current.Search(filtersApplied,Query));
+                    return new ObservableCollection<ProjectViewModel>(filtersApplied.Select(p => new ProjectViewModel(p)).ToList());
+                return new ObservableCollection<ProjectViewModel>(ProjectService.Current.Search(filtersApplied,Query).Select(p => new ProjectViewModel(p)).ToList());
             }
         }
 
@@ -65,15 +65,6 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged("Projects");
         }
 
-        public void Delete()
-        {
-            if (SelectedProject == null)
-            {
-                return;
-            }
-            ProjectService.Current.Delete(SelectedProject);
-            NotifyPropertyChanged("Projects");
-        }
 
         public void Reset()
         {
@@ -81,7 +72,10 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged("Projects");
         }
 
-
+        public void RefreshProjectList()
+        {
+            NotifyPropertyChanged(nameof(Projects));
+        }
         public string Query { get; set; }
 
         public void Search()

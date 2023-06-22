@@ -58,7 +58,7 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            var button = (Button)sender;
+            var button = (ImageButton)sender;
             var cli = (ClientViewModel) button.BindingContext;
             
             ClientViewDetail popup = new ClientViewDetail(cli.Model);

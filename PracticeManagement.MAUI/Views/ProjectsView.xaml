@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PracticeManagement.MAUI.Views.ProjectsView">
+            
+             x:Class="PracticeManagement.MAUI.Views.ProjectsView"
+             >
     <ContentPage.MenuBarItems>
 
         <MenuBarItem Text="Home">
@@ -41,21 +43,33 @@
                 </Button>
             </HorizontalStackLayout>
 
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Row="2" >
                 
-               
-                
-                <ListView Grid.Column="0" ItemsSource="{Binding Path=Projects}"
+                <ListView ItemsSource="{Binding Path=Projects}"
                           SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
                     <ListView.ItemTemplate>
-                        
                         <DataTemplate>
-                            <TextCell Text="{Binding printVal}"
-                                      Detail="{Binding Client.Name}"/>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="12*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
+                                    <Button Grid.Column="1" 
+                                    Text="Delete" 
+                                    Command="{Binding Path=DeleteCommand}" 
+                                    CommandParameter="{Binding}"
+                                    Clicked="Delete_Clicked"/>
+                                    <Button Grid.Column="2"
+                                     Text="Edit"
+                                     Clicked="Edit_Clicked"/>
+
+                                </Grid>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     

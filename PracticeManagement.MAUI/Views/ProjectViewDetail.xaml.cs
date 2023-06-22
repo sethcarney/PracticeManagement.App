@@ -9,7 +9,7 @@ public partial class ProjectViewDetail : Popup
 	public ProjectViewDetail(Project? currentProject)
 	{
 		InitializeComponent();
-		BindingContext = new ProjectViewDetailModel(currentProject);
+		BindingContext = new ProjectViewModel(currentProject);
 	}
 
 
@@ -19,29 +19,13 @@ public partial class ProjectViewDetail : Popup
         Close(false);
     }
 
-    private void ClosedFilter_Clicked(object sender, EventArgs e)
-    {
-        (BindingContext as ProjectsViewViewModel).switchClosedFilter((Button)sender);
-    }
+
 
     private void Submit_Clicked(object sender, EventArgs e)
     {
         //Update with new values
-        bool result = (BindingContext as ProjectViewDetailModel).VerifyandUpdate();
-
-        if (result)
-        {
-            //Return new client if created
-            if ((BindingContext as ProjectViewDetailModel).createNew)
-                Close((BindingContext as ProjectViewDetailModel).SelectedProject);
-            //Return true if successfully updated
-            else
-                Close(true);
-
-        }
-        else
-            Close();
-        
+        bool result = (BindingContext as ProjectViewModel).VerifyandUpdate();
+        Close(result);        
     }
 
 
@@ -53,7 +37,7 @@ public partial class ProjectViewDetail : Popup
         if (selectedIndex != -1)
         {
             Client current = (Client) picker.SelectedItem;
-            (BindingContext as ProjectViewDetailModel).SelectedProject.Client = current;
+            (BindingContext as ProjectViewModel).Model.Client = current;
         }
     }
 }
