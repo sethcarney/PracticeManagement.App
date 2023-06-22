@@ -57,16 +57,26 @@
                                         <ColumnDefinition Width="12*"/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0"  Text="{Binding Path=Display}"/>
-                                    <Button Grid.Column="1" 
-                                    Text="Delete" 
+                                    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                                        <Label Margin="15,0,0,0"  Grid.Column="0"  Text="{Binding Path=Display}"/>
+                                        <Label Margin="15,0,0,0" FontSize="Caption" Grid.Column="0"  Text="{Binding Path=Model.Client.Name}"/>
+                                    </VerticalStackLayout>
+                                    
+                                    <ImageButton Grid.Column="1" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                     Source="pen_to_square.png"
+                                     Clicked="Edit_Clicked"/>
+                                    <ImageButton Grid.Column="2" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    Source="rectangle_xmark.png"   WidthRequest="10" HeightRequest="10"
+                                    Command="{Binding Path=CloseCommand}" 
+                                    CommandParameter="{Binding}"
+                                    Clicked="Close_Clicked"/>
+                                        <ImageButton Grid.Column="3" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
-                                    Clicked="Delete_Clicked"/>
-                                    <Button Grid.Column="2"
-                                     Text="Edit"
-                                     Clicked="Edit_Clicked"/>
+                                    Clicked="Delete_Clicked"/>                                  
 
                                 </Grid>
                             </ViewCell>
@@ -79,16 +89,15 @@
 
 
               
-                <VerticalStackLayout Grid.Column="1" 
+                <VerticalStackLayout
                                      Spacing="25"
             Padding="30,0"
             VerticalOptions="CenterAndExpand">
                    
                     <Button Text="Add" Clicked="Add_Clicked"></Button>
-                    <Button Text="Edit" Clicked="Edit_Clicked"></Button>
+                  
                     <Button Text="Close" Clicked="Close_Clicked"></Button>
-                    <Button Text="Delete" Clicked="Delete_Clicked" ></Button>
-                    <Button Text="Back" Clicked="Back_Clicked"></Button>
+                   
                 </VerticalStackLayout>
                 
                 
