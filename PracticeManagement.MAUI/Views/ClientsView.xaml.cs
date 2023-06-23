@@ -27,16 +27,7 @@ namespace PracticeManagement.MAUI.Views
         private async void Close_Clicked(object sender, EventArgs e)
         {
           
-            bool choice = await DisplayAlert("Confirm", "Are you sure you would like to close this client?", "Yes", "No");
-            bool result = (BindingContext as ClientsViewViewModel).Close();
-            if (result)
-            {
-                await DisplayAlert("Success", "Client closed successfully", "OK");
-            }
-            else
-            {
-                await DisplayAlert("Alert", "Unable to close client. Please ensure that there are no active projects linked to that client.", "OK");
-            }
+           
         }
         private void Delete_Clicked(object sender, EventArgs e)
         {
@@ -45,13 +36,19 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-      
             ClientViewDetail popup = new ClientViewDetail(null);
-            //await Navigation.PushModalAsync(popup);
-            await this.ShowPopupAsync(popup);
-            popup.Closed += (o, e) => { (BindingContext as ClientsViewViewModel).RefreshClientList(); };
-           
-
+            bool result = (bool) await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) => 
+            {
+                if (result)
+                {
+                    (BindingContext as ClientsViewViewModel).RefreshClientList();
+                }
+                else
+                {
+                    DisplayAlert("Alert", "Unable to add Client.", "OK");
+                }
+            };
         }
 
        
@@ -65,19 +62,6 @@ namespace PracticeManagement.MAUI.Views
             await this.ShowPopupAsync(popup);
             popup.Closed += (o, e) => { (BindingContext as ClientsViewViewModel).RefreshClientList(); };
 
-        }
-
-        public async Task DisplayPopup(bool addClient)
-        {
-            Client currentClient = (BindingContext as ClientsViewViewModel).SelectedClient;
-            ClientViewDetail popup;
-            if (addClient == true)
-                popup = new ClientViewDetail(null);
-            else
-                popup = new ClientViewDetail(currentClient);
-
-          //   await Navigation.PushModalAsync(popup);
-            
         }
 
         private void Back_Clicked(object sender, EventArgs e)

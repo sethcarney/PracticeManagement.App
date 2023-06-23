@@ -32,7 +32,12 @@ namespace PracticeManagement.MAUI.ViewModels
             ProjectService.Current.Delete(id);
         }
 
+        public void ExecuteClose(Project current)
+        {
+            ProjectService.Current.Close(current);
+        }
     
+        public ICommand CloseCommand { get ; private set; }
 
         public ProjectViewModel(Project currentProject) {
             Model = currentProject;
@@ -53,6 +58,9 @@ namespace PracticeManagement.MAUI.ViewModels
 
             DeleteCommand = new Command(
                 (c) => ExecuteDelete((c as ProjectViewModel).Model.Id));
+            CloseCommand = new Command(
+                (c) => ExecuteClose((c as ProjectViewModel).Model));
+            
         
 
         }

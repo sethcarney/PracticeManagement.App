@@ -42,67 +42,28 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            
-
-            await DisplayPopup(false);
-        }
-
-        public async Task DisplayPopup(bool addProject)
-        {
-            ProjectViewDetail popup;
-            if (addProject == true)
-                popup = new ProjectViewDetail(null);
-            else
-                popup = new ProjectViewDetail((BindingContext as ProjectsViewViewModel).SelectedProject);
-
-            var result = await this.ShowPopupAsync(popup);
-         
-                if (result is Project)
-                {
-                    Project newProject = result as Project;
-                    ProjectService.Current.Add(newProject);
-                }
-                else if (result is bool)
-                {
-                    bool success = (bool)result;
-                    if (success == false)
-                        return;
-
-                }
+            var button = (ImageButton)sender;
+            var cli = (ProjectViewModel)button.BindingContext;
+            ProjectViewDetail popup = new ProjectViewDetail(cli.Model);
+            bool result = (bool) await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) =>
+            {
+                if (result)
+                    (BindingContext as ProjectsViewViewModel).RefreshProjectList();
                 else
-                {
-                    await DisplayAlert("Alert", "Unable to edit/create project. Ensure a client has been selected and all fields are populated.", "OK");
-                    return;
-                }
-                
-                (BindingContext as ProjectsViewViewModel).Reset();
-
-
-
-                    
-
-            
+                    DisplayAlert("Alert", "Unable to modify project", "OK");
+            };
         }
+
 
         private void Back_Clicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//MainPage");
         }
 
-        private async void Close_Clicked(object sender, EventArgs e)
+        private void Close_Clicked(object sender, EventArgs e)
         {
-           
-            bool choice = await DisplayAlert("Confirm", "Are you sure you would like to close this project?", "Yes", "No");
-            bool result = (BindingContext as ProjectsViewViewModel).Close();
-            if (result)
-            {
-                await DisplayAlert("Success", "Project closed successfully", "OK");
-            }
-            else
-            {
-                await DisplayAlert("Alert", "Unable to close project. Project was already closed.", "OK");
-            }
-
+            (BindingContext as ProjectsViewViewModel).RefreshProjectList();
         }
 
    
