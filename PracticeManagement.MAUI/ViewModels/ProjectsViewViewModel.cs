@@ -27,16 +27,6 @@ namespace PracticeManagement.MAUI.ViewModels
 
         }
 
-        public bool Close()
-        {
-            if (SelectedProject == null)
-                return false;
-
-            bool result = ProjectService.Current.Close(SelectedProject);
-            if (result)
-                NotifyPropertyChanged("Projects");
-            return result;
-        }
         public ObservableCollection<ProjectViewModel> Projects
         {
             get

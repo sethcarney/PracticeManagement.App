@@ -99,14 +99,17 @@ namespace PracticeManagement.Library.Services
             return closedFilter;
         }
 
-        public bool Close(Project proj)
+        public void Close(Project proj)
         {
             if (proj.isActive)
             {
                 proj.isActive = false;
-                return true;
             }
-            return false;
+            else
+            {
+                 proj.isActive= true;
+            }
+
         }
 
         public void Read()

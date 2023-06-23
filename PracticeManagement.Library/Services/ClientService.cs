@@ -78,6 +78,12 @@ namespace PracticeManagement.Library.Services
 
         public bool Close(Client client)
         {
+            if (client.isActive == false)
+            {
+                client.isActive = true;
+                return true;
+            }
+
             foreach (var project in client.Projects)
             {
                 if (project.isActive)

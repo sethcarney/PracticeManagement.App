@@ -12,9 +12,6 @@
             <MenuFlyoutItem Text="Hours" Clicked="HoursMenu_Clicked"></MenuFlyoutItem>
         </MenuBarItem>
     </ContentPage.MenuBarItems>
-    <Shell.TitleView>
-        <Label Text="Clients" HorizontalOptions="StartAndExpand"></Label>
-    </Shell.TitleView>
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
