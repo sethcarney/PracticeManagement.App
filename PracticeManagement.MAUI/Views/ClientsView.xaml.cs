@@ -24,10 +24,15 @@ namespace PracticeManagement.MAUI.Views
            (BindingContext as ClientsViewViewModel).Search();
         }
 
-        private async void Close_Clicked(object sender, EventArgs e)
+        private void Close_Clicked(object sender, EventArgs e)
         {
-          
-           
+            var button = (ImageButton)sender;
+            var cli = (ClientViewModel)button.BindingContext;
+            bool result = (BindingContext as ClientsViewViewModel).Close(cli.Model);
+            if(result == false)
+            {
+                DisplayAlert("Alert", "Unable to close client. Ensure all projects connected to client have been closed", "OK");
+            }
         }
         private void Delete_Clicked(object sender, EventArgs e)
         {

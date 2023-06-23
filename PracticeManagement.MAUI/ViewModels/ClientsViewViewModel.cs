@@ -54,12 +54,9 @@ namespace PracticeManagement.MAUI.ViewModels
         }
 
 
-        public bool Close()
+        public bool Close(Client current)
         {
-            if (SelectedClient == null)
-                return false;
-            
-            bool result = ClientService.Current.Close(SelectedClient);
+            bool result = ClientService.Current.Close(current);
             if (result)
                 NotifyPropertyChanged("Clients");
             return result;

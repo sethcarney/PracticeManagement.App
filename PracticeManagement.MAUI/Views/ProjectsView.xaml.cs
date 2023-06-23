@@ -66,8 +66,6 @@ namespace PracticeManagement.MAUI.Views
             (BindingContext as ProjectsViewViewModel).RefreshProjectList();
         }
 
-   
-
         private void ClosedFilter_Clicked(object sender, EventArgs e)
         {
             (BindingContext as ProjectsViewViewModel).switchClosedFilter((Button)sender);

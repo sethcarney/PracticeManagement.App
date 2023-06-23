@@ -2,10 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PracticeManagement.MAUI.Views.ClientsView">
-     
-    
     <ContentPage.MenuBarItems>
-
         <MenuBarItem Text="Home">
             <MenuFlyoutItem Text="Clients"/>
             <MenuFlyoutItem Text="Projects" Clicked="ProjectMenu_Clicked"/>
@@ -14,18 +11,10 @@
             <MenuFlyoutItem Text="Employees" Clicked="EmployeesMenu_Clicked"></MenuFlyoutItem>
             <MenuFlyoutItem Text="Hours" Clicked="HoursMenu_Clicked"></MenuFlyoutItem>
         </MenuBarItem>
-
-        
-
     </ContentPage.MenuBarItems>
-
     <Shell.TitleView>
         <Label Text="Clients" HorizontalOptions="StartAndExpand"></Label>
     </Shell.TitleView>
-
-
-
-
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
@@ -34,33 +23,20 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="1*"/>
-
             </Grid.RowDefinitions>
-
             <Grid Grid.Row="0">
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Entry Grid.Column="0"  Text="{Binding Path=Query, Mode=TwoWay}" TextChanged="Search_Clicked"></Entry>
-                <Button Grid.Column="1" Text="Search" Clicked="Search_Clicked"></Button>
+                <Entry Grid.Column="0"  Text="{Binding Path=Query, Mode=TwoWay}" TextChanged="Search_Clicked"/>
+                <Button Grid.Column="1" Text="Search" Clicked="Search_Clicked"/>
             </Grid>
-
             <HorizontalStackLayout Grid.Row="1">
-                <Button Text="Show Closed" Scale=".8" BackgroundColor="Gray" Clicked="ClosedFilter_Clicked">
-                    
-                </Button>
+                <Button Text="Show Closed" Scale=".8" BackgroundColor="Gray" Clicked="ClosedFilter_Clicked" />
             </HorizontalStackLayout>
-
             <Grid Grid.Row="2">
-
-
-
-                <ListView 
-            ItemsSource="{Binding Path=Clients}"
-            SelectedItem="{Binding Path=SelectedClient}"
-            >
+                <ListView ItemsSource="{Binding Path=Clients}" SelectedItem="{Binding Path=SelectedClient}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -69,45 +45,31 @@
                                         <ColumnDefinition  Width="12*"/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Label Margin="15,0,0,0" VerticalOptions="CenterAndExpand" Grid.Column="0"  Text="{Binding Path=Display}"/>
                                     <ImageButton Grid.Column="1" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                      Source="pen_to_square.png"
                                      Clicked="Edit_Clicked"/>
                                     <ImageButton Grid.Column="2" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    Source="rectangle_xmark.png"   WidthRequest="10" HeightRequest="10"
+                                    Command="{Binding Path=CloseCommand}" 
+                                    CommandParameter="{Binding}"
+                                    Clicked="Close_Clicked"/>
+                                    <ImageButton Grid.Column="3" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
                                     Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
                                     Clicked="Delete_Clicked"/>
-                                    
-
-
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-
-
-
-                <VerticalStackLayout   
-                                     Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-                   
+                <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
                     <Button  Text="Add" Clicked="Add_Clicked"></Button>
-                    
-                    <Button Text="Close" Clicked="Close_Clicked"></Button>
-                    
-          
                 </VerticalStackLayout>
-                
-                
             </Grid>
-
-           
         </Grid>
     </ScrollView>
-
 </ContentPage>
