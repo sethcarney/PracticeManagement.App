@@ -9,46 +9,53 @@
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4*"/>
-				<RowDefinition Height="3*"/>
 				<RowDefinition Height="1*"/>
 			</Grid.RowDefinitions>
 
 			<Grid Grid.Row="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="6*"/>
-				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid Grid.Row="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="6*"/>
+					</Grid.ColumnDefinitions>
 
-				<VerticalStackLayout  Grid.Column="0" Margin="15" Spacing="33" Padding="0,10,0,0" >
-					<Label  Text="Name :"></Label>
-					<Label  Text="Notes :"></Label>
-				</VerticalStackLayout>
+					<VerticalStackLayout  Grid.Column="0" Margin="15" Spacing="33" Padding="0,10,0,0" >
+						<Label  Text="Name :"></Label>
+						<Label  Text="Notes :"></Label>
+					</VerticalStackLayout>
 
-				<VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
-					<Entry  Text="{Binding Path=UpdatedName, Mode=TwoWay}"></Entry>
-					<Entry  Text="{Binding Path=UpdatedNotes, Mode=TwoWay}"></Entry>
+					<VerticalStackLayout Grid.Column="1" Margin="10" Spacing="20">
+						<Entry  Text="{Binding Path=UpdatedName, Mode=TwoWay}"></Entry>
+						<Entry  Text="{Binding Path=UpdatedNotes, Mode=TwoWay}"></Entry>
+					</VerticalStackLayout>
+				</Grid>
+
+
+				<VerticalStackLayout Grid.Row="1" HorizontalOptions="Center">
+					<Label Text ="Projects"></Label>
+
+					<ListView ItemsSource="{Binding Path= Model.Projects}">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<TextCell Text="{Binding printVal}"
+										  Detail="{Binding OpenDate}"/>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+
+					</ListView>
+
+
 				</VerticalStackLayout>
 
 			</Grid>
 
-			<VerticalStackLayout Grid.Row="1" Spacing="10" HorizontalOptions="Center">
-				<Label Text ="Projects"></Label>
-
-				<ListView ItemsSource="{Binding Path= Model.Projects}">
-					<ListView.ItemTemplate>
-						<DataTemplate>
-							<TextCell Text="{Binding printVal}"
-                                      Detail="{Binding OpenDate}"/>
-						</DataTemplate>
-					</ListView.ItemTemplate>
-
-				</ListView>
 
 
-			</VerticalStackLayout>
-
-
-			<HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center">
+			<HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
 
 				<Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
 				<Button   Text="Submit" Clicked="Submit_Clicked"></Button>

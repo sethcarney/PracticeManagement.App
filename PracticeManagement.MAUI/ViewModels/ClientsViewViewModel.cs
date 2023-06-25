@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
@@ -20,9 +21,18 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public SearchFilters Filters { get; set; }
 
+        public ICommand SearchCommand { get; private set; } 
+
         public ClientsViewViewModel() 
         {
+
             Filters = new SearchFilters();
+             SearchCommand = new Command(ExecuteSearchCommand);
+        }
+
+        public void ExecuteSearchCommand()
+        {
+            NotifyPropertyChanged(nameof(Clients));
         }
 
         public void switchClosedFilter(Button button)
@@ -76,11 +86,6 @@ namespace PracticeManagement.MAUI.ViewModels
 
 
         public string Query { get; set; }
-
-        public void Search()
-        {
-            NotifyPropertyChanged("Clients");
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
