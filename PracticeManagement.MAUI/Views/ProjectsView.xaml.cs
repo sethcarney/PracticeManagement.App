@@ -1,8 +1,4 @@
-﻿using System.Net.Security;
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.ApplicationModel.Communication;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
+﻿using CommunityToolkit.Maui.Views;
 using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.Views
@@ -16,8 +12,8 @@ namespace PracticeManagement.MAUI.Views
             InitializeComponent();
             BindingContext = new ProjectsViewViewModel();
         }
-      
-        private  void Delete_Clicked(object sender, EventArgs e)
+
+        private void Delete_Clicked(object sender, EventArgs e)
         {
             (BindingContext as ProjectsViewViewModel).RefreshProjectList();
         }
@@ -25,8 +21,9 @@ namespace PracticeManagement.MAUI.Views
         private async void Add_Clicked(object sender, EventArgs e)
         {
             ProjectViewDetail popup = new ProjectViewDetail(null);
-            result = (bool?) await this.ShowPopupAsync(popup);
-            popup.Closed += (o, e) => {
+            result = (bool?)await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) =>
+            {
                 if (result == true)
                     (BindingContext as ProjectsViewViewModel).RefreshProjectList();
                 else if (result == false)
@@ -39,7 +36,7 @@ namespace PracticeManagement.MAUI.Views
             var button = (ImageButton)sender;
             var cli = (ProjectViewModel)button.BindingContext;
             ProjectViewDetail popup = new ProjectViewDetail(cli.Model);
-            result = (bool?) await this.ShowPopupAsync(popup);
+            result = (bool?)await this.ShowPopupAsync(popup);
             popup.Closed += (o, e) =>
             {
                 if (result == true)

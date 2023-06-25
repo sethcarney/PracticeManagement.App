@@ -1,11 +1,6 @@
-﻿using PracticeManagement.Library.Models;
+﻿using System.Windows.Input;
+using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace PracticeManagement.MAUI.ViewModels
 {
@@ -14,7 +9,6 @@ namespace PracticeManagement.MAUI.ViewModels
         public Project? Model { get; set; }
         public string? UpdatedShortName { get; set; }
         public string? UpdatedLongName { get; set; }
-
         public Client? SelectedClient { get; set; }
 
 
@@ -26,6 +20,7 @@ namespace PracticeManagement.MAUI.ViewModels
             }
         }
 
+
         public ICommand DeleteCommand { get; private set; }
         public void ExecuteDelete(int id)
         {
@@ -36,17 +31,18 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             ProjectService.Current.Close(current);
         }
-    
-        public ICommand CloseCommand { get ; private set; }
 
-        public ProjectViewModel(Project currentProject) {
+        public ICommand CloseCommand { get; private set; }
+
+        public ProjectViewModel(Project currentProject)
+        {
             Model = currentProject;
             if (Model != null)
             {
                 UpdatedShortName = Model.ShortName;
                 UpdatedLongName = Model.LongName;
                 SelectedClient = currentProject.Client;
-     
+
             }
             else
             {
@@ -54,27 +50,21 @@ namespace PracticeManagement.MAUI.ViewModels
                 UpdatedLongName = "";
 
             }
-
-
             DeleteCommand = new Command(
                 (c) => ExecuteDelete((c as ProjectViewModel).Model.Id));
             CloseCommand = new Command(
                 (c) => ExecuteClose((c as ProjectViewModel).Model));
-            
-        
+
+
 
         }
 
-       
+
         public void Add()
         {
             ProjectService.Current.Add(Model);
         }
 
-
-        
-    
- 
 
         public List<Client> Clients
         {
@@ -85,7 +75,7 @@ namespace PracticeManagement.MAUI.ViewModels
         }
 
 
-       
+
 
         public bool VerifyandUpdate()
         {

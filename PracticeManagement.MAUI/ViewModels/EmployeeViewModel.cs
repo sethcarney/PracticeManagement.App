@@ -14,10 +14,6 @@ namespace PracticeManagement.MAUI.ViewModels
         public Employee Model { get; set; }
         public string? UpdatedName { get; set; }
         public string? UpdatedRate { get; set; }
-
-  
-
-
         public string Display
         {
             get
@@ -32,45 +28,46 @@ namespace PracticeManagement.MAUI.ViewModels
             EmployeeService.Current.Delete(id);
         }
 
-    
-        public EmployeeViewModel(Employee currentEmployee) {
 
-            
+        public EmployeeViewModel(Employee currentEmployee)
+        {
+
+
             if (currentEmployee != null)
             {
                 Model = currentEmployee;
                 UpdatedName = Model.Name;
                 UpdatedRate = Model.Rate.ToString();
-         
+
             }
             else
             {
                 UpdatedName = "";
                 UpdatedRate = "0.00";
-               
+
             }
 
 
             DeleteCommand = new Command(
                 (c) => ExecuteDelete((c as EmployeeViewModel).Model.Id));
 
-            
-        
+
+
 
         }
 
-       
+
         public void Add()
         {
             EmployeeService.Current.Add(Model);
         }
 
 
-        
-    
- 
 
-      
+
+
+
+
 
 
 

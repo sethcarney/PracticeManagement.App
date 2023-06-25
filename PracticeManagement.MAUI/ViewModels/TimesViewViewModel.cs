@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
 
@@ -26,8 +19,8 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged(nameof(Times));
         }
 
-        public TimesViewViewModel() 
-        { 
+        public TimesViewViewModel()
+        {
             PageFilters = new SearchFilters();
             PageFilters.Filters.Add(new Filter { Name = "Today", Applied = false });
             PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
@@ -38,20 +31,16 @@ namespace PracticeManagement.MAUI.ViewModels
             get
             {
                 List<Time> filtersApplied = TimeService.Current.applyFilters(PageFilters);
-                if(string.IsNullOrEmpty(Query))
+                if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<TimeViewModel>(filtersApplied.Select(t => new TimeViewModel(t)).ToList());
-                return new ObservableCollection<TimeViewModel>(TimeService.Current.Search(filtersApplied,Query).Select(t => new TimeViewModel(t)).ToList());
+                return new ObservableCollection<TimeViewModel>(TimeService.Current.Search(filtersApplied, Query).Select(t => new TimeViewModel(t)).ToList());
             }
         }
-
-     
         public void Reset()
         {
             Query = "";
             NotifyPropertyChanged("Times");
         }
-
-
         public string Query { get; set; }
 
         public void RefreshTimes()

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using PracticeManagement.Library.Models;
+﻿using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Services
 {
@@ -20,7 +13,7 @@ namespace PracticeManagement.Library.Services
             get
             {
                 //Thread safety, mission critical
-                lock(_lock)
+                lock (_lock)
                 {
                     if (instance == null)
                     {
@@ -31,7 +24,7 @@ namespace PracticeManagement.Library.Services
             }
         }
 
-        private ClientService() 
+        private ClientService()
         {
             clients = new List<Client>();
         }
@@ -40,27 +33,27 @@ namespace PracticeManagement.Library.Services
         {
             get { return clients; }
         }
-        
-        public List<Client> applyFilters (SearchFilters filter)
-        { 
+
+        public List<Client> applyFilters(SearchFilters filter)
+        {
             List<Client> filtered = currentClients;
             foreach (var filterItem in filter.Filters)
             {
                 if (filterItem.Name == "Show Closed")
                     filtered = filtered.Where(c => c.isActive != filterItem.Applied).ToList();
             }
-                return filtered;
+            return filtered;
         }
-        
+
         public Client? Get(int id)
         {
             return clients.FirstOrDefault(e => e.Id == id);
         }
 
         public void Add(Client? client)
-        {   
+        {
 
-            if(client != null)
+            if (client != null)
             {
                 client.Id = _counter++;
                 clients.Add(client);
@@ -97,7 +90,7 @@ namespace PracticeManagement.Library.Services
             Delete(s.Id);
         }
 
-        public List<Client> Search (List<Client> currentContext,string query)
+        public List<Client> Search(List<Client> currentContext, string query)
         {
             return currentContext.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }

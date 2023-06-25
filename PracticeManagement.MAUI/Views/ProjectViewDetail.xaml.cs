@@ -6,12 +6,12 @@ using PracticeManagement.MAUI.ViewModels;
 
 public partial class ProjectViewDetail : Popup
 {
-	public ProjectViewDetail(Project? currentProject)
-	{
-		InitializeComponent();
-		BindingContext = new ProjectViewModel(currentProject);
+    public ProjectViewDetail(Project? currentProject)
+    {
+        InitializeComponent();
+        BindingContext = new ProjectViewModel(currentProject);
 
-	}
+    }
 
 
     private void Cancel_Clicked(object sender, EventArgs e)
@@ -26,7 +26,7 @@ public partial class ProjectViewDetail : Popup
     {
         //Update with new values
         bool result = (BindingContext as ProjectViewModel).VerifyandUpdate();
-        Close(result);        
+        Close(result);
     }
 
 
@@ -37,7 +37,7 @@ public partial class ProjectViewDetail : Popup
 
         if (selectedIndex != -1)
         {
-            Client current = (Client) picker.SelectedItem;
+            Client current = (Client)picker.SelectedItem;
             (BindingContext as ProjectViewModel).Model.Client = current;
         }
     }

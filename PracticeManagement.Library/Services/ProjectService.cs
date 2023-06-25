@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using PracticeManagement.Library.Models;
+﻿using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Services
 {
@@ -19,7 +13,7 @@ namespace PracticeManagement.Library.Services
             get
             {
                 //Thread safety, mission critical
-                lock(_lock)
+                lock (_lock)
                 {
                     if (instance == null)
                     {
@@ -30,7 +24,7 @@ namespace PracticeManagement.Library.Services
             }
         }
 
-        private ProjectService() 
+        private ProjectService()
         {
             projects = new List<Project>();
             /*
@@ -54,7 +48,7 @@ namespace PracticeManagement.Library.Services
             get { return projects; }
         }
 
-        
+
         public Project? Get(int id)
         {
             return projects.FirstOrDefault(e => e.Id == id);
@@ -66,9 +60,9 @@ namespace PracticeManagement.Library.Services
         }
 
         public void Add(Project? Project)
-        {   
+        {
 
-            if(Project != null)
+            if (Project != null)
             {
                 Project.Id = _counter++;
                 projects.Add(Project);
@@ -89,24 +83,24 @@ namespace PracticeManagement.Library.Services
             Delete(s.Id);
         }
 
-        public List<Project> Search (List<Project> filtered, string query)
+        public List<Project> Search(List<Project> filtered, string query)
         {
-            return filtered.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.Client.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ).ToList();
+            return filtered.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.Client.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
-        
+
         public List<Project> applyFilters(SearchFilters filter)
         {
             List<Project> filtered = currentProjects;
             foreach (var filterItem in filter.Filters)
             {
-                if(filterItem.Name == "Show Closed")
-                 filtered = filtered.Where(p => p.isActive != filterItem.Applied).ToList();
+                if (filterItem.Name == "Show Closed")
+                    filtered = filtered.Where(p => p.isActive != filterItem.Applied).ToList();
             }
 
-            
+
             return filtered;
         }
-        
+
         public void Close(Project proj)
         {
             if (proj.isActive)
@@ -115,7 +109,7 @@ namespace PracticeManagement.Library.Services
             }
             else
             {
-                 proj.isActive= true;
+                proj.isActive = true;
             }
 
         }

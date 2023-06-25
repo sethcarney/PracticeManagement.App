@@ -1,8 +1,4 @@
-﻿using System.Net.Security;
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.ApplicationModel.Communication;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
+﻿using CommunityToolkit.Maui.Views;
 using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.Views
@@ -22,7 +18,8 @@ namespace PracticeManagement.MAUI.Views
             TimeViewDetail popup = new TimeViewDetail(null);
             popup.Size = new Size(600, 600);
             result = (bool?)await this.ShowPopupAsync(popup);
-            popup.Closed += (o, e) => {
+            popup.Closed += (o, e) =>
+            {
                 if (result == true)
                     (BindingContext as TimesViewViewModel).RefreshTimes();
                 else if (result == false)
@@ -52,9 +49,9 @@ namespace PracticeManagement.MAUI.Views
         {
             (BindingContext as EmployeesViewViewModel).Reset();
         }
-       
 
-        
+
+
 
     }
 }

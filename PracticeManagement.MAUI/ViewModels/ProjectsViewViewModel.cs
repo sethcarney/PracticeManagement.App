@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
 
@@ -43,11 +36,11 @@ namespace PracticeManagement.MAUI.ViewModels
                 List<Project> filtersApplied = ProjectService.Current.applyFilters(PageFilters);
                 if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<ProjectViewModel>(filtersApplied.Select(p => new ProjectViewModel(p)).ToList());
-                return new ObservableCollection<ProjectViewModel>(ProjectService.Current.Search(filtersApplied,Query).Select(p => new ProjectViewModel(p)).ToList());
+                return new ObservableCollection<ProjectViewModel>(ProjectService.Current.Search(filtersApplied, Query).Select(p => new ProjectViewModel(p)).ToList());
             }
         }
 
-     
+
 
 
         public void Reset()

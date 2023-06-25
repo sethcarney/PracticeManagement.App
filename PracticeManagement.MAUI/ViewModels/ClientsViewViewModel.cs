@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
-using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.ViewModels
 {
@@ -21,9 +13,9 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public SearchFilters PageFilters { get; set; }
 
-        public ICommand SearchCommand { get; private set; } 
+        public ICommand SearchCommand { get; private set; }
 
-        public ClientsViewViewModel() 
+        public ClientsViewViewModel()
         {
 
             PageFilters = new SearchFilters();
@@ -36,7 +28,7 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged(nameof(Clients));
         }
 
-       
+
 
         public ObservableCollection<ClientViewModel> Clients
         {
@@ -45,7 +37,7 @@ namespace PracticeManagement.MAUI.ViewModels
                 List<Client> filtersApplied = ClientService.Current.applyFilters(PageFilters);
                 if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<ClientViewModel>(filtersApplied.Select(c => new ClientViewModel(c)).ToList());
-                return new ObservableCollection<ClientViewModel>(ClientService.Current.Search(filtersApplied,Query).Select(c => new ClientViewModel(c)).ToList());
+                return new ObservableCollection<ClientViewModel>(ClientService.Current.Search(filtersApplied, Query).Select(c => new ClientViewModel(c)).ToList());
             }
         }
 
@@ -58,7 +50,7 @@ namespace PracticeManagement.MAUI.ViewModels
             return result;
         }
 
-     
+
         public void RefreshClientList()
         {
             NotifyPropertyChanged(nameof(Clients));

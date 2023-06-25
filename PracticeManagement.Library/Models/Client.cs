@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PracticeManagement.Library.Models
+﻿namespace PracticeManagement.Library.Models
 {
 
     public class Client
@@ -22,7 +16,7 @@ namespace PracticeManagement.Library.Models
             Projects = new List<Project>();
         }
 
-       
+
         public int Id { get; set; }
 
         public DateTime OpenDate { get; set; }
@@ -31,7 +25,7 @@ namespace PracticeManagement.Library.Models
         public bool isActive { get; set; }
 
         public string Name { get; set; }
-        public string ? Notes { get; set; }
+        public string? Notes { get; set; }
 
         public string printVal { get { return $"{Name} - {Notes}"; } }
         public List<Project> Projects { get; set; }

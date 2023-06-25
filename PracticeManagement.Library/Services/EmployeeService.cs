@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using PracticeManagement.Library.Models;
+﻿using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Services
 {
@@ -19,7 +13,7 @@ namespace PracticeManagement.Library.Services
             get
             {
                 //Thread safety, mission critical
-                lock(_lock)
+                lock (_lock)
                 {
                     if (instance == null)
                     {
@@ -30,10 +24,10 @@ namespace PracticeManagement.Library.Services
             }
         }
 
-        private EmployeeService() 
+        private EmployeeService()
         {
             Employees = new List<Employee>();
-          
+
         }
 
         public List<Employee> currentEmployees
@@ -52,9 +46,9 @@ namespace PracticeManagement.Library.Services
         }
 
         public void Add(Employee? Employee)
-        {   
+        {
 
-            if(Employee != null)
+            if (Employee != null)
             {
                 Employee.Id = _counter++;
                 Employees.Add(Employee);
@@ -77,9 +71,9 @@ namespace PracticeManagement.Library.Services
             Delete(s.Id);
         }
 
-        public List<Employee> Search (string query)
+        public List<Employee> Search(string query)
         {
-            return Employees.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ).ToList();
+            return Employees.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
         public void Read()

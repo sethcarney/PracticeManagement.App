@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using PracticeManagement.Library.Models;
+﻿using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Services
 {
@@ -19,7 +13,7 @@ namespace PracticeManagement.Library.Services
             get
             {
                 //Thread safety, mission critical
-                lock(_lock)
+                lock (_lock)
                 {
                     if (instance == null)
                     {
@@ -30,7 +24,7 @@ namespace PracticeManagement.Library.Services
             }
         }
 
-        private TimeService() 
+        private TimeService()
         {
             times = new List<Time>();
         }
@@ -46,9 +40,9 @@ namespace PracticeManagement.Library.Services
         }
 
         public void Add(Time? Time)
-        {   
+        {
 
-            if(Time != null)
+            if (Time != null)
             {
                 Time.Id = _counter++;
                 times.Add(Time);
@@ -58,7 +52,7 @@ namespace PracticeManagement.Library.Services
         public List<Time> Search(List<Time> filtered, string query)
         {
             return filtered.Where(s => s.Date.ToShortDateString().IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ||
-            s.Employee.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || 
+            s.Employee.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ||
             s.Project.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ||
             s.Project.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
@@ -89,7 +83,7 @@ namespace PracticeManagement.Library.Services
             Delete(s.Id);
         }
 
-        public List<Time> Search (string query)
+        public List<Time> Search(string query)
         {
             return times.Where(s => s.Narrative.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }

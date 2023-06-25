@@ -9,7 +9,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
         {
             List<Project> projects = new List<Project>();
             var myClientService = ClientService.Current;
-            while(true)
+            while (true)
             {
                 Console.WriteLine("C. Clients");
                 Console.WriteLine("P. Projects");
@@ -25,7 +25,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                 {
                     projectMenu(projects);
                 }
-                else if (choice.Equals("Q",StringComparison.InvariantCultureIgnoreCase))
+                else if (choice.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
                 {
                     break;
                 }
@@ -64,7 +64,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     string Notes = Console.ReadLine() ?? string.Empty;
                     if (Name != string.Empty)
                     {
-                        myClientService.Add(new Client(Name,Notes));
+                        myClientService.Add(new Client(Name, Notes));
                         Console.WriteLine("Client successfully added\n");
                     }
                     else
@@ -111,7 +111,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                             Console.WriteLine("No name given\n");
                     }
                 }
-                else if (input.Equals("Q",StringComparison.InvariantCultureIgnoreCase))
+                else if (input.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
                 {
                     return;
                 }
@@ -120,7 +120,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
             }
         }
 
-        public static void projectMenu(List<Project>projects)
+        public static void projectMenu(List<Project> projects)
         {
             while (true)
             {
@@ -142,8 +142,8 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                     string longName = Console.ReadLine() ?? string.Empty;
                     if (shortName != string.Empty && longName != string.Empty)
                     {
-                        projects.Add(new Project(shortName, longName, new Client("Fake","Notes")));
-                     
+                        projects.Add(new Project(shortName, longName, new Client("Fake", "Notes")));
+
                         Console.WriteLine("Project successfully added\n");
                     }
                     else
@@ -193,7 +193,7 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                             int linkedClient = Convert.ToInt32(Console.ReadLine() ?? "0");
                             result.ShortName = shortName;
                             result.LongName = longName;
-                           
+
 
                             Console.WriteLine("Project successfully updated\n");
                         }
@@ -211,8 +211,8 @@ namespace PracticeManagement // Note: actual namespace depends on the project na
                 Console.WriteLine();
             }
         }
-              
-            }
-            
-           
-        }
+
+    }
+
+
+}

@@ -1,8 +1,4 @@
-﻿using System.Net.Security;
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.ApplicationModel.Communication;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
+﻿using CommunityToolkit.Maui.Views;
 using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.Views
@@ -20,7 +16,8 @@ namespace PracticeManagement.MAUI.Views
         {
             EmployeeViewDetail popup = new EmployeeViewDetail(null);
             result = (bool?)await this.ShowPopupAsync(popup);
-            popup.Closed += (o, e) => {
+            popup.Closed += (o, e) =>
+            {
                 if (result == true)
                     (BindingContext as EmployeesViewViewModel).Reset();
                 else if (result == false)

@@ -1,11 +1,60 @@
-﻿using PracticeManagement.Library.Models;
+﻿
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-ios)'
+Before:
+using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+After:
+using System;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-maccatalyst)'
+Before:
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+using System;
+After:
+using System;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-windows10.0.19041.0)'
+Before:
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+using System;
+After:
+using System;
+*/
 using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-ios)'
+Before:
+using System.Windows.Input;
+After:
+using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-maccatalyst)'
+Before:
+using System.Windows.Input;
+After:
+using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-windows10.0.19041.0)'
+Before:
+using System.Windows.Input;
+After:
+using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+*/
+
 
 namespace PracticeManagement.MAUI.ViewModels
 {
@@ -27,10 +76,11 @@ namespace PracticeManagement.MAUI.ViewModels
             ClientService.Current.Delete(id);
         }
 
-    
 
-        public ClientViewModel(Client client) {
-            if(client  == null)
+
+        public ClientViewModel(Client client)
+        {
+            if (client == null)
             {
                 UpdatedName = String.Empty; UpdatedNotes = String.Empty;
             }
@@ -40,15 +90,15 @@ namespace PracticeManagement.MAUI.ViewModels
                 UpdatedName = Model.Name;
                 UpdatedNotes = Model.Notes;
             }
-        
-         
+
+
             DeleteCommand = new Command(
                 (c) => ExecuteDelete((c as ClientViewModel).Model.Id));
-        
+
 
         }
 
-       
+
         public void Add()
         {
             ClientService.Current.Add(Model);
@@ -56,7 +106,7 @@ namespace PracticeManagement.MAUI.ViewModels
 
 
 
-     
+
         public string? UpdatedName { get; set; }
         public string? UpdatedNotes { get; set; }
 
@@ -76,10 +126,10 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             else
             {
-               Model = new Client(UpdatedName, UpdatedNotes);
-               Add();
+                Model = new Client(UpdatedName, UpdatedNotes);
+                Add();
             }
-          
+
             return true;
         }
     }

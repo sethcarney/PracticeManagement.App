@@ -1,50 +1,69 @@
-﻿using PracticeManagement.Library.Models;
+﻿
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-ios)'
+Before:
+using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+After:
+using System;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-maccatalyst)'
+Before:
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+using System;
+After:
+using System;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-windows10.0.19041.0)'
+Before:
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+using System;
+After:
+using System;
+*/
 using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-ios)'
+Before:
+using System.Windows.Input;
+After:
+using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-maccatalyst)'
+Before:
+using System.Windows.Input;
+After:
+using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+*/
+
+/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-windows10.0.19041.0)'
+Before:
+using System.Windows.Input;
+After:
+using System.Windows.Input;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Services;
+*/
+
 
 namespace PracticeManagement.MAUI.ViewModels
 {
     public class TimeViewModel
     {
-
-
-        public string Display
-        {
-            get
-            {
-                return Model.ToString() ?? string.Empty;
-            }
-        }
-        public ICommand DeleteCommand { get; private set; }
-        public void ExecuteDelete(int id)
-        {
-            TimeService.Current.Delete(id);
-        }
         public Time? Model { get; set; }
         public DateTime SelectedDate { get; set; }
         public string? UpdatedNarrative { get; set; }
         public string? UpdatedHours { get; set; }
-        public bool createNew { get; set; }
-        public List<Employee> Employees
-        {
-            get
-            {
-                return EmployeeService.Current.currentEmployees;
-            }
-        }
-        SearchFilters FilterClosed { get; set; }
-        public List<Project> Projects
-        {
-            get 
-            {
-                return ProjectService.Current.applyFilters(FilterClosed);
-            }
-        }
         public Employee SelectedEmployee { get; set; }
         public Project SelectedProject { get; set; }
         public TimeViewModel(Time? currentTime)
@@ -55,22 +74,25 @@ namespace PracticeManagement.MAUI.ViewModels
                 SelectedDate = Model.Date;
                 UpdatedNarrative = Model.Narrative;
                 UpdatedHours = Model.Hours.ToString();
-                SelectedEmployee =  Model.Employee;
+                SelectedEmployee = Model.Employee;
                 SelectedProject = Model.Project;
-                createNew = false;
+
             }
             else
             {
                 SelectedDate = DateTime.Today;
                 UpdatedNarrative = null;
                 UpdatedHours = "0.0";
-                createNew = true;
             }
             DeleteCommand = new Command((c) => ExecuteDelete((c as TimeViewModel).Model.Id));
             FilterClosed = new SearchFilters();
             FilterClosed.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
         }
-              
+        public ICommand DeleteCommand { get; private set; }
+        public void ExecuteDelete(int id)
+        {
+            TimeService.Current.Delete(id);
+        }
         public void Add()
         {
             TimeService.Current.Add(Model);
@@ -96,7 +118,28 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             return true;
         }
-
-
+        public List<Employee> Employees
+        {
+            get
+            {
+                return EmployeeService.Current.currentEmployees;
+            }
+        }
+        SearchFilters FilterClosed { get; set; }
+        public List<Project> Projects
+        {
+            get
+            {
+                //Only return open projects for potential time entries
+                return ProjectService.Current.applyFilters(FilterClosed);
+            }
+        }
+        public string Display
+        {
+            get
+            {
+                return Model.ToString() ?? string.Empty;
+            }
+        }
     }
 }

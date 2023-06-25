@@ -1,9 +1,4 @@
-﻿using System.Net.Security;
-using System.Net.Sockets;
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.ApplicationModel.Communication;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
+﻿using CommunityToolkit.Maui.Views;
 using PracticeManagement.MAUI.ViewModels;
 
 namespace PracticeManagement.MAUI.Views
@@ -22,7 +17,7 @@ namespace PracticeManagement.MAUI.Views
             var button = (ImageButton)sender;
             var cli = (ClientViewModel)button.BindingContext;
             bool result = (BindingContext as ClientsViewViewModel).Close(cli.Model);
-            if(result == false)
+            if (result == false)
             {
                 DisplayAlert("Alert", "Unable to close client. Ensure all projects connected to client have been closed", "OK");
             }
@@ -34,9 +29,9 @@ namespace PracticeManagement.MAUI.Views
         private async void Add_Clicked(object sender, EventArgs e)
         {
             ClientViewDetail popup = new ClientViewDetail(null);
-             result = (bool?)await this.ShowPopupAsync(popup);
-        
-            popup.Closed += (o, e) => 
+            result = (bool?)await this.ShowPopupAsync(popup);
+
+            popup.Closed += (o, e) =>
             {
                 if (result == true)
                 {
@@ -51,7 +46,7 @@ namespace PracticeManagement.MAUI.Views
         private async void Edit_Clicked(object sender, EventArgs e)
         {
             var button = (ImageButton)sender;
-            var cli = (ClientViewModel) button.BindingContext;
+            var cli = (ClientViewModel)button.BindingContext;
             ClientViewDetail popup = new ClientViewDetail(cli.Model);
             popup.Size = new Size(600, 600);
             await this.ShowPopupAsync(popup);
