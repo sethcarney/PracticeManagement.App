@@ -73,12 +73,7 @@ namespace PracticeManagement.MAUI.Views
             Shell.Current.GoToAsync("//MainPage");
         }
 
-        private void ClosedFilter_Clicked(object sender, EventArgs e)
-        {
-            (BindingContext as ClientsViewViewModel).switchClosedFilter((Button)sender); 
-        }
-
-         
+        
         private void ProjectMenu_Clicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//Projects");

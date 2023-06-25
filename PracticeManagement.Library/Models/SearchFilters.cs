@@ -8,11 +8,22 @@ namespace PracticeManagement.Library.Models
 {
     public class SearchFilters
     {
-        public bool showClosed { get; set; }
+        public List<Filter> Filters { get; set; }
         public SearchFilters() 
         {
-            showClosed = false;
+            Filters = new List<Filter>();
         }
 
+
+       
+    }
+    public class Filter
+    {
+        public string? Name { get; set; }
+        public bool Applied { get; set; }
+        public Filter()
+        {
+           
+        }
     }
 }

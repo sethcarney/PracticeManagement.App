@@ -34,33 +34,24 @@ namespace PracticeManagement.Library.Services
         private ClientService() 
         {
             clients = new List<Client>();
-            /*
-             * clients.Add(new Client
-                        {
-                            Id = 1,
-                            Name = "BOB",
-                            Notes = "Is cool"
-                        });
-            clients.Add(new Client
-            {
-                Id = 1,
-                Name = "Susan",
-                Notes = "Is even cooler"
-            });
-            */
         }
 
         public List<Client> currentClients
         {
             get { return clients; }
         }
-
+        
         public List<Client> applyFilters (SearchFilters filter)
-        {
-            List<Client> closedFilter = clients.Where(s => s.isActive != filter.showClosed).ToList();
-            return closedFilter;
+        { 
+            List<Client> filtered = currentClients;
+            foreach (var filterItem in filter.Filters)
+            {
+                if (filterItem.Name == "Show Closed")
+                    filtered = filtered.Where(c => c.isActive != filterItem.Applied).ToList();
+            }
+                return filtered;
         }
-
+        
         public Client? Get(int id)
         {
             return clients.FirstOrDefault(e => e.Id == id);

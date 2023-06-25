@@ -21,7 +21,9 @@ public partial class EmployeeViewDetail : Popup
 
     private void Submit_Clicked(object sender, EventArgs e)
     {
-   
+       
+
+
         Close((BindingContext as EmployeeViewModel).Update());
    
        

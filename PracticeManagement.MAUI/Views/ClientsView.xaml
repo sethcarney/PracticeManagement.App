@@ -17,19 +17,13 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <!-- * makes it relative to operating system and screen-->
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height=".8*"/>
+                <RowDefinition/>
                 <RowDefinition Height="7*"/>
-                <RowDefinition />
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <c:SearchBarControl 
-                                QueryText="{Binding Query}"
-                                SearchButtonText="Search"
-                                SearchCommand="{Binding SearchCommand}"/>
-            <HorizontalStackLayout Grid.Row="1">
-                <Button Text="Show Closed" Scale=".8" BackgroundColor="Gray" Clicked="ClosedFilter_Clicked" />
-            </HorizontalStackLayout>
+            <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchButtonText="Search" SearchCommand="{Binding SearchCommand}"/>
+            <c:FilterBarControl Grid.Row="1" SearchFilters="{Binding PageFilters}" UpdateCommand="{Binding SearchCommand}" />
             <Grid Grid.Row="2">
                 <ListView ItemsSource="{Binding Path=Clients}" SelectedItem="{Binding Path=SelectedClient}">
                     <ListView.ItemTemplate>
@@ -60,7 +54,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-            <VerticalStackLayout Grid.Row="3" HorizontalOptions="Center">
+            <VerticalStackLayout Grid.Row="3" VerticalOptions="End">
                     <Button  FontAttributes="Bold" Text="Add" Clicked="Add_Clicked"></Button>
                 </VerticalStackLayout>
             

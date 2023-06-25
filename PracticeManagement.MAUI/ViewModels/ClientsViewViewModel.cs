@@ -19,15 +19,16 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Client SelectedClient { get; set; }
 
-        public SearchFilters Filters { get; set; }
+        public SearchFilters PageFilters { get; set; }
 
         public ICommand SearchCommand { get; private set; } 
 
         public ClientsViewViewModel() 
         {
 
-            Filters = new SearchFilters();
-             SearchCommand = new Command(ExecuteSearchCommand);
+            PageFilters = new SearchFilters();
+            PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            SearchCommand = new Command(ExecuteSearchCommand);
         }
 
         public void ExecuteSearchCommand()
@@ -35,28 +36,13 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged(nameof(Clients));
         }
 
-        public void switchClosedFilter(Button button)
-        {
-            var firstColor = button.BackgroundColor;
-            if(Filters.showClosed)
-            {
-                button.BackgroundColor = Colors.Gray;
-                Filters.showClosed = false;
-
-            }
-            else
-            {
-                button.BackgroundColor = Colors.MediumSeaGreen;
-                Filters.showClosed = true;
-            }
-            NotifyPropertyChanged("Clients");
-        }
+       
 
         public ObservableCollection<ClientViewModel> Clients
         {
             get
             {
-                List<Client> filtersApplied = ClientService.Current.applyFilters(Filters);
+                List<Client> filtersApplied = ClientService.Current.applyFilters(PageFilters);
                 if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<ClientViewModel>(filtersApplied.Select(c => new ClientViewModel(c)).ToList());
                 return new ObservableCollection<ClientViewModel>(ClientService.Current.Search(filtersApplied,Query).Select(c => new ClientViewModel(c)).ToList());

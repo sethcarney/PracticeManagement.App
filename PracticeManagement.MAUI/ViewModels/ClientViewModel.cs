@@ -61,7 +61,7 @@ namespace PracticeManagement.MAUI.ViewModels
         public string? UpdatedNotes { get; set; }
 
         public List<Project> linkedProjects { get; set; }
-        public bool createNew { get; set; }
+
 
 
         public bool Update()

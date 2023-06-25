@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel.Communication;
+using System.Windows.Input;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
 
@@ -17,41 +11,40 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Employee SelectedEmployee { get; set; }
 
+        public ICommand SearchCommand { get; private set; }
 
-        public ObservableCollection<Employee> Employees
+        public EmployeesViewViewModel()
+        {
+            SearchCommand = new Command(ExecuteSearchCommand);
+        }
+
+        public void ExecuteSearchCommand()
+        {
+            NotifyPropertyChanged(nameof(Employees));
+        }
+        public ObservableCollection<EmployeeViewModel> Employees
         {
             get
             {
-                if(string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Employee>(EmployeeService.Current.currentEmployees);
-                return new ObservableCollection<Employee>(EmployeeService.Current.Search(Query));
+                if (string.IsNullOrEmpty(Query))
+                    return new ObservableCollection<EmployeeViewModel>(EmployeeService.Current.currentEmployees.Select(e => new EmployeeViewModel(e)).ToList());
+                return new ObservableCollection<EmployeeViewModel>(EmployeeService.Current.Search(Query).Select(e => new EmployeeViewModel(e)).ToList());
             }
         }
 
-        public Employee? getCurrentClient() { return SelectedEmployee; }
-        public void Delete()
-        {
-            if (SelectedEmployee == null)
-            {
-                return;
-            }
-            EmployeeService.Current.Delete(SelectedEmployee);
-            NotifyPropertyChanged("Employees");
-        }
+
+
 
         public void Reset()
         {
             Query = "";
-            NotifyPropertyChanged("Employees");
+            NotifyPropertyChanged(nameof(Employees));
         }
 
 
         public string Query { get; set; }
 
-        public void Search()
-        {
-            NotifyPropertyChanged("Employees");
-        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

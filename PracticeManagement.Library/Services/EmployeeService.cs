@@ -33,20 +33,7 @@ namespace PracticeManagement.Library.Services
         private EmployeeService() 
         {
             Employees = new List<Employee>();
-            /*
-             * Employees.Add(new Employee
-                        {
-                            Id = 1,
-                            Name = "BOB",
-                            Notes = "Is cool"
-                        });
-            Employees.Add(new Employee
-            {
-                Id = 1,
-                Name = "Susan",
-                Notes = "Is even cooler"
-            });
-            */
+          
         }
 
         public List<Employee> currentEmployees

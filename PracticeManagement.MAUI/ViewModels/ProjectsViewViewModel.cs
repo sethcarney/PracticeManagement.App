@@ -19,7 +19,7 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Project SelectedProject { get; set; }
 
-        public SearchFilters Filters { get; set; }
+        public SearchFilters PageFilters { get; set; }
 
         public ICommand SearchCommand { get; set; }
         public void ExecuteSearchCommand()
@@ -28,7 +28,8 @@ namespace PracticeManagement.MAUI.ViewModels
         }
         public ProjectsViewViewModel()
         {
-            Filters = new SearchFilters();
+            PageFilters = new SearchFilters();
+            PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
             SearchCommand = new Command(ExecuteSearchCommand);
 
         }
@@ -39,29 +40,14 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             get
             {
-                List<Project> filtersApplied = ProjectService.Current.applyFilters(Filters);
-                if(string.IsNullOrEmpty(Query))
+                List<Project> filtersApplied = ProjectService.Current.applyFilters(PageFilters);
+                if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<ProjectViewModel>(filtersApplied.Select(p => new ProjectViewModel(p)).ToList());
                 return new ObservableCollection<ProjectViewModel>(ProjectService.Current.Search(filtersApplied,Query).Select(p => new ProjectViewModel(p)).ToList());
             }
         }
 
-        public void switchClosedFilter(Button button)
-        {
-            var firstColor = button.BackgroundColor;
-            if (Filters.showClosed)
-            {
-                button.BackgroundColor = Colors.Gray;
-                Filters.showClosed = false;
-
-            }
-            else
-            {
-                button.BackgroundColor = Colors.MediumSeaGreen;
-                Filters.showClosed = true;
-            }
-            NotifyPropertyChanged("Projects");
-        }
+     
 
 
         public void Reset()

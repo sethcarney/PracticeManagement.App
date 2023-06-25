@@ -22,12 +22,12 @@
             <Grid.RowDefinitions>
                 <!-- * makes it relative to operating system and screen-->
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="7*"/>
+                <RowDefinition Height="8*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchButtonText="Search" SearchCommand="{Binding SearchCommand}"/>
-            <Grid Grid.Row="2" >
-                <ListView ItemsSource="{Binding Path=Employees}" SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}">
+            <Grid Grid.Row="1" >
+                <ListView ItemsSource="{Binding Path=Employees}" SelectedItem="{Binding Path=SelectedEmployee}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -40,7 +40,6 @@
                                     </Grid.ColumnDefinitions>
                                     <VerticalStackLayout VerticalOptions="CenterAndExpand">
                                         <Label Margin="15,0,0,0"  Grid.Column="0"  Text="{Binding Path=Display}"/>
-                                        <Label Margin="15,0,0,0" FontSize="Caption" Grid.Column="0"  Text="{Binding Path=Model.Client.Name}"/>
                                     </VerticalStackLayout>
                                     <ImageButton Grid.Column="1" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                      Source="pen_to_square.png"
@@ -49,17 +48,20 @@
                                     Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
-                                    Clicked="Delete_Clicked"/>
+                                    />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <VerticalStackLayout Grid.Row="2" VerticalOptions="Center">
-                    <Button  FontAttributes="Bold"  Text="Add" Clicked="Add_Clicked"/>
-                </VerticalStackLayout>
+                
             </Grid>
+            <VerticalStackLayout Grid.Row="2" VerticalOptions="End">
+                <Button  FontAttributes="Bold"  Text="Add" Clicked="Add_Clicked"/>
+            </VerticalStackLayout>
+
         </Grid>
+       
     </ScrollView>
 
 </ContentPage>

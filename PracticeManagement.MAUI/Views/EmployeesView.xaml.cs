@@ -18,18 +18,8 @@ namespace PracticeManagement.MAUI.Views
         }
 
         
-     
-        private void Search_Clicked(object sender, EventArgs e)
-        {
-           (BindingContext as EmployeesViewViewModel).Search();
-        }
+  
 
-        private async void Delete_Clicked(object sender, EventArgs e)
-        {
-            bool choice = await DisplayAlert("Alert", "Are you sure you would like to delete this Employee?", "Yes", "No");
-            if(choice)
-                (BindingContext as EmployeesViewViewModel).Delete();
-        }
 
         private async void Add_Clicked(object sender, EventArgs e)
         {

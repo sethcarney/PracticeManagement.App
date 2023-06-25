@@ -11,7 +11,7 @@ namespace PracticeManagement.MAUI.ViewModels
 {
     public class EmployeeViewModel
     {
-        public Employee? Model { get; set; }
+        public Employee Model { get; set; }
         public string? UpdatedName { get; set; }
         public string? UpdatedRate { get; set; }
 
@@ -70,13 +70,7 @@ namespace PracticeManagement.MAUI.ViewModels
     
  
 
-        public List<Client> Clients
-        {
-            get
-            {
-                return new List<Client>(ClientService.Current.currentClients);
-            }
-        }
+      
 
 
 
@@ -96,6 +90,7 @@ namespace PracticeManagement.MAUI.ViewModels
             else
             {
                 Model = new Employee(UpdatedName, holder);
+                Add();
             }
             return true;
         }
