@@ -3,20 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:c="clr-namespace:PracticeManagement.MAUI.Controls"
              x:Class="PracticeManagement.MAUI.Views.EmployeesView">
-
-    <ContentPage.MenuBarItems>
-
-        <MenuBarItem Text="Home">
-            <MenuFlyoutItem Text="Clients" Clicked="ClientMenu_Clicked"/>
-            <MenuFlyoutItem Text="Projects" Clicked="ProjectMenu_Clicked"/>
-        </MenuBarItem>
-        <MenuBarItem Text="Time Tracking">
-            <MenuFlyoutItem Text="Employees" ></MenuFlyoutItem>
-            <MenuFlyoutItem Text="Hours" Clicked="HoursMenu_Clicked"></MenuFlyoutItem>
-        </MenuBarItem>
-
-    </ContentPage.MenuBarItems>
-
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
@@ -48,6 +34,7 @@
                                     Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"
+                                    Clicked="Delete_Clicked"
                                     />
                                 </Grid>
                             </ViewCell>

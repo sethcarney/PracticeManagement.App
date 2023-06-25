@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using PracticeManagement.Library.Services;
 
 namespace PracticeManagement.Library.Models
 {
@@ -40,7 +40,7 @@ namespace PracticeManagement.Library.Models
         }
         public override string ToString()
         {
-            return $" {Date.ToString()} {prettyHours} {Narrative} ";
+            return $" {Date.ToShortDateString()}  {EmployeeService.Current.Get(EmployeeId).Name}  {prettyHours} \n {ProjectService.Current.Get(ProjectId)} \t  {Narrative}  ";
         }
 
     }

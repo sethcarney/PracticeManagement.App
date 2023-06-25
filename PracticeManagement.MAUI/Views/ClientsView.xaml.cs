@@ -17,10 +17,6 @@ namespace PracticeManagement.MAUI.Views
             InitializeComponent();
             BindingContext = new ClientsViewViewModel();
         }
-
-        
-     
-
         private void Close_Clicked(object sender, EventArgs e)
         {
             var button = (ImageButton)sender;
@@ -35,7 +31,6 @@ namespace PracticeManagement.MAUI.Views
         {
             (BindingContext as ClientsViewViewModel).RefreshClientList();
         }
-
         private async void Add_Clicked(object sender, EventArgs e)
         {
             ClientViewDetail popup = new ClientViewDetail(null);
@@ -53,40 +48,14 @@ namespace PracticeManagement.MAUI.Views
                 }
             };
         }
-
-       
-
         private async void Edit_Clicked(object sender, EventArgs e)
         {
             var button = (ImageButton)sender;
             var cli = (ClientViewModel) button.BindingContext;
-            
             ClientViewDetail popup = new ClientViewDetail(cli.Model);
             popup.Size = new Size(600, 600);
             await this.ShowPopupAsync(popup);
             popup.Closed += (o, e) => { (BindingContext as ClientsViewViewModel).RefreshClientList(); };
-
-        }
-
-        private void Back_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//MainPage");
-        }
-
-        
-        private void ProjectMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Projects");
-        }
-
-        private void EmployeesMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Employees");
-        }
-
-        private void HoursMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Hours");
         }
     }
 }

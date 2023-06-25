@@ -18,27 +18,17 @@ namespace PracticeManagement.MAUI.ViewModels
         public Time SelectedTime { get; set; }
 
 
-        public ObservableCollection<Time> Times
+        public ObservableCollection<TimeViewModel> Times
         {
             get
             {
                 if(string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Time>(TimeService.Current.currentTimes);
-                return new ObservableCollection<Time>(TimeService.Current.Search(Query));
+                    return new ObservableCollection<TimeViewModel>(TimeService.Current.currentTimes.Select(t => new TimeViewModel(t)).ToList());
+                return new ObservableCollection<TimeViewModel>(TimeService.Current.Search(Query).Select(t => new TimeViewModel(t)).ToList());
             }
         }
 
-        public Time? getCurrentClient() { return SelectedTime; }
-        public void Delete()
-        {
-            if (SelectedTime == null)
-            {
-                return;
-            }
-            TimeService.Current.Delete(SelectedTime);
-            NotifyPropertyChanged("Times");
-        }
-
+     
         public void Reset()
         {
             Query = "";
@@ -48,9 +38,9 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public string Query { get; set; }
 
-        public void Search()
+        public void RefreshTimes()
         {
-            NotifyPropertyChanged("Times");
+            NotifyPropertyChanged(nameof(Times));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

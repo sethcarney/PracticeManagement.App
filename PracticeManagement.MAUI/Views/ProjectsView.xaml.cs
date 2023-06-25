@@ -16,9 +16,6 @@ namespace PracticeManagement.MAUI.Views
             InitializeComponent();
             BindingContext = new ProjectsViewViewModel();
         }
-
-        
-     
         private void Search_Clicked(object sender, EventArgs e)
         {
            (BindingContext as ProjectsViewViewModel).Search();
@@ -56,8 +53,6 @@ namespace PracticeManagement.MAUI.Views
 
             };
         }
-
-
         private void Back_Clicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//MainPage");
@@ -67,27 +62,5 @@ namespace PracticeManagement.MAUI.Views
         {
             (BindingContext as ProjectsViewViewModel).RefreshProjectList();
         }
-
-        /*private void ClosedFilter_Clicked(object sender, EventArgs e)
-        {
-            (BindingContext as ProjectsViewViewModel).switchClosedFilter((Button)sender);
-        }*/
-
-        private void ClientMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Clients");
-        }
-       
-
-        private void EmployeesMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Employees");
-        }
-
-        private void HoursMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Hours");
-        }
-
     }
 }

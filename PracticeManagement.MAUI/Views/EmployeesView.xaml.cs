@@ -16,11 +16,6 @@ namespace PracticeManagement.MAUI.Views
             InitializeComponent();
             BindingContext = new EmployeesViewViewModel();
         }
-
-        
-  
-
-
         private async void Add_Clicked(object sender, EventArgs e)
         {
             EmployeeViewDetail popup = new EmployeeViewDetail(null);
@@ -49,22 +44,9 @@ namespace PracticeManagement.MAUI.Views
 
             };
         }
-
-
-        private void ClientMenu_Clicked(object sender, EventArgs e)
+        private void Delete_Clicked(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync("//Clients");
-        }
-        private void ProjectMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Projects");
-        }
-
-        
-
-        private void HoursMenu_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//Hours");
+            (BindingContext as EmployeesViewViewModel).Reset();
         }
     }
 }

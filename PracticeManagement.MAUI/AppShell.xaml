@@ -6,33 +6,20 @@
     xmlns:local="clr-namespace:PracticeManagement.MAUI"
     xmlns:local1="clr-namespace:PracticeManagement.MAUI.Views"
     Shell.FlyoutBehavior="Disabled"
-    Shell.BackgroundColor="BurlyWood"
-    >
-
- 
-    
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    <ShellContent
-        Title="Clients"
-        ContentTemplate="{DataTemplate local1:ClientsView}"
-        Route="Clients" />
-    <ShellContent
-        Title="Projects"
-        ContentTemplate="{DataTemplate local1:ProjectsView}"
-        Route="Projects" />
-    <ShellContent
-        Title="Employees"
-        ContentTemplate="{DataTemplate local1:EmployeesView}"
-        Route="Employees"/>
-    <ShellContent
-        Title="Hours"
-        ContentTemplate="{DataTemplate local1:TimesView}"
-        Route="Hours"/>
-   
-
-
-
+    Shell.BackgroundColor="BurlyWood">
+    <Shell.MenuBarItems>
+        <MenuBarItem Text="Home">
+            <MenuFlyoutItem Text="Clients" Clicked="ClientMenu_Clicked"/>
+            <MenuFlyoutItem Text="Projects" Clicked="ProjectMenu_Clicked"/>
+        </MenuBarItem>
+        <MenuBarItem Text="Time Tracking">
+            <MenuFlyoutItem Text="Employees" Clicked="EmployeesMenu_Clicked"/>
+            <MenuFlyoutItem Text="Hours"  Clicked="HoursMenu_Clicked"/>
+        </MenuBarItem>
+    </Shell.MenuBarItems>
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <ShellContent Title="Clients" ContentTemplate="{DataTemplate local1:ClientsView}" Route="Clients" />
+    <ShellContent Title="Projects" ContentTemplate="{DataTemplate local1:ProjectsView}" Route="Projects" />
+    <ShellContent Title="Employees" ContentTemplate="{DataTemplate local1:EmployeesView}" Route="Employees"/>
+    <ShellContent Title="Hours" ContentTemplate="{DataTemplate local1:TimesView}" Route="Hours"/>
 </Shell>
