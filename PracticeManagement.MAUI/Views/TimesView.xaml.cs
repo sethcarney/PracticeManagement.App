@@ -20,6 +20,7 @@ namespace PracticeManagement.MAUI.Views
         private async void Add_Clicked(object sender, EventArgs e)
         {
             TimeViewDetail popup = new TimeViewDetail(null);
+            popup.Size = new Size(600, 600);
             result = (bool?)await this.ShowPopupAsync(popup);
             popup.Closed += (o, e) => {
                 if (result == true)

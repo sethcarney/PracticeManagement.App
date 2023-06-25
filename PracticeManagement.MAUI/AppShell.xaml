@@ -7,16 +7,24 @@
     xmlns:local1="clr-namespace:PracticeManagement.MAUI.Views"
     Shell.FlyoutBehavior="Disabled"
     Shell.BackgroundColor="BurlyWood">
+
     <Shell.MenuBarItems>
-        <MenuBarItem Text="Home">
+        
+        
+        <MenuBarItem Text="Work">
             <MenuFlyoutItem Text="Clients" Clicked="ClientMenu_Clicked"/>
             <MenuFlyoutItem Text="Projects" Clicked="ProjectMenu_Clicked"/>
         </MenuBarItem>
-        <MenuBarItem Text="Time Tracking">
+        <MenuBarItem Text="Time Entries">
             <MenuFlyoutItem Text="Employees" Clicked="EmployeesMenu_Clicked"/>
             <MenuFlyoutItem Text="Hours"  Clicked="HoursMenu_Clicked"/>
+
         </MenuBarItem>
+
     </Shell.MenuBarItems>
+   
+        
+                   
     <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     <ShellContent Title="Clients" ContentTemplate="{DataTemplate local1:ClientsView}" Route="Clients" />
     <ShellContent Title="Projects" ContentTemplate="{DataTemplate local1:ProjectsView}" Route="Projects" />

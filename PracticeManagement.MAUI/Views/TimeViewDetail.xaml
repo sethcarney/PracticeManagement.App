@@ -13,7 +13,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
 				<RowDefinition Height="3*"/>
-				<RowDefinition Height="2*"/>
+				<RowDefinition Height="1*"/>
 				<RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -21,58 +21,32 @@
             
 			<Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
-
                 <VerticalStackLayout  Grid.Column="0" Margin="20" Spacing="45">
                     <Label Text="Hours :" ></Label>
 					<Label Text="Narrative :"></Label>
-                     
                 </VerticalStackLayout>
-
                 <VerticalStackLayout HorizontalOptions="FillAndExpand" Grid.Column="1" Margin="10" Spacing="20">
 					<Entry  Text="{Binding Path=UpdatedHours, Mode=TwoWay}"></Entry>
                     <Entry  Text="{Binding Path=UpdatedNarrative, Mode=TwoWay}"></Entry>
-					
-				
-					
-                </VerticalStackLayout>
-
+				</VerticalStackLayout>
             </Grid>
-
-			
-			<!--<mynamespace:ProjectSearch Grid.Row="2" >              </mynamespace:ProjectSearch> -->
-			<VerticalStackLayout Grid.Row="3">
+			<VerticalStackLayout HorizontalOptions="Center" Spacing="25" Padding="30,30" Grid.Row="2">
 				<Picker Title="Select an Employee"
                     ItemsSource="{Binding Employees}"
                     ItemDisplayBinding="{Binding printVal}"
-                    SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
-		            />
+                    SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"/>
 				<Picker Title="Select a Project"
 				ItemsSource="{Binding Projects}"
 				ItemDisplayBinding="{Binding printVal}"
-				SelectedItem="{Binding SelectedProject, Mode=TwoWay}"
-		            />
-
-
+				SelectedItem="{Binding SelectedProject, Mode=TwoWay}"/>
 			</VerticalStackLayout>
-			
-
-			<HorizontalStackLayout Grid.Row="4" HorizontalOptions="Center">
-
+			<HorizontalStackLayout Margin="0,25,0,0" Grid.Row="3"  HorizontalOptions="Center">
                 <Button   Text="Cancel" Clicked="Cancel_Clicked"></Button>
                 <Button   Text="Submit" Clicked="Submit_Clicked"></Button>
-            </HorizontalStackLayout>
-            
-
-            
-               
-             
-            
-                
-            </Grid>
-
-    
+            </HorizontalStackLayout>       
+            </Grid>   
     </ScrollView>
 </mct:Popup>

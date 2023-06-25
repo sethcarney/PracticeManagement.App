@@ -25,5 +25,10 @@
         {
             Shell.Current.GoToAsync("//Employees");
         }
+
+        private void HomeMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//MainPage");
+        }
     }
 }
