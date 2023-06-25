@@ -74,6 +74,8 @@ namespace PracticeManagement.Library.Services
             }
         }
 
+
+
         public void Delete(int id)
         {
             var toRemove = Get(id);

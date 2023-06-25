@@ -9,31 +9,21 @@ public partial class EmployeeViewDetail : Popup
 	public EmployeeViewDetail(Employee? currentEmployee)
 	{
 		InitializeComponent();
-		BindingContext = new EmployeeViewDetailModel(currentEmployee);
+		BindingContext = new EmployeeViewModel(currentEmployee);
 	}
 
 
     private void Cancel_Clicked(object sender, EventArgs e)
     {
         //Return false to represent no change
-        Close(false);
+        Close();
     }
 
     private void Submit_Clicked(object sender, EventArgs e)
     {
-        //Update with new values
-        bool success = (BindingContext as EmployeeViewDetailModel).Update();
-        //Return new client if created
-        if (success)
-        {
-            if ((BindingContext as EmployeeViewDetailModel).createNew)
-                Close((BindingContext as EmployeeViewDetailModel).SelectedEmployee);
-            //Return true if successfully updated
-            else
-                Close(true);
-
-        }
-        else
-            Close();
+   
+        Close((BindingContext as EmployeeViewModel).Update());
+   
+       
     }
 }

@@ -9,7 +9,8 @@ namespace PracticeManagement.MAUI.Views
 {
     public partial class EmployeesView : ContentPage
     {
-  
+
+        bool? result;
         public EmployeesView()
         {
             InitializeComponent();
@@ -32,54 +33,33 @@ namespace PracticeManagement.MAUI.Views
 
         private async void Add_Clicked(object sender, EventArgs e)
         {
-            await DisplayPopup(true);
-            
+            EmployeeViewDetail popup = new EmployeeViewDetail(null);
+            result = (bool?)await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) => {
+                if (result == true)
+                    (BindingContext as EmployeesViewViewModel).Reset();
+                else if (result == false)
+                    DisplayAlert("Alert", "Alert unable to add Employee", "OK");
+            };
+
         }
 
         private async void Edit_Clicked(object sender, EventArgs e)
         {
-            Employee toEdit = (BindingContext as EmployeesViewViewModel).SelectedEmployee;
-            if (toEdit != null)
+            var button = (ImageButton)sender;
+            var cli = (EmployeeViewModel)button.BindingContext;
+            EmployeeViewDetail popup = new EmployeeViewDetail(cli.Model);
+            result = (bool?)await this.ShowPopupAsync(popup);
+            popup.Closed += (o, e) =>
             {
-                await DisplayPopup(false);
-            }
-            else
-                await DisplayAlert("Alert", "Please select a Employee to edit", "Yes");
+                if (result == true)
+                    (BindingContext as EmployeesViewViewModel).Reset();
+                else if (result == false)
+                    DisplayAlert("Alert", "Unable to modify project", "OK");
 
-
+            };
         }
 
-        public async Task DisplayPopup(bool addEmployee)
-        {
-            Employee currentEmployee = (BindingContext as EmployeesViewViewModel).SelectedEmployee;
-            EmployeeViewDetail popup;
-            if (addEmployee == true)
-                popup = new EmployeeViewDetail(null);
-            else
-                popup = new EmployeeViewDetail(currentEmployee);
-
-            var result = await this.ShowPopupAsync(popup);
-
-            if (result is Employee)
-            {
-                Employee newEmployee = result as Employee;
-                EmployeeService.Current.Add(newEmployee);
-            }
-            else if(result is bool)
-            {
-                bool success = (bool)result;
-                if (success == false)
-                    return;
-
-            }
-            else
-            {
-                await DisplayAlert("Alert", "Unable to add/edit Employee. Ensure all fields have been populated properly", "OK");
-            }
-            (BindingContext as EmployeesViewViewModel).Reset();
-
-            
-        }
 
         private void ClientMenu_Clicked(object sender, EventArgs e)
         {
