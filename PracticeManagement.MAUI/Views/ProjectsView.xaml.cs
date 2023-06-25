@@ -9,7 +9,8 @@ namespace PracticeManagement.MAUI.Views
 {
     public partial class ProjectsView : ContentPage
     {
-  
+
+        bool? result { get; set; }
         public ProjectsView()
         {
             InitializeComponent();
@@ -31,11 +32,11 @@ namespace PracticeManagement.MAUI.Views
         private async void Add_Clicked(object sender, EventArgs e)
         {
             ProjectViewDetail popup = new ProjectViewDetail(null);
-            bool result = (bool) await this.ShowPopupAsync(popup);
+            result = (bool?) await this.ShowPopupAsync(popup);
             popup.Closed += (o, e) => {
-                if (result)
+                if (result == true)
                     (BindingContext as ProjectsViewViewModel).RefreshProjectList();
-                else
+                else if (result == false)
                     DisplayAlert("Alert", "Alert unable to add Project", "OK");
             };
         }
@@ -45,13 +46,14 @@ namespace PracticeManagement.MAUI.Views
             var button = (ImageButton)sender;
             var cli = (ProjectViewModel)button.BindingContext;
             ProjectViewDetail popup = new ProjectViewDetail(cli.Model);
-            bool result = (bool) await this.ShowPopupAsync(popup);
+            result = (bool?) await this.ShowPopupAsync(popup);
             popup.Closed += (o, e) =>
             {
-                if (result)
+                if (result == true)
                     (BindingContext as ProjectsViewViewModel).RefreshProjectList();
-                else
+                else if (result == false)
                     DisplayAlert("Alert", "Unable to modify project", "OK");
+
             };
         }
 

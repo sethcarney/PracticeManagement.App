@@ -21,11 +21,19 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public SearchFilters Filters { get; set; }
 
+        public ICommand SearchCommand { get; set; }
+        public void ExecuteSearchCommand()
+        {
+            NotifyPropertyChanged(nameof(Projects));
+        }
         public ProjectsViewViewModel()
         {
             Filters = new SearchFilters();
+            SearchCommand = new Command(ExecuteSearchCommand);
 
         }
+
+
 
         public ObservableCollection<ProjectViewModel> Projects
         {

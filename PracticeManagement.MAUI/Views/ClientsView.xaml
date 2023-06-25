@@ -23,7 +23,7 @@
                 <RowDefinition Height="7*"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <c:SearchBarControl Grid.Column="0" 
+            <c:SearchBarControl 
                                 QueryText="{Binding Query}"
                                 SearchButtonText="Search"
                                 SearchCommand="{Binding SearchCommand}"/>
@@ -61,7 +61,7 @@
                 </ListView>
             </Grid>
             <VerticalStackLayout Grid.Row="3" HorizontalOptions="Center">
-                    <Button  Scale =".6" FontSize="Header" FontAttributes="Bold" Text="+" Clicked="Add_Clicked"></Button>
+                    <Button  FontAttributes="Bold" Text="Add" Clicked="Add_Clicked"></Button>
                 </VerticalStackLayout>
             
         </Grid>

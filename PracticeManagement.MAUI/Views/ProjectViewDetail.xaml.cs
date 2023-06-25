@@ -10,13 +10,14 @@ public partial class ProjectViewDetail : Popup
 	{
 		InitializeComponent();
 		BindingContext = new ProjectViewModel(currentProject);
+
 	}
 
 
     private void Cancel_Clicked(object sender, EventArgs e)
     {
         //Return false to represent no change
-        Close(false);
+        Close();
     }
 
 
