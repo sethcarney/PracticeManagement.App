@@ -12,18 +12,13 @@ namespace PracticeManagement.Library.Models
         public SearchFilters() 
         {
             Filters = new List<Filter>();
-        }
-
-
-       
+        }       
     }
     public class Filter
     {
         public string? Name { get; set; }
         public bool Applied { get; set; }
         public Filter()
-        {
-           
-        }
+        {   }
     }
 }

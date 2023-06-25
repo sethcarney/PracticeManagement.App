@@ -16,9 +16,9 @@ namespace PracticeManagement.Library.Models
         
         public double Hours { get; set; }
 
-        public int ProjectId { get; set; }
+        public Project Project { get; set; }
 
-        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
 
         public Time ( string narrative, DateTime date, double hrs, int ProjectID, int EmployeeID)
         {
@@ -26,8 +26,8 @@ namespace PracticeManagement.Library.Models
             Narrative = narrative;
             Date = date;
             Hours = hrs;
-            ProjectId = ProjectID;
-            EmployeeId = EmployeeID;
+            Project = ProjectService.Current.Get(ProjectID);
+            Employee = EmployeeService.Current.Get(EmployeeID);
 
         }
 
@@ -40,7 +40,7 @@ namespace PracticeManagement.Library.Models
         }
         public override string ToString()
         {
-            return $" {Date.ToShortDateString()}  {EmployeeService.Current.Get(EmployeeId).Name}  {prettyHours} \n {ProjectService.Current.Get(ProjectId)} \t  {Narrative}  ";
+            return $" {Date.ToShortDateString()}  {Employee.Name}  {prettyHours} \n {Project.ToString()} \t  {Narrative}  ";
         }
 
     }

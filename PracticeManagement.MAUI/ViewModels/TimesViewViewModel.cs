@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Maui.ApplicationModel.Communication;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
@@ -17,14 +18,29 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Time SelectedTime { get; set; }
 
+        public SearchFilters PageFilters { get; set; }
 
+        public ICommand SearchCommand { get; set; }
+        public void ExecuteSearchCommand()
+        {
+            NotifyPropertyChanged(nameof(Times));
+        }
+
+        public TimesViewViewModel() 
+        { 
+            PageFilters = new SearchFilters();
+            PageFilters.Filters.Add(new Filter { Name = "Today", Applied = false });
+            PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            SearchCommand = new Command(ExecuteSearchCommand);
+        }
         public ObservableCollection<TimeViewModel> Times
         {
             get
             {
+                List<Time> filtersApplied = TimeService.Current.applyFilters(PageFilters);
                 if(string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<TimeViewModel>(TimeService.Current.currentTimes.Select(t => new TimeViewModel(t)).ToList());
-                return new ObservableCollection<TimeViewModel>(TimeService.Current.Search(Query).Select(t => new TimeViewModel(t)).ToList());
+                    return new ObservableCollection<TimeViewModel>(filtersApplied.Select(t => new TimeViewModel(t)).ToList());
+                return new ObservableCollection<TimeViewModel>(TimeService.Current.Search(filtersApplied,Query).Select(t => new TimeViewModel(t)).ToList());
             }
         }
 

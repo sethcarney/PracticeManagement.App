@@ -2,17 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PracticeManagement.MAUI.Views.TimesView"
-             xmlns:c="clr-namespace:PracticeManagement.MAUI.Controls">
+             xmlns:controls="clr-namespace:PracticeManagement.MAUI.Controls">
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
                 <!-- * makes it relative to operating system and screen-->
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height=".8*"/>
+                <RowDefinition/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchButtonText="Search" SearchCommand="{Binding SearchCommand}"/>
-            <Grid Grid.Row="1" >
+            <controls:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchButtonText="Search" SearchCommand="{Binding SearchCommand}"/>
+            <controls:FilterBarControl Grid.Row="1" SearchFilters="{Binding PageFilters}" UpdateCommand="{Binding SearchCommand}" />
+            <Grid Grid.Row="2" >
                 <ListView ItemsSource="{Binding Path=Times}" SelectedItem="{Binding Path=SelectedTime}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -40,13 +42,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
             </Grid>
-            <VerticalStackLayout Grid.Row="2" VerticalOptions="End">
+            <VerticalStackLayout Grid.Row="3" VerticalOptions="End">
                 <Button  FontAttributes="Bold"  Text="Add" Clicked="Add_Clicked"/>
             </VerticalStackLayout>
-
         </Grid>
     </ScrollView>
-
 </ContentPage>

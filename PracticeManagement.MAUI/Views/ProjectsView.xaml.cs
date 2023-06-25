@@ -16,11 +16,7 @@ namespace PracticeManagement.MAUI.Views
             InitializeComponent();
             BindingContext = new ProjectsViewViewModel();
         }
-        private void Search_Clicked(object sender, EventArgs e)
-        {
-           (BindingContext as ProjectsViewViewModel).Search();
-        }
-
+      
         private  void Delete_Clicked(object sender, EventArgs e)
         {
             (BindingContext as ProjectsViewViewModel).RefreshProjectList();

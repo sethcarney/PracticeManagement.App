@@ -55,8 +55,8 @@ namespace PracticeManagement.MAUI.ViewModels
                 SelectedDate = Model.Date;
                 UpdatedNarrative = Model.Narrative;
                 UpdatedHours = Model.Hours.ToString();
-                SelectedEmployee = EmployeeService.Current.Get(Model.EmployeeId);
-                SelectedProject = ProjectService.Current.Get(Model.ProjectId);
+                SelectedEmployee =  Model.Employee;
+                SelectedProject = Model.Project;
                 createNew = false;
             }
             else
@@ -86,8 +86,8 @@ namespace PracticeManagement.MAUI.ViewModels
                 Model.Date = SelectedDate;
                 Model.Hours = holder;
                 Model.Narrative = UpdatedNarrative;
-                Model.ProjectId = SelectedProject.Id;
-                Model.EmployeeId = SelectedEmployee.Id;
+                Model.Project = SelectedProject;
+                Model.Employee = SelectedEmployee;
             }
             else
             {
