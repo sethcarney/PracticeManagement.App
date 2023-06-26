@@ -10,8 +10,6 @@ namespace PracticeManagement.MAUI.ViewModels
         public string? UpdatedShortName { get; set; }
         public string? UpdatedLongName { get; set; }
         public Client? SelectedClient { get; set; }
-
-
         public string Display
         {
             get
@@ -19,7 +17,6 @@ namespace PracticeManagement.MAUI.ViewModels
                 return Model.ToString() ?? string.Empty;
             }
         }
-
 
         public ICommand DeleteCommand { get; private set; }
         public void ExecuteDelete(int id)

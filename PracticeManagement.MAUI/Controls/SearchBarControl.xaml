@@ -2,20 +2,22 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PracticeManagement.MAUI.Controls.SearchBarControl">
-    <VerticalStackLayout>
-        <Grid>
+
+    <Border>
+        <Grid  VerticalOptions="Start" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="11*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
 
-            <Entry Grid.Column="0" TextChanged="Query_TextChanged"  Text="{Binding QueryText}"></Entry>
-            <Button Grid.Column="1" 
-                    Text="{Binding SearchButtonText}"
-                    Command="{Binding SearchCommand}"></Button>
+            <Entry Grid.Row="0" Grid.Column="0" TextChanged="Query_TextChanged"  Text="{Binding QueryText}"></Entry>
+            <ImageButton Scale=".3" HorizontalOptions="Center" Grid.Column="1" Grid.Row="0" Command="{Binding SearchCommand}" Source="search_icon.png"/>
 
 
         </Grid>
-    </VerticalStackLayout>
+    </Border>
 </ContentView>

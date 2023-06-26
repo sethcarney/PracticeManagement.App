@@ -4,11 +4,7 @@ namespace PracticeManagement.MAUI.Controls;
 
 public partial class SearchBarControl : ContentView
 {
-    public static readonly BindableProperty SearchButtonTextProperty
-        = BindableProperty.Create(nameof(SearchButtonText)
-            , typeof(string)
-            , typeof(SearchBarControl)
-            , string.Empty);
+ 
 
     public static readonly BindableProperty SearchCommandProperty
         = BindableProperty.Create(
@@ -25,12 +21,6 @@ public partial class SearchBarControl : ContentView
             , typeof(SearchBarControl)
             , string.Empty
             , BindingMode.TwoWay);
-
-    public string SearchButtonText
-    {
-        get => (string)GetValue(SearchButtonTextProperty);
-        set => SetValue(SearchButtonTextProperty, value);
-    }
 
     public string QueryText
     {

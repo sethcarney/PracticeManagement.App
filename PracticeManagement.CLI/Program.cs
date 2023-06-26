@@ -1,6 +1,6 @@
 ﻿using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
-namespace PracticeManagement // Note: actual namespace depends on the project name.
+namespace PracticeManagement 
 {
     internal class Program
     {

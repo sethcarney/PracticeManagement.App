@@ -7,11 +7,11 @@
         <Grid>
             <Grid.RowDefinitions>
                 <!-- * makes it relative to operating system and screen-->
-                <RowDefinition Height="1*"/>
+                <RowDefinition />
                 <RowDefinition Height="8*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchButtonText="Search" SearchCommand="{Binding SearchCommand}"/>
+            <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchCommand="{Binding SearchCommand}"/>
             <Grid Grid.Row="1" >
                 <ListView ItemsSource="{Binding Path=Employees}" SelectedItem="{Binding Path=SelectedEmployee}">
                     <ListView.ItemTemplate>
