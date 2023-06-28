@@ -11,18 +11,21 @@ namespace PracticeManagement.Library.Models
 
         public double Hours { get; set; }
 
+        public bool Billed { get; set; }
+
         public Project Project { get; set; }
 
         public Employee Employee { get; set; }
 
-        public Time(string narrative, DateTime date, double hrs, int ProjectID, int EmployeeID)
+        public Time(string narrative, DateTime date, double hrs, Project currentProject, Employee currentEmployee)
         {
 
             Narrative = narrative;
             Date = date;
             Hours = hrs;
-            Project = ProjectService.Current.Get(ProjectID);
-            Employee = EmployeeService.Current.Get(EmployeeID);
+            Project = currentProject;
+            Employee = currentEmployee;
+            Billed = false;
 
         }
 

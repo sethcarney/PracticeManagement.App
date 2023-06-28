@@ -26,6 +26,7 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <VerticalStackLayout VerticalOptions="CenterAndExpand">
                                         <Label Margin="15,0,0,0"  Grid.Column="0"  Text="{Binding Path=Display}"/>
@@ -34,12 +35,14 @@
                                     <ImageButton Grid.Column="1" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                      Source="pen_to_square.png"
                                      Clicked="Edit_Clicked"/>
-                                    <ImageButton Grid.Column="2" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    <ImageButton Grid.Column="2" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                     Source="bill_icon.png" />
+                                    <ImageButton Grid.Column="3" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
                                     Source="rectangle_xmark.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=CloseCommand}" 
                                     CommandParameter="{Binding}"
                                     Clicked="Close_Clicked"/>
-                                    <ImageButton Grid.Column="3" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    <ImageButton Grid.Column="4" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
                                     Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"

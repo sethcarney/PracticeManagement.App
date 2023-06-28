@@ -50,6 +50,9 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\FontAwesome6Brands-Regular-400.otf" />
+	  <None Remove="Resources\Images\bill_icon.svg" />
+	  <None Remove="Resources\Images\cancel_icon.svg" />
+	  <None Remove="Resources\Images\check_icon.svg" />
 	  <None Remove="Resources\Images\pen_to_square.svg" />
 	  <None Remove="Resources\Images\rectangle_xmark.svg" />
 	  <None Remove="Resources\Images\trash_can.svg" />

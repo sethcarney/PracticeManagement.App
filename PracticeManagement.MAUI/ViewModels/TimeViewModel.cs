@@ -113,7 +113,7 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             else
             {
-                Model = new Time(UpdatedNarrative, SelectedDate, holder, SelectedProject.Id, SelectedEmployee.Id);
+                Model = new Time(UpdatedNarrative, SelectedDate, holder, SelectedProject, SelectedEmployee);
                 Add();
             }
             return true;
