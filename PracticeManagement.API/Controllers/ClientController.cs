@@ -20,10 +20,16 @@ namespace PracticeManagement.API.Controllers
                 _logger = logger;
             }
 
-            [HttpGet]
+            [HttpGet("All")]
             public IEnumerable<Client> Get()
             {
                 return FakeDatabase.Clients;
+            }
+
+            [HttpGet("GetClient/{id}")]
+            public Client GetId(int id)
+            {
+                return FakeDatabase.Clients.FirstOrDefault(c => c.Id == id);
             }
 
         }

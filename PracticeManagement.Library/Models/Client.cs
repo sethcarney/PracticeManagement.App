@@ -3,18 +3,19 @@
 
     public class Client
     {
-        public Client()
-        {
-        }
+       
 
-        public Client(string name, string notes)
+        public Client(int id, string name, string notes)
         {
+            Id = id;
             OpenDate = DateTime.Now;
             isActive = true;
             Name = name;
             Notes = notes;
             Projects = new List<Project>();
         }
+
+
 
 
         public int Id { get; set; }

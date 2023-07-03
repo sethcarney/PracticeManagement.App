@@ -6,9 +6,13 @@ namespace PracticeManagement.API.Database
     {
         public static List<Client> Clients = new List<Client>
         {
-             new Client { Id = 1, Name = "Client 1"},
-              new Client { Id = 2, Name = "Client 2"}
+             new Client (1, "Client 1", "notes"),
+              new Client (2, "Client 2", "notes")
 
         };
+
+        public static int LastClientId =>
+             Clients.Any() ? Clients.Select(c => c.Id).Max() : 0; 
+        
     }
 }

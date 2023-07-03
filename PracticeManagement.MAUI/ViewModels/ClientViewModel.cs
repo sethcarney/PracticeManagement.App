@@ -1,59 +1,9 @@
 ﻿
-/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-ios)'
-Before:
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
-using System;
-After:
-using System;
-*/
 
-/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-maccatalyst)'
-Before:
+using System.Windows.Input;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
-using System;
-After:
-using System;
-*/
 
-/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-windows10.0.19041.0)'
-Before:
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
-using System;
-After:
-using System;
-*/
-using System.Windows.Input;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
-/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-ios)'
-Before:
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
-*/
-
-/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-maccatalyst)'
-Before:
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
-*/
-
-/* Unmerged change from project 'PracticeManagement.MAUI (net7.0-windows10.0.19041.0)'
-Before:
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using PracticeManagement.Library.Models;
-using PracticeManagement.Library.Services;
-*/
 
 
 namespace PracticeManagement.MAUI.ViewModels
@@ -126,7 +76,7 @@ namespace PracticeManagement.MAUI.ViewModels
             }
             else
             {
-                Model = new Client(UpdatedName, UpdatedNotes);
+                Model = new Client(0,UpdatedName, UpdatedNotes);
                 Add();
             }
 

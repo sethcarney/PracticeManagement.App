@@ -1,13 +1,18 @@
-﻿using PracticeManagement.Library.Models;
+﻿using System.Net;
+using System.Text.Json.Nodes;
+using Newtonsoft.Json;
+using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Utilities;
 
 namespace PracticeManagement.Library.Services
 {
     public class ClientService
     {
         private static ClientService? instance;
-        private List<Client> clients;
         private static object _lock = new object();
         private static int _counter = 1;
+
+        private List<Client> clients = new List<Client>();
         public static ClientService Current
         {
             get
@@ -26,12 +31,16 @@ namespace PracticeManagement.Library.Services
 
         private ClientService()
         {
-            clients = new List<Client>();
+            var response = new WebRequestHandler().Get("/Client/All").Result;
+            clients = JsonConvert.DeserializeObject<List<Client>>(response) ?? new List<Client>();
         }
 
         public List<Client> currentClients
         {
-            get { return clients; }
+            get 
+            {
+                return clients;
+            }
         }
 
         public List<Client> applyFilters(SearchFilters filter)
@@ -47,7 +56,13 @@ namespace PracticeManagement.Library.Services
 
         public Client? Get(int id)
         {
-            return clients.FirstOrDefault(e => e.Id == id);
+          /*  var response = new WebRequestHandler().
+                .Get($"/Client/GetClients/{id}").Results;
+            var client = JsonConvert.DeserializeObject<Client>(response);
+            return client ?? new Client();
+            */
+
+            return currentClients.FirstOrDefault(e => e.Id == id);
         }
 
         public void Add(Client? client)
@@ -95,9 +110,6 @@ namespace PracticeManagement.Library.Services
             return currentContext.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
-        public void Read()
-        {
-            clients.ForEach(Console.WriteLine);
-        }
+       
     }
 }

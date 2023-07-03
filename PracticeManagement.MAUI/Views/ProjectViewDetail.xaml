@@ -21,41 +21,19 @@
 					<RowDefinition />
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-
-                
                 <Label Grid.Column="0" Grid.Row="0" Text="Short Name :"/> <Entry  Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpdatedShortName, Mode=TwoWay}"/>
 				<Label Grid.Column="0" Grid.Row="1"  Text="Long Name :"/> <Entry  Grid.Column="1" Grid.Row="1"  Text="{Binding Path=UpdatedLongName, Mode=TwoWay}"/>
-
-			</Grid>
-                
-                   
-                  
+			</Grid>                        
 					<Picker Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Title="Select a Client" 
-        ItemsSource="{Binding Clients}"
-        ItemDisplayBinding="{Binding printVal}"
-        SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
-		/>
-					
-				
-
-       
-
-
+                    ItemsSource="{Binding Clients}"
+                    ItemDisplayBinding="{Binding printVal}"
+                    SelectedItem="{Binding SelectedClient, Mode=TwoWay}"/>
             <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center" Spacing="20">
             <!--<Button Text="Cancel" Clicked="Cancel_Clicked"/> -->
 			<!--	<Button Text="Submit" Clicked="Submit_Clicked"/> -->
                 <ImageButton Source="cancel_icon.png" Clicked="Cancel_Clicked"  WidthRequest="10" HeightRequest="10" />
-				<ImageButton Source="check_icon.png" Clicked="Submit_Clicked"  WidthRequest="10" HeightRequest="10" />
-            </HorizontalStackLayout>
-            
-
-            
-               
-             
-            
-                
-            </Grid>
-
-    
+				<ImageButton Source="checkmark.png" Clicked="Submit_Clicked"  WidthRequest="10" HeightRequest="10" />
+            </HorizontalStackLayout>                
+            </Grid>   
     </ScrollView>
 </mct:Popup>
