@@ -32,7 +32,7 @@ namespace PracticeManagement.Library.Services
         private ClientService()
         {
             var response = new WebRequestHandler().Get("/Client/All").Result;
-            clients = JsonConvert.DeserializeObject<List<Client>>(response) ?? new List<Client>();
+            clients = !string.IsNullOrEmpty(response) ? JsonConvert.DeserializeObject<List<Client>>(response) : new List<Client>();
         }
 
         public List<Client> currentClients

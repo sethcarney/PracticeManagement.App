@@ -30,4 +30,5 @@
     <ShellContent Title="Projects" ContentTemplate="{DataTemplate local1:ProjectsView}" Route="Projects" />
     <ShellContent Title="Employees" ContentTemplate="{DataTemplate local1:EmployeesView}" Route="Employees"/>
     <ShellContent Title="Hours" ContentTemplate="{DataTemplate local1:TimesView}" Route="Hours"/>
+    <ShellContent Title="Billing" ContentTemplate="{DataTemplate local1:BillsView}" Route="Bills"/>
 </Shell>

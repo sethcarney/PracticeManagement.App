@@ -55,5 +55,7 @@ namespace PracticeManagement.MAUI.Views
         {
             (BindingContext as ProjectsViewViewModel).RefreshProjectList();
         }
+
+       
     }
 }

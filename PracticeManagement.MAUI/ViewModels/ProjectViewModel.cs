@@ -31,6 +31,12 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public ICommand CloseCommand { get; private set; }
 
+        public void ExecuteBilling(int id)
+        {
+            Shell.Current.GoToAsync($"//Bills?projectId={id}");
+        }
+
+        public ICommand BillingCommand { get; private set; }
         public ProjectViewModel(Project currentProject)
         {
             Model = currentProject;
@@ -51,6 +57,8 @@ namespace PracticeManagement.MAUI.ViewModels
                 (c) => ExecuteDelete((c as ProjectViewModel).Model.Id));
             CloseCommand = new Command(
                 (c) => ExecuteClose((c as ProjectViewModel).Model));
+            BillingCommand = new Command(
+                (c) => ExecuteBilling((c as ProjectViewModel).Model.Id));
 
 
 

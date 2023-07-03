@@ -36,7 +36,9 @@
                                      Source="pen_to_square.png"
                                      Clicked="Edit_Clicked"/>
                                     <ImageButton Grid.Column="2" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                                     Source="bill_icon.png" />
+                                     Source="bill_icon.png" 
+                                      Command="{Binding Path=BillingCommand}"
+                                                 CommandParameter="{Binding}"/>
                                     <ImageButton Grid.Column="3" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
                                     Source="rectangle_xmark.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=CloseCommand}" 

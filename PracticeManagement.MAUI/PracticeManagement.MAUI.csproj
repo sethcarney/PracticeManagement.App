@@ -72,6 +72,9 @@
 	  <Compile Update="Controls\FilterBarControl.xaml.cs">
 	    <DependentUpon>FilterBarControl.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\BillsView.xaml.cs">
+	    <DependentUpon>BillsView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\TimeViewDetail.xaml.cs">
 	    <DependentUpon>TimeViewDetail.xaml</DependentUpon>
 	  </Compile>
@@ -103,6 +106,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\SearchBarControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BillsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TimeViewDetail.xaml">
