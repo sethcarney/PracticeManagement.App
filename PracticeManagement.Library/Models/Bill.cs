@@ -11,22 +11,31 @@ namespace PracticeManagement.Library.Models
     public class Bill
     {
         public double TotalAmount { get; set; }
+        public double TotalHours { get; set; }
         public DateOnly DueDate { get; set; }
 
         public int ProjectId { get; set; }
         public int Id { get; set; }
-        public Bill(double amount, int DaysToPay, int projId)
+
+        public List<Time> Times { get; set; }
+        public Bill(double amount, double hours,  List<Time> times, int DaysToPay, int projId)
         {
             TotalAmount = amount;
+            TotalHours = hours;
+            Times= times;
             DueDate = DateOnly.FromDateTime(DateTime.Now).AddDays(DaysToPay);
             ProjectId = projId;
+            Id = 0;
         }
 
         public string printVal
         {
             get
             {
-                return DueDate + "\t$" + System.String.Format("{0:0.00}", TotalAmount);
+                string header = "Due Date: "+ DueDate + "\t" + "Total Hours Worked: " + System.String.Format("{0:0.00}",TotalHours) + "\t Amount Due: $" + System.String.Format("{0:0.00}", TotalAmount);
+                string body = "";
+                Times.ForEach(t => { body += t.ToString() + "\n"; });
+                return header + "\n" + body;
             }
         }
         public override string ToString()

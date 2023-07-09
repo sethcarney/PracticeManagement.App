@@ -9,22 +9,20 @@
     Shell.BackgroundColor="BurlyWood">
 
     <Shell.MenuBarItems>
-        
-        
-        <MenuBarItem Text="Work">
+        <MenuBarItem Text="Projects &amp; Clients">
             <MenuFlyoutItem Text="Clients" Clicked="ClientMenu_Clicked"/>
             <MenuFlyoutItem Text="Projects" Clicked="ProjectMenu_Clicked"/>
         </MenuBarItem>
-        <MenuBarItem Text="Time Entries">
-            <MenuFlyoutItem Text="Employees" Clicked="EmployeesMenu_Clicked"/>
+        <MenuBarItem Text="Time &amp; Billing Entries">
             <MenuFlyoutItem Text="Hours"  Clicked="HoursMenu_Clicked"/>
-
+            <MenuFlyoutItem Text="Billing" Clicked="BillingMenu_Clicked"/>
         </MenuBarItem>
-
+        <MenuBarItem Text="Employees" >
+            <MenuFlyoutItem Text="Current"  Clicked="EmployeesMenu_Clicked"/>
+        </MenuBarItem>
+  
     </Shell.MenuBarItems>
-   
-        
-                   
+
     <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     <ShellContent Title="Clients" ContentTemplate="{DataTemplate local1:ClientsView}" Route="Clients" />
     <ShellContent Title="Projects" ContentTemplate="{DataTemplate local1:ProjectsView}" Route="Projects" />

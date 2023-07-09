@@ -67,12 +67,28 @@ namespace PracticeManagement.Library.Services
 
         public void Add(Client? client)
         {
-
+            
             if (client != null)
             {
                 client.Id = _counter++;
                 clients.Add(client);
             }
+            /*
+             * var response = new WebRequestHandler().Post("/Client", c).Result;
+            var UpdatedClient = Json.DeserializeObject<Client>(response);
+            if(UpdatedClient != null)
+            {
+                var ExistingClient = clients.FirstOrDefault( c => c.Id == UpdatedClient.Id);
+                if(ExistingClient == null)
+                    clients.Add(UpdatedClient);
+                else
+                {
+                    var index = clients.IndexOf(ExistingClient)
+                    clients.RemoveAt(index);
+                    clients.Insert(index,UpdatedClient);                
+                }
+            }
+            */
         }
 
         public bool Close(Client client)

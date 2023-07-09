@@ -30,5 +30,10 @@
         {
             Shell.Current.GoToAsync("//MainPage");
         }
+
+        private void BillingMenu_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Bills?projectId=0?clientId=0");
+        }
     }
 }

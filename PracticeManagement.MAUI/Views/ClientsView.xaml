@@ -6,7 +6,7 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition/>
                 <RowDefinition Height="7*"/>
                 <RowDefinition/>
@@ -24,15 +24,20 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Label Margin="15,0,0,0" VerticalOptions="CenterAndExpand" Grid.Column="0"  Text="{Binding Path=Display}"/>
                                     <ImageButton Grid.Column="1" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                      Source="pen_to_square.png"
                                      Clicked="Edit_Clicked"/>
+                                    <ImageButton Grid.Column="2" WidthRequest="8" HeightRequest="8" Scale=".4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                     Source="bill_icon.png" 
+                                      Command="{Binding Path=BillingCommand}"
+                                                 CommandParameter="{Binding}"/>
                                     <!-- Close is linked to page binding context to show alert on failure -->
-                                    <ImageButton Grid.Column="2" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
-                                    Source="rectangle_xmark.png"   WidthRequest="10" HeightRequest="10" Clicked="Close_Clicked"/>
                                     <ImageButton Grid.Column="3" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
+                                    Source="rectangle_xmark.png"   WidthRequest="10" HeightRequest="10" Clicked="Close_Clicked"/>
+                                    <ImageButton Grid.Column="4" VerticalOptions="CenterAndExpand" Scale=".4" HorizontalOptions="CenterAndExpand"
                                     Source="trash_can.png"   WidthRequest="10" HeightRequest="10"
                                     Command="{Binding Path=DeleteCommand}" 
                                     CommandParameter="{Binding}"

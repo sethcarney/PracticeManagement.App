@@ -45,6 +45,11 @@ namespace PracticeManagement.Library.Services
             return Bills.FirstOrDefault(e => e == Bill);
         }
 
+        public List<Bill> GetByProjId(int id)
+        {
+            return Bills.Where(e => e.ProjectId == id).ToList();
+        }
+
         public void Add(Bill? Bill)
         {
 

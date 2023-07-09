@@ -10,32 +10,58 @@ namespace PracticeManagement.MAUI.ViewModels
     public class BillsViewViewModel : INotifyPropertyChanged
     {
      
+        
         public Project CurrentProject { get; set; }
-        public BillsViewViewModel(int projectID)
+
+        private List<Project> _projects = new List<Project>();
+        public BillsViewViewModel(int projectID, int clientId)
         {
             if (projectID != 0)
             {
-                CurrentProject = ProjectService.Current.Get(projectID);
+                _projects.Add(ProjectService.Current.Get(projectID));
 
             }
-          
-        }
-
-        public void GenerateBills ()
-        {
-            if(CurrentProject == null)
-                return;
+            else if(clientId != 0)
+            { 
+                _projects = ClientService.Current.Get(clientId).Projects;
+            }
             else
             {
-                var Times = TimeService.Current.currentTimes.Where(t => t.Project == CurrentProject).ToList();
-                double HrsWorked = 0;
-                Times.ForEach(t => { HrsWorked += t.Hours; });
-                BillService.Current.Add( new Bill(HrsWorked, 7, CurrentProject.Id));
+                _projects = ProjectService.Current.currentProjects;
             }
-
-            NotifyPropertyChanged(nameof(Bills));
         }
 
+        public bool GenerateBills ()
+        {
+            bool result = false;
+            _projects.ForEach(p => 
+            {  
+                if(result == false)
+                    result = GenerateBill(p); 
+            });
+            if(result)
+                NotifyPropertyChanged(nameof(Bills));
+            return result;
+        }
+
+        public bool GenerateBill (Project project)
+        {
+            var Times = TimeService.Current.currentTimes.Where(t => t.Project == project).ToList();
+            var TimesUnbilled = Times.Where(t => t.Billed == false).ToList();
+            if(TimesUnbilled.Count == 0)
+            {
+                return false;
+            }
+            double TotalDue = 0;
+            double TotalHours = 0;
+            Times.ForEach(t => { 
+                TotalDue += (t.Hours*t.Employee.Rate);
+                TotalHours += t.Hours;
+            });
+            BillService.Current.Add(new Bill(TotalDue,TotalHours, TimesUnbilled, 7, project.Id));
+            TimesUnbilled.ForEach(t => { t.Billed = true; });
+            return true;
+        }
     
 
 
@@ -43,14 +69,19 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             get
             {
-                if (CurrentProject == null)
+
+                if (  _projects == ProjectService.Current.currentProjects)
                     return new ObservableCollection<BillViewModel>(BillService.Current.currentBills.Select(b => new BillViewModel(b)).ToList());
                 else
-                    return new ObservableCollection<BillViewModel>(BillService.Current.currentBills.Where(b => b.ProjectId == CurrentProject.Id).ToList().Select(b => new BillViewModel(b)).ToList());
-
-
-                
-                
+                {
+                    List<Bill> currentSelection = new List<Bill>();
+                    _projects.ForEach(
+                        p =>
+                        {
+                            currentSelection.AddRange(BillService.Current.GetByProjId(p.Id));
+                        });
+                    return new ObservableCollection<BillViewModel>(currentSelection.Select(b => new BillViewModel(b)).ToList());
+                }                
             }
         }
 

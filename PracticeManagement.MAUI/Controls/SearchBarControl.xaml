@@ -4,19 +4,20 @@
              x:Class="PracticeManagement.MAUI.Controls.SearchBarControl">
 
     <Border>
-        <Grid  VerticalOptions="Start" >
+        <Grid HeightRequest="50"  VerticalOptions="Start" >
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Entry Grid.Row="0" Grid.Column="0" TextChanged="Query_TextChanged"  Text="{Binding QueryText}"></Entry>
-            <ImageButton Scale=".4" HorizontalOptions="Center" Grid.Column="1" Grid.Row="0" Command="{Binding SearchCommand}" Source="search_icon.png"/>
-
+            <Entry Grid.Row="0" Grid.Column="0" TextChanged="Query_TextChanged" Placeholder="Enter text" Text="{Binding QueryText}"></Entry>
+            <ImageButton Scale=".4" HorizontalOptions="Center" Grid.Column="2" Grid.Row="0" Command="{Binding SearchCommand}" Source="search_icon.png"/>
+            <ImageButton Scale=".4" HorizontalOptions="Center" Grid.Column="1" Grid.Row="0" Source="refresh.png"/>
 
         </Grid>
     </Border>

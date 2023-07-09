@@ -26,7 +26,12 @@ namespace PracticeManagement.MAUI.ViewModels
             ClientService.Current.Delete(id);
         }
 
+        public void ExecuteBilling(int id)
+        {
+            Shell.Current.GoToAsync($"//Bills?projectId=0?clientId={id}");
+        }
 
+        public ICommand BillingCommand { get; private set; }
 
         public ClientViewModel(Client client)
         {
@@ -44,6 +49,8 @@ namespace PracticeManagement.MAUI.ViewModels
 
             DeleteCommand = new Command(
                 (c) => ExecuteDelete((c as ClientViewModel).Model.Id));
+            BillingCommand = new Command(
+                (c) => ExecuteBilling((c as ClientViewModel).Model.Id));
 
 
         }
