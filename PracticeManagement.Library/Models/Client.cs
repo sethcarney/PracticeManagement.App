@@ -15,6 +15,12 @@
             Projects = new List<Project>();
         }
 
+        public Client()
+        {
+            Name = String.Empty;
+            Notes = String.Empty;
+            Projects = new List<Project>();
+        }
 
 
 

@@ -38,7 +38,7 @@ namespace PracticeManagement.Library.Models
         }
         public override string ToString()
         {
-            return $" {Date.ToShortDateString()} Employee:  {Employee.Name}  {prettyHours} \n {Project.ToString()} \t  {Narrative}  ";
+            return $" {Date.ToShortDateString()}\t Employee:  {Employee.Name}  {prettyHours} \n {Project.ToString()} \t  {Narrative}  ";
         }
 
     }

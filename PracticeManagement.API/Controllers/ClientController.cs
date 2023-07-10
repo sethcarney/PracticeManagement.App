@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PracticeManagement.API.Database;
+using PracticeManagement.API.EC;
 using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Utilities;
 
 
 namespace PracticeManagement.API.Controllers
@@ -20,20 +22,45 @@ namespace PracticeManagement.API.Controllers
                 _logger = logger;
             }
 
-            [HttpGet("All")]
+            [HttpGet]
             public IEnumerable<Client> Get()
             {
                 return FakeDatabase.Clients;
             }
 
-            [HttpGet("GetClient/{id}")]
+            [HttpGet("/{id}")]
             public Client GetId(int id)
             {
-                return FakeDatabase.Clients.FirstOrDefault(c => c.Id == id);
+                return FakeDatabase.Clients.FirstOrDefault(c => c.Id == id) ?? new Client();
             }
 
-        }
+            [HttpDelete("Delete/{id}")]
+            public Client? Delete(int id)
+            {
+                var clientToDelete = FakeDatabase.Clients.FirstOrDefault(c => c.Id == id);
+                if (clientToDelete != null)
+                {
+                    FakeDatabase.Clients.Remove(clientToDelete);
+                }
+                return clientToDelete;
+            }
 
-   
+            [HttpPost]
+            public Client AddOrUpdate([FromBody] Client client)
+            {
+                return new ClientEC().AddOrUpdate(client);
+            }
+
+            [HttpPost]
+            [Route("Search")]
+            public IEnumerable<Client> Search([FromBody] QueryMessage query)
+            {
+                return new ClientEC().Search(query.Query);
+            }
+
+
+    }
+
+
 
 }

@@ -15,12 +15,14 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public ICommand SearchCommand { get; private set; }
 
+        public ICommand RefreshCommand { get; private set; }
         public ClientsViewViewModel()
         {
 
             PageFilters = new SearchFilters();
             PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
             SearchCommand = new Command(ExecuteSearchCommand);
+            RefreshCommand = new Command(ExecuteRefreshCommand);
         }
 
         public void ExecuteSearchCommand()
@@ -28,6 +30,11 @@ namespace PracticeManagement.MAUI.ViewModels
             NotifyPropertyChanged(nameof(Clients));
         }
 
+        public void ExecuteRefreshCommand()
+        {
+            ClientService.Current.RefreshData();
+            NotifyPropertyChanged(nameof(Clients));
+        }
 
 
         public ObservableCollection<ClientViewModel> Clients

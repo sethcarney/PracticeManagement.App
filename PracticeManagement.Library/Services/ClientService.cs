@@ -29,10 +29,15 @@ namespace PracticeManagement.Library.Services
             }
         }
 
+
+        public void RefreshData()
+        {
+            var response = new WebRequestHandler().Get("/Client").Result;
+            clients = JsonConvert.DeserializeObject<List<Client>>(response) ?? new List<Client>();
+        }
         private ClientService()
         {
-            var response = new WebRequestHandler().Get("/Client/All").Result;
-            clients = !string.IsNullOrEmpty(response) ? JsonConvert.DeserializeObject<List<Client>>(response) : new List<Client>();
+            RefreshData();
         }
 
         public List<Client> currentClients
@@ -65,30 +70,28 @@ namespace PracticeManagement.Library.Services
             return currentClients.FirstOrDefault(e => e.Id == id);
         }
 
-        public void Add(Client? client)
+        public void AddOrUpdate(Client c)
         {
-            
-            if (client != null)
+
+            var response
+                = new WebRequestHandler().Post("/Client", c).Result;
+            //MISSING CODE
+            var myUpdatedClient = JsonConvert.DeserializeObject<Client>(response);
+            if (myUpdatedClient != null)
             {
-                client.Id = _counter++;
-                clients.Add(client);
-            }
-            /*
-             * var response = new WebRequestHandler().Post("/Client", c).Result;
-            var UpdatedClient = Json.DeserializeObject<Client>(response);
-            if(UpdatedClient != null)
-            {
-                var ExistingClient = clients.FirstOrDefault( c => c.Id == UpdatedClient.Id);
-                if(ExistingClient == null)
-                    clients.Add(UpdatedClient);
+                var existingClient = clients.FirstOrDefault(c => c.Id == myUpdatedClient.Id);
+                if (existingClient == null)
+                {
+                    clients.Add(myUpdatedClient);
+                }
                 else
                 {
-                    var index = clients.IndexOf(ExistingClient)
+                    var index = clients.IndexOf(existingClient);
                     clients.RemoveAt(index);
-                    clients.Insert(index,UpdatedClient);                
+                    clients.Insert(index, myUpdatedClient);
                 }
             }
-            */
+            return;
         }
 
         public bool Close(Client client)
@@ -111,14 +114,14 @@ namespace PracticeManagement.Library.Services
         {
             var toRemove = Get(id);
             if (toRemove != null)
-            {
-                clients.Remove(toRemove);
-            }
+                Delete(toRemove);
+
         }
 
         public void Delete(Client s)
         {
-            Delete(s.Id);
+        
+            clients.Remove(s);  
         }
 
         public List<Client> Search(List<Client> currentContext, string query)

@@ -56,11 +56,7 @@ namespace PracticeManagement.MAUI.ViewModels
         }
 
 
-        public void Add()
-        {
-            ClientService.Current.Add(Model);
-        }
-
+        
 
 
 
@@ -84,9 +80,9 @@ namespace PracticeManagement.MAUI.ViewModels
             else
             {
                 Model = new Client(0,UpdatedName, UpdatedNotes);
-                Add();
+                
             }
-
+            ClientService.Current.AddOrUpdate(Model);
             return true;
         }
     }

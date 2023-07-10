@@ -13,6 +13,12 @@ public partial class SearchBarControl : ContentView
             , typeof(SearchBarControl)
             , default(ICommand));
 
+    public static readonly BindableProperty RefreshCommandProperty
+       = BindableProperty.Create(
+           nameof(RefreshCommand)
+           , typeof(ICommand)
+           , typeof(SearchBarControl)
+           , default(ICommand));
 
 
     public static readonly BindableProperty QueryTextProperty
@@ -34,6 +40,11 @@ public partial class SearchBarControl : ContentView
         set => SetValue(SearchCommandProperty, value);
     }
 
+    public ICommand RefreshCommand
+    {
+        get => (ICommand)GetValue(RefreshCommandProperty);
+        set => SetValue(RefreshCommandProperty, value);
+    }
 
 
     public SearchBarControl()

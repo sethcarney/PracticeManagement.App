@@ -5,7 +5,7 @@ namespace PracticeManagement.MAUI.Views
 {
     public partial class ClientsView : ContentPage
     {
-        private bool? result;
+       
 
         public ClientsView()
         {
@@ -29,10 +29,15 @@ namespace PracticeManagement.MAUI.Views
         private async void Add_Clicked(object sender, EventArgs e)
         {
             ClientViewDetail popup = new ClientViewDetail(null);
-            result = (bool?)await this.ShowPopupAsync(popup);
+            await this.ShowPopupAsync(popup);
 
             popup.Closed += (o, e) =>
             {
+                if(e.WasDismissedByTappingOutsideOfPopup)
+                    return;
+
+                bool result = (bool)e.Result;
+
                 if (result == true)
                 {
                     (BindingContext as ClientsViewViewModel).RefreshClientList();
@@ -40,6 +45,10 @@ namespace PracticeManagement.MAUI.Views
                 else if (result == false)
                 {
                     DisplayAlert("Alert", "Unable to add Client.", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Alert", "Undefined behavior.", "OK");
                 }
             };
         }

@@ -39,28 +39,38 @@ namespace PracticeManagement.Library.Utilities
 
         public async Task<string> Post(string url, object obj)
         {
-            using(var client = new HttpClient())
+            var fullUrl = $"https://{host}:{port}{url}";
+            try
             {
-                using(var request = new HttpRequestMessage(HttpMethod.Post, url))
-                {
-                    var json = JsonConvert.SerializeObject(obj);
-                    using(var stringContent = new StringContent(json, Encoding.UTF8, "aPracticeManagementlication/json"))
-                    {
-                        request.Content = stringContent;
 
-                        using(var response = await client
-                            .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                            .ConfigureAwait(false))
+                using (var client = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(HttpMethod.Post, fullUrl))
+                    {
+                        var json = JsonConvert.SerializeObject(obj);
+                        using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
                         {
-                            if(response.IsSuccessStatusCode)
+                            request.Content = stringContent;
+
+                            using (var response = await client
+                                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                                .ConfigureAwait(false))
                             {
-                                return await response.Content.ReadAsStringAsync();
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    return await response.Content.ReadAsStringAsync();
+                                }
+                                return "ERROR";
                             }
-                            return "ERROR";
                         }
                     }
                 }
             }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
+
     }
 }
