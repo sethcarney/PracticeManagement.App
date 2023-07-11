@@ -9,8 +9,10 @@ namespace PracticeManagement.MAUI.ViewModels
 {
     public class BillsViewViewModel : INotifyPropertyChanged
     {
-     
-        
+
+        private string titleString = "Billing page for: ";
+        public String DisplayBillingContext { get {
+                return titleString; }}
         public Project CurrentProject { get; set; }
 
         private List<Project> _projects = new List<Project>();
@@ -18,16 +20,21 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             if (projectID != 0)
             {
+                Project current = ProjectService.Current.Get(projectID);
+                titleString += $"{current.ShortName} - {current.LongName} \n {current.Client.Name}"; 
                 _projects.Add(ProjectService.Current.Get(projectID));
 
             }
             else if(clientId != 0)
             { 
-                _projects = ClientService.Current.Get(clientId).Projects;
+                Client current = ClientService.Current.Get(clientId);
+                _projects = current.Projects;
+                titleString += current.Name;
             }
             else
             {
                 _projects = ProjectService.Current.currentProjects;
+                titleString += "All Projects";
             }
         }
 

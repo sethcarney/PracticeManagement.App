@@ -28,7 +28,7 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public void ExecuteBilling(int id)
         {
-            Shell.Current.GoToAsync($"//Bills?projectId=0?clientId={id}");
+            Shell.Current.GoToAsync($"//Bills?projectId=0&clientId={id}");
         }
 
         public ICommand BillingCommand { get; private set; }

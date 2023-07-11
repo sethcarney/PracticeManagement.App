@@ -33,8 +33,9 @@ namespace PracticeManagement.Library.Services
         public void RefreshData()
         {
             var response = new WebRequestHandler().Get("/Client").Result;
-            clients = JsonConvert.DeserializeObject<List<Client>>(response) ?? new List<Client>();
+            clients = !string.IsNullOrEmpty(response) ? JsonConvert.DeserializeObject<List<Client>>(response) : new List<Client>();
         }
+
         private ClientService()
         {
             RefreshData();
