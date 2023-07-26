@@ -72,5 +72,30 @@ namespace PracticeManagement.Library.Utilities
             }
         }
 
+
+        public async Task<string> Delete(string url)
+        {
+            var fullUrl = $"https://{host}:{port}{url}";
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client
+                        .GetStringAsync(fullUrl)
+                        .ConfigureAwait(false);
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+
+            return null;
+        }
+         
+        }
+
     }
-}
+

@@ -11,7 +11,7 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Time SelectedTime { get; set; }
 
-        public SearchFilters PageFilters { get; set; }
+        public List<Filter> Filters { get; set; }
 
         public ICommand SearchCommand { get; set; }
         public void ExecuteSearchCommand()
@@ -21,20 +21,23 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public TimesViewViewModel()
         {
-            PageFilters = new SearchFilters();
-            PageFilters.Filters.Add(new Filter { Name = "Today", Applied = false });
-            PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+           Filters = new List<Filter>();
+            Filters.Add(new Filter { Name = "Today", Applied = false });
+            Filters.Add(new Filter { Name = "Show Closed", Applied = false });
             SearchCommand = new Command(ExecuteSearchCommand);
         }
         public ObservableCollection<TimeViewModel> Times
         {
             get
             {
+                /*
                 List<Time> filtersApplied = TimeService.Current.applyFilters(PageFilters);
                 if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<TimeViewModel>(filtersApplied.Select(t => new TimeViewModel(t)).ToList());
                 return new ObservableCollection<TimeViewModel>(TimeService.Current.Search(filtersApplied, Query).Select(t => new TimeViewModel(t)).ToList());
-            }
+            */
+                return new ObservableCollection<TimeViewModel>();
+                }
         }
         public void Reset()
         {

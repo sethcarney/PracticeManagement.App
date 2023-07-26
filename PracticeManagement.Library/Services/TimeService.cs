@@ -56,18 +56,7 @@ namespace PracticeManagement.Library.Services
             s.Project.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ||
             s.Project.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
-        public List<Time> applyFilters(SearchFilters filter)
-        {
-            List<Time> filtered = currentTimes;
-            foreach (var filterItem in filter.Filters)
-            {
-                if (filterItem.Name == "Today" && filterItem.Applied)
-                    filtered = filtered.Where(p => p.Date == DateTime.Now.Date).ToList();
-                else if (filterItem.Name == "Show Closed")
-                    filtered = filtered.Where(p => p.Project.isActive != filterItem.Applied).ToList();
-            }
-            return filtered;
-        }
+ 
 
         public void Delete(int id)
         {

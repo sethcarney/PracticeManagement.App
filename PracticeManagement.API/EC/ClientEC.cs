@@ -1,5 +1,6 @@
 ﻿using PracticeManagement.API.Database;
 using PracticeManagement.Library.Models;
+using PracticeManagement.Library.Utilities;
 
 namespace PracticeManagement.API.EC
 {
@@ -26,11 +27,11 @@ namespace PracticeManagement.API.EC
             return client;
         }
 
-        public IEnumerable<Client> Search(string query)
+        public IEnumerable<Client> Search(SearchObj searchObj)
         {
             return FakeDatabase.Clients.
                 Where(c => c.Name.ToUpper()
-                    .Contains(query.ToUpper())).Take(1000);
+                    .Contains(searchObj.Query.ToUpper())).Take(1000);
         }
     }
 }

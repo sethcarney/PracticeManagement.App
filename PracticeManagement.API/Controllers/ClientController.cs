@@ -28,7 +28,7 @@ namespace PracticeManagement.API.Controllers
                 return FakeDatabase.Clients;
             }
 
-            [HttpGet("/{id}")]
+            [HttpGet("{id}")]
             public Client GetId(int id)
             {
                 return FakeDatabase.Clients.FirstOrDefault(c => c.Id == id) ?? new Client();
@@ -53,9 +53,9 @@ namespace PracticeManagement.API.Controllers
 
             [HttpPost]
             [Route("Search")]
-            public IEnumerable<Client> Search([FromBody] QueryMessage query)
+            public IEnumerable<Client> Search([FromBody] SearchObj searchInfo)
             {
-                return new ClientEC().Search(query.Query);
+                return new ClientEC().Search(searchInfo);
             }
 
 

@@ -88,18 +88,6 @@ namespace PracticeManagement.Library.Services
             return filtered.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.Client.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
-        public List<Project> applyFilters(SearchFilters filter)
-        {
-            List<Project> filtered = currentProjects;
-            foreach (var filterItem in filter.Filters)
-            {
-                if (filterItem.Name == "Show Closed")
-                    filtered = filtered.Where(p => p.isActive != filterItem.Applied).ToList();
-            }
-
-
-            return filtered;
-        }
 
         public void Close(Project proj)
         {

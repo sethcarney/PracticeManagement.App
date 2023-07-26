@@ -7,9 +7,9 @@ public partial class FilterBarControl : ContentView
 {
     public static readonly BindableProperty SearchFiltersProperty
         = BindableProperty.Create(nameof(SearchFilters)
-            , typeof(SearchFilters)
+            , typeof(List<Filter>)
             , typeof(FilterBarControl)
-            , new SearchFilters()
+            , new List<Filter>()
             , BindingMode.TwoWay);
 
     public static readonly BindableProperty UpdateCommandProperty
@@ -21,9 +21,9 @@ public partial class FilterBarControl : ContentView
 
 
 
-    public SearchFilters SearchFilters
+    public List<Filter> SearchFilters
     {
-        get => (SearchFilters)GetValue(SearchFiltersProperty);
+        get => (List<Filter>)GetValue(SearchFiltersProperty);
         set => SetValue(SearchFiltersProperty, value);
     }
     public ICommand UpdateCommand
@@ -36,7 +36,7 @@ public partial class FilterBarControl : ContentView
     {
         Button button = sender as Button;
         var firstColor = button.BackgroundColor;
-        Filter filterClicked = SearchFilters.Filters.FirstOrDefault(f => f.Name == button.Text);
+        Filter filterClicked = SearchFilters.FirstOrDefault(f => f.Name == button.Text);
         if (filterClicked.Applied)
         {
             button.BackgroundColor = Colors.Gray;

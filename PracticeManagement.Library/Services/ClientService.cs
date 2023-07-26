@@ -49,17 +49,7 @@ namespace PracticeManagement.Library.Services
             }
         }
 
-        public List<Client> applyFilters(SearchFilters filter)
-        {
-            List<Client> filtered = currentClients;
-            foreach (var filterItem in filter.Filters)
-            {
-                if (filterItem.Name == "Show Closed")
-                    filtered = filtered.Where(c => c.isActive != filterItem.Applied).ToList();
-            }
-            return filtered;
-        }
-
+       
         public Client? Get(int id)
         {
           /*  var response = new WebRequestHandler().
@@ -100,6 +90,7 @@ namespace PracticeManagement.Library.Services
             if (client.isActive == false)
             {
                 client.isActive = true;
+                AddOrUpdate(client);
                 return true;
             }
 
@@ -109,25 +100,26 @@ namespace PracticeManagement.Library.Services
                     return false;
             }
 
-            client.isActive = false; return true;
+            client.isActive = false;
+            AddOrUpdate(client);
+            return true;
         }
         public void Delete(int id)
         {
-            var toRemove = Get(id);
-            if (toRemove != null)
-                Delete(toRemove);
+            var response = new WebRequestHandler().Delete($"/Client/{id}").Result;
 
         }
 
         public void Delete(Client s)
         {
-        
-            clients.Remove(s);  
+            Delete(s.Id);  
         }
 
-        public List<Client> Search(List<Client> currentContext, string query)
+        public void Search(SearchObj s)
         {
-            return currentContext.Where(s => s.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            var response = new WebRequestHandler().Post("/Client/Search", s).Result;
+            clients = JsonConvert.DeserializeObject<List<Client>>(response) ?? new List<Client>();
+
         }
 
        

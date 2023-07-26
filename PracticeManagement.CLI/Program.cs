@@ -7,6 +7,7 @@ namespace PracticeManagement
 
         static public void Main(string[] args)
         {
+            /*
             List<Project> projects = new List<Project>();
             var myClientService = ClientService.Current;
             while (true)
@@ -34,7 +35,9 @@ namespace PracticeManagement
                     Console.WriteLine("Invalid menu selection");
                 }
             }
+            */
         }
+        /*
 
         public static void clientMenu()
         {
@@ -211,8 +214,8 @@ namespace PracticeManagement
                 Console.WriteLine();
             }
         }
-
+        */
     }
-
+        
 
 }

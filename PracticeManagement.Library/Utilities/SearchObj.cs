@@ -7,34 +7,41 @@ using PracticeManagement.Library.Models;
 
 namespace PracticeManagement.Library.Utilities
 {
-    public class QueryMessage
+    public class SearchObj
     {
         private string? query;
 
-        private SearchFilters? filters;
-        public SearchFilters Filters { get => filters ?? new SearchFilters();
-                set 
-                {
-                    filters = value;
-                } 
-        }
+        public List<Filter>? Filters { get; set; }
+
+
+        
         public string Query { get => query ?? string.Empty;
             set
             {
                 query = value;
             }
-        } 
-
-        public QueryMessage(string query, SearchFilters filters)
+        }
+        
+        public bool hasContent ()
+        {
+            return !string.IsNullOrEmpty(Query) || Filters.Any(f => f.Applied);
+        }
+        public SearchObj(string query, List<Filter> filters)
         {
             Query = query;
             Filters = filters;
         }
 
-        public QueryMessage(string query)
+        public SearchObj(string query)
         {
             Query = query;
-            
+            Filters= new List<Filter>();
+        }
+
+        public SearchObj()
+        {
+            query = string.Empty;
+            Filters = new List<Filter>();
         }
     }
 }

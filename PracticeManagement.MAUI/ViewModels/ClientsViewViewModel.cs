@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Services;
+using PracticeManagement.Library.Utilities;
 
 namespace PracticeManagement.MAUI.ViewModels
 {
@@ -11,16 +12,18 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Client SelectedClient { get; set; }
 
-        public SearchFilters PageFilters { get; set; }
+       
 
+        public SearchObj searchObj { get; set; }
         public ICommand SearchCommand { get; private set; }
 
         public ICommand RefreshCommand { get; private set; }
         public ClientsViewViewModel()
         {
 
-            PageFilters = new SearchFilters();
-            PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            List<Filter> Filters = new List<Filter>();
+            Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            searchObj = new SearchObj("", Filters);
             SearchCommand = new Command(ExecuteSearchCommand);
             RefreshCommand = new Command(ExecuteRefreshCommand);
         }
@@ -41,10 +44,11 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             get
             {
-                List<Client> filtersApplied = ClientService.Current.applyFilters(PageFilters);
-                if (string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<ClientViewModel>(filtersApplied.Select(c => new ClientViewModel(c)).ToList());
-                return new ObservableCollection<ClientViewModel>(ClientService.Current.Search(filtersApplied, Query).Select(c => new ClientViewModel(c)).ToList());
+
+                if (searchObj.hasContent() == true)
+                    ClientService.Current.Search(searchObj);
+
+                return new ObservableCollection<ClientViewModel>(ClientService.Current.currentClients.Select(c => new ClientViewModel(c)).ToList());
             }
         }
 

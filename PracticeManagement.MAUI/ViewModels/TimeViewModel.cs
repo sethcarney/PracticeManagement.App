@@ -85,8 +85,8 @@ namespace PracticeManagement.MAUI.ViewModels
                 UpdatedHours = "0.0";
             }
             DeleteCommand = new Command((c) => ExecuteDelete((c as TimeViewModel).Model.Id));
-            FilterClosed = new SearchFilters();
-            FilterClosed.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            Filters = new List<Filter>();
+            Filters.Add(new Filter { Name = "Show Closed", Applied = false });
         }
         public ICommand DeleteCommand { get; private set; }
         public void ExecuteDelete(int id)
@@ -125,13 +125,14 @@ namespace PracticeManagement.MAUI.ViewModels
                 return EmployeeService.Current.currentEmployees;
             }
         }
-        SearchFilters FilterClosed { get; set; }
+        public List<Filter> Filters { get; set; }
         public List<Project> Projects
         {
             get
             {
                 //Only return open projects for potential time entries
-                return ProjectService.Current.applyFilters(FilterClosed);
+                //return ProjectService.Current.applyFilters(FilterClosed);
+                return ProjectService.Current.currentProjects;
             }
         }
         public string Display

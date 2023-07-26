@@ -12,7 +12,7 @@ namespace PracticeManagement.MAUI.ViewModels
     {
         public Project SelectedProject { get; set; }
 
-        public SearchFilters PageFilters { get; set; }
+        public List<Filter> Filters { get; set; }
 
         public ICommand SearchCommand { get; set; }
         public void ExecuteSearchCommand()
@@ -21,8 +21,8 @@ namespace PracticeManagement.MAUI.ViewModels
         }
         public ProjectsViewViewModel()
         {
-            PageFilters = new SearchFilters();
-            PageFilters.Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            Filters = new List<Filter>();
+            Filters.Add(new Filter { Name = "Show Closed", Applied = false });
             SearchCommand = new Command(ExecuteSearchCommand);
 
         }
@@ -33,11 +33,13 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             get
             {
-                List<Project> filtersApplied = ProjectService.Current.applyFilters(PageFilters);
+               /* List<Project> filtersApplied = ProjectService.Current.applyFilters(PageFilters);
                 if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<ProjectViewModel>(filtersApplied.Select(p => new ProjectViewModel(p)).ToList());
                 return new ObservableCollection<ProjectViewModel>(ProjectService.Current.Search(filtersApplied, Query).Select(p => new ProjectViewModel(p)).ToList());
-            }
+            */
+               return new ObservableCollection<ProjectViewModel>();
+                }
         }
 
 
