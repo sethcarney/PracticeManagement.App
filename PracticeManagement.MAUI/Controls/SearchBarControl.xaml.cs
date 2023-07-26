@@ -55,6 +55,6 @@ public partial class SearchBarControl : ContentView
 
     private void Query_TextChanged(object sender, TextChangedEventArgs e)
     {
-        SearchCommand?.Execute(this);
+     SearchCommand?.Execute(this);
     }
 }

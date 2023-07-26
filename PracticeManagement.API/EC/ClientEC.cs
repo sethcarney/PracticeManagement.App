@@ -29,9 +29,20 @@ namespace PracticeManagement.API.EC
 
         public IEnumerable<Client> Search(SearchObj searchObj)
         {
-            return FakeDatabase.Clients.
+            var context = FakeDatabase.Clients.Take(1000);
+            if(!string.IsNullOrEmpty(searchObj.Query))
+            {
+                context = FakeDatabase.Clients.
                 Where(c => c.Name.ToUpper()
                     .Contains(searchObj.Query.ToUpper())).Take(1000);
+            }
+
+            foreach (var filterItem in searchObj.Filters)
+            {
+                if (filterItem.Name == "Show Closed")
+                   context = context.Where(c => c.isActive != filterItem.Applied).ToList();
+            }
+            return context;
         }
     }
 }

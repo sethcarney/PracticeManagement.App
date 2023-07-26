@@ -45,9 +45,8 @@ namespace PracticeManagement.MAUI.ViewModels
             get
             {
 
-                if (searchObj.hasContent() == true)
-                    ClientService.Current.Search(searchObj);
-
+               
+                ClientService.Current.Search(searchObj);
                 return new ObservableCollection<ClientViewModel>(ClientService.Current.currentClients.Select(c => new ClientViewModel(c)).ToList());
             }
         }
