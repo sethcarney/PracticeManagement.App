@@ -80,22 +80,31 @@ namespace PracticeManagement.Library.Utilities
             {
                 using (var client = new HttpClient())
                 {
-                    var response = await client
-                        .GetStringAsync(fullUrl)
-                        .ConfigureAwait(false);
-                    return response;
+                    using (var request = new HttpRequestMessage(HttpMethod.Delete, fullUrl))
+                    {
+                        using (var response = await client
+                                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                                .ConfigureAwait(false))
+                        {
+                            if (response.IsSuccessStatusCode)
+                            {
+                                return await response.Content.ReadAsStringAsync();
+                            }
+                            return "ERROR";
+                        }
+                    }
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+
             }
 
 
             return null;
         }
-         
-        }
+
+    }
 
     }
 

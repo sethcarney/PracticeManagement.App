@@ -44,5 +44,19 @@ namespace PracticeManagement.API.EC
             }
             return context;
         }
+
+
+        public Client? Delete(int id)
+        {
+            var clientToDelete
+                = FakeDatabase.Clients
+                .FirstOrDefault(c => c.Id == id);
+            if(clientToDelete != null)
+            {
+                FakeDatabase.Clients.Remove(clientToDelete);
+                return clientToDelete;
+            }
+            return null;
+        }
     }
 }

@@ -106,6 +106,9 @@ namespace PracticeManagement.Library.Services
         }
         public void Delete(int id)
         {
+            
+           
+            //Remove from server
             var response = new WebRequestHandler().Delete($"/Client/{id}").Result;
 
         }

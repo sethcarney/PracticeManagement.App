@@ -34,15 +34,10 @@ namespace PracticeManagement.API.Controllers
                 return FakeDatabase.Clients.FirstOrDefault(c => c.Id == id) ?? new Client();
             }
 
-            [HttpDelete("Delete/{id}")]
+            [HttpDelete("{id}")]
             public Client? Delete(int id)
             {
-                var clientToDelete = FakeDatabase.Clients.FirstOrDefault(c => c.Id == id);
-                if (clientToDelete != null)
-                {
-                    FakeDatabase.Clients.Remove(clientToDelete);
-                }
-                return clientToDelete;
+               return new ClientEC().Delete(id);
             }
 
             [HttpPost]
@@ -50,6 +45,8 @@ namespace PracticeManagement.API.Controllers
             {
                 return new ClientEC().AddOrUpdate(client);
             }
+
+            
 
             [HttpPost]
             [Route("Search")]
