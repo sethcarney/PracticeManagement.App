@@ -25,7 +25,7 @@ namespace PracticeManagement.API.Controllers
             [HttpGet]
             public IEnumerable<Client> Get()
             {
-                return FakeDatabase.Clients;
+                return MsSqlContext.Current.Get();
             }
 
             [HttpGet("{id}")]
