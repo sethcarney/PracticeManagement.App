@@ -110,6 +110,7 @@ namespace PracticeManagement.Library.Services
            
             //Remove from server
             var response = new WebRequestHandler().Delete($"/Client/{id}").Result;
+            //clients.Remove(clients.FirstOrDefault(c => c.Id == id));
 
         }
 

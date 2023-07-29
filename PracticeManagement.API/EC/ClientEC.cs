@@ -1,4 +1,6 @@
-﻿using PracticeManagement.API.Database;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Data.SqlClient;
+using PracticeManagement.API.Database;
 using PracticeManagement.Library.Models;
 using PracticeManagement.Library.Utilities;
 
@@ -8,7 +10,7 @@ namespace PracticeManagement.API.EC
     {
         public Client AddOrUpdate(Client client)
         {
-            if (client.Id > 0)
+            /*if (client.Id > 0)
             {
                 var clientToUpdate
                     = FakeDatabase.Clients
@@ -22,27 +24,41 @@ namespace PracticeManagement.API.EC
             {
                 int id = MsSqlContext.Current.insertClient(client);
             }
+            */
+            if (client.Id <= 0)
+            {
+                using (var context = new EfContextFactory().CreateDbContext(new string[0]))
+                {
+
+                    context.Clients.Add(client);
+                    context.SaveChanges();
+                }
+            }
 
             return client;
         }
 
         public IEnumerable<Client> Search(SearchObj searchObj)
         {
-            return MsSqlContext.Current.filterClients(searchObj);
-        }
-
-
-        public Client? Delete(int id)
-        {
-            var clientToDelete
-                = FakeDatabase.Clients
-                .FirstOrDefault(c => c.Id == id);
-            if(clientToDelete != null)
+            var results = new List<Client>();
+            using (var context = new EfContextFactory().CreateDbContext(new string[0]))
             {
-                FakeDatabase.Clients.Remove(clientToDelete);
-                return clientToDelete;
+                foreach (var filterItem in searchObj.Filters)
+                {
+                    if (filterItem.Name == "Show Closed")
+                        results = (List<Client>)context.Clients.Where(indexer => indexer.isActive != filterItem.Applied).ToList();
+                }
+
             }
-            return null;
+            return results;
+        }
+        //var groups = context.Products.GroupBy(p => p.CategoryId);
+
+
+        public bool Delete(int id)
+        {
+           var result = MsSqlContext.Current.deleteClient(id);
+           return Convert.ToBoolean(result);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace PracticeManagement.MAUI.ViewModels
             if (projectID != 0)
             {
                 Project current = ProjectService.Current.Get(projectID);
-                titleString += $"{current.ShortName} - {current.LongName} \n {current.Client.Name}"; 
+                titleString += $"{current.ShortName} - {current.LongName} \n"; 
                 _projects.Add(ProjectService.Current.Get(projectID));
 
             }

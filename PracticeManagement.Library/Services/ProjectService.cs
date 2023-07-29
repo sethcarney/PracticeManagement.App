@@ -85,7 +85,7 @@ namespace PracticeManagement.Library.Services
 
         public List<Project> Search(List<Project> filtered, string query)
         {
-            return filtered.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.Client.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            return filtered;//.Where(s => s.ShortName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.LongName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || s.Client.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
 

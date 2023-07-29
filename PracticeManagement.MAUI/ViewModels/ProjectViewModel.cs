@@ -9,7 +9,7 @@ namespace PracticeManagement.MAUI.ViewModels
         public Project? Model { get; set; }
         public string? UpdatedShortName { get; set; }
         public string? UpdatedLongName { get; set; }
-        public Client? SelectedClient { get; set; }
+        public int SelectedClientId { get; set; }
         public string Display
         {
             get
@@ -44,13 +44,14 @@ namespace PracticeManagement.MAUI.ViewModels
             {
                 UpdatedShortName = Model.ShortName;
                 UpdatedLongName = Model.LongName;
-                SelectedClient = currentProject.Client;
+                SelectedClientId = currentProject.ClientId;
 
             }
             else
             {
                 UpdatedShortName = "";
                 UpdatedLongName = "";
+                SelectedClientId = 0;
 
             }
             DeleteCommand = new Command(
@@ -64,8 +65,8 @@ namespace PracticeManagement.MAUI.ViewModels
 
         }
 
-
-        public void Add()
+        //TODO Enable update on proj
+        public void AddorUpdate()
         {
             ProjectService.Current.Add(Model);
         }
@@ -84,28 +85,31 @@ namespace PracticeManagement.MAUI.ViewModels
 
         public bool VerifyandUpdate()
         {
-            if (SelectedClient == null || String.IsNullOrEmpty(UpdatedLongName) || String.IsNullOrEmpty(UpdatedShortName))
+            if (SelectedClientId == 0 || String.IsNullOrEmpty(UpdatedLongName) || String.IsNullOrEmpty(UpdatedShortName))
                 return false;
 
-
+            var SelectedClient = ClientService.Current.Get(SelectedClientId);
 
             if (Model != null)
             {
+               
                 Model.ShortName = UpdatedShortName;
                 Model.LongName = UpdatedLongName;
-                if (!SelectedClient.Equals(Model.Client))
+                if (SelectedClientId != Model.ClientId)
                 {
-                    Model.Client.Projects.Remove(Model);
-                    Model.Client = SelectedClient;
+                    var OldClient = ClientService.Current.Get(Model.ClientId);
+                    OldClient.Projects.Remove(Model);
                     SelectedClient.Projects.Add(Model);
+                    Model.ClientId = SelectedClientId;
                 }
             }
             else
             {
-                Model = new Project(UpdatedShortName, UpdatedLongName, SelectedClient);
+                Model = new Project(UpdatedShortName, UpdatedLongName, SelectedClientId);
                 SelectedClient.Projects.Add(Model);
-                Add();
+                
             }
+            AddorUpdate();
             return true;
         }
 

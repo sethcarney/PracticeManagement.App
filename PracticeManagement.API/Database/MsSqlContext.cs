@@ -39,6 +39,32 @@ namespace PracticeManagement.API.Database
             return results;
         }
 
+        public Client Get(int id)
+        {
+              var result = new Client();
+            using (var conn = new SqlConnection(connectionString))
+            {
+                var sql = "select Id, Name, Notes, isActive  from Clients where Id = @Id";
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    conn.Open();
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result = new Client
+                        {
+                            Id = (int)reader[0],
+                            Name = reader[1]?.ToString() ?? string.Empty,
+                            Notes = reader[2]?.ToString() ?? string.Empty,
+                            isActive = Convert.ToBoolean(reader[3])
+                        };
+                    }
+                }
+            }
+
+            return result;  
+        }
 
         public int insertClient(Client client)
         {
@@ -58,6 +84,20 @@ namespace PracticeManagement.API.Database
             }
 
             return result;
+        }
+
+        public int deleteClient(int id)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                var sql = "delete from Clients where Id = @Id";
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    conn.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<Client> filterClients(SearchObj searchObj)

@@ -16,7 +16,7 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             get
             {
-                return Model.ToString() ?? string.Empty;
+                return $"{Model.Name} - {Model.Notes}";
             }
         }
 

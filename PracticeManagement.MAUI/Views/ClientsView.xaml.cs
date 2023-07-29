@@ -33,11 +33,11 @@ namespace PracticeManagement.MAUI.Views
 
             popup.Closed += (o, e) =>
             {
-                if(e.WasDismissedByTappingOutsideOfPopup)
+                if(e.WasDismissedByTappingOutsideOfPopup || e.Result == null)
                     return;
 
+    
                 bool result = (bool)e.Result;
-
                 if (result == true)
                 {
                     (BindingContext as ClientsViewViewModel).RefreshClientList();
@@ -45,10 +45,6 @@ namespace PracticeManagement.MAUI.Views
                 else if (result == false)
                 {
                     DisplayAlert("Alert", "Unable to add Client.", "OK");
-                }
-                else
-                {
-                    DisplayAlert("Alert", "Undefined behavior.", "OK");
                 }
             };
         }

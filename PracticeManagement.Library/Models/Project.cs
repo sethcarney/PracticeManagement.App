@@ -3,36 +3,33 @@
     public class Project
     {
 
-        public Project(string shortName, string longName, Client attachedClient)
+        public Project(string shortName, string longName, int clientId)
         {
             isActive = true;
             OpenDate = DateTime.Now;
             ShortName = shortName;
             LongName = longName;
-            Client = attachedClient;
+            ClientId = clientId;
+        }
+        
+        public Project()
+        {
+            isActive = true;
+            OpenDate = DateTime.Now;
+            ShortName = String.Empty;
+            LongName = String.Empty;
         }
 
 
 
         public int Id { get; set; }
         public DateTime OpenDate { get; set; }
-        public DateTime ClosedDate { get; set; }
+        public DateTime? ClosedDate { get; set; }
         public bool isActive { get; set; }
         public string ShortName { get; set; }
         public string LongName { get; set; }
 
-        public Client Client { get; set; }
-
-        public string printVal
-        {
-            get
-            {
-                return $"[{ShortName}] - {LongName}";
-            }
-        }
-        public override string ToString()
-        {
-            return printVal;
-        }
+        public int  ClientId { get; set; }
+        
     }
 }

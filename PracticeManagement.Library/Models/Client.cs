@@ -27,18 +27,13 @@
         public int Id { get; set; }
 
         public DateTime OpenDate { get; set; }
-        public DateTime ClosedDate { get; set; }
+        public DateTime? ClosedDate { get; set; }
 
         public bool isActive { get; set; }
 
         public string Name { get; set; }
         public string? Notes { get; set; }
 
-        public string printVal { get { return $"{Name} - {Notes}"; } }
         public List<Project> Projects { get; set; }
-        public override string ToString()
-        {
-            return printVal;
-        }
     }
 }

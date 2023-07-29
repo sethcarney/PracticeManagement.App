@@ -38,7 +38,7 @@ public partial class ProjectViewDetail : Popup
         if (selectedIndex != -1)
         {
             Client current = (Client)picker.SelectedItem;
-            (BindingContext as ProjectViewModel).Model.Client = current;
+            (BindingContext as ProjectViewModel).Model.ClientId = current.Id;
         }
     }
 }
