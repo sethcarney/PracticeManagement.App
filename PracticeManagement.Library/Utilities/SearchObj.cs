@@ -11,7 +11,7 @@ namespace PracticeManagement.Library.Utilities
     {
         private string? query;
 
-        public List<Filter>? Filters { get; set; }
+        public List<Filter> Filters { get; set; }
 
 
         
@@ -25,6 +25,12 @@ namespace PracticeManagement.Library.Utilities
         public bool hasContent ()
         {
             return !string.IsNullOrEmpty(Query) || Filters.Any(f => f.Applied);
+        }
+
+        public void Reset()
+        {
+            Query = string.Empty;
+            Filters.ForEach(f => f.Applied = false);
         }
         public SearchObj(string query, List<Filter> filters)
         {

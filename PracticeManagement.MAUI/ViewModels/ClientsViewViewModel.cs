@@ -15,28 +15,48 @@ namespace PracticeManagement.MAUI.ViewModels
        
 
         public SearchObj searchObj { get; set; }
-        public ICommand SearchCommand { get; private set; }
+        public ICommand LocalSearchCommand { get; private set; }
 
         public ICommand RefreshCommand { get; private set; }
+
+        public ICommand ResetSearchCommand { get; private set; }
         public ClientsViewViewModel()
         {
 
             List<Filter> Filters = new List<Filter>();
             Filters.Add(new Filter { Name = "Show Closed", Applied = false });
+            Filters.Add(new Filter { Name = "Show Open", Applied = false });
+            Filters.Add(new Filter { Name = "Has Projects", Applied = false });
             searchObj = new SearchObj("", Filters);
-            SearchCommand = new Command(ExecuteSearchCommand);
-            RefreshCommand = new Command(ExecuteRefreshCommand);
+            RefreshCommand = new Command(ExecuteRefreshOrSearchCommand);
+            LocalSearchCommand = new Command(ExecuteLocalSearchCommand);
+            ResetSearchCommand = new Command(ExecuteResetSearchObj);
         }
 
-        public void ExecuteSearchCommand()
+        public void ExecuteRefreshOrSearchCommand()
         {
+            if(searchObj.hasContent())
+                ClientService.Current.Search(searchObj);
+            else
+                ClientService.Current.RefreshData();
             NotifyPropertyChanged(nameof(Clients));
         }
-
-        public void ExecuteRefreshCommand()
+        
+        //This gets called when typing in the search bar
+        public void ExecuteLocalSearchCommand()
         {
-            ClientService.Current.RefreshData();
-            NotifyPropertyChanged(nameof(Clients));
+            if (searchObj.Query != String.Empty)
+            {
+                ClientService.Current.LocalSearch(searchObj.Query);
+                NotifyPropertyChanged(nameof(Clients));
+            }
+
+        }
+
+        public void ExecuteResetSearchObj()
+        {
+            searchObj.Reset();
+            ExecuteRefreshOrSearchCommand();
         }
 
 
@@ -44,9 +64,6 @@ namespace PracticeManagement.MAUI.ViewModels
         {
             get
             {
-
-               
-                ClientService.Current.Search(searchObj);
                 return new ObservableCollection<ClientViewModel>(ClientService.Current.currentClients.Select(c => new ClientViewModel(c)).ToList());
             }
         }
@@ -59,21 +76,10 @@ namespace PracticeManagement.MAUI.ViewModels
                 NotifyPropertyChanged("Clients");
             return result;
         }
-
-
         public void RefreshClientList()
         {
             NotifyPropertyChanged(nameof(Clients));
         }
-
-        public void Reset()
-        {
-            Query = "";
-            NotifyPropertyChanged("Clients");
-        }
-
-
-        public string Query { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

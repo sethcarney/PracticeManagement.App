@@ -16,9 +16,9 @@
             </Grid.RowDefinitions>
 
             <Entry Grid.Row="0" Grid.Column="0" TextChanged="Query_TextChanged" Placeholder="Enter text" Text="{Binding QueryText}"></Entry>
-            <ImageButton Scale=".4" HorizontalOptions="Center" Grid.Column="2" Grid.Row="0" Command="{Binding SearchCommand}" Source="search_icon.png"/>
-            <ImageButton Scale=".4" HorizontalOptions="Center" Grid.Column="1" Grid.Row="0" Command="{Binding RefreshCommand}" Source="refresh.png"/>
 
+            <ImageButton Scale=".4" HorizontalOptions="Center" Grid.Column="2" Grid.Row="0" Command="{Binding RefreshCommand}" Source="search_icon.png"/>
+            <Button Text="Reset" Command="{Binding ResetCommand}" Clicked="Reset_Clicked" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"/>
         </Grid>
     </Border>
 </ContentView>

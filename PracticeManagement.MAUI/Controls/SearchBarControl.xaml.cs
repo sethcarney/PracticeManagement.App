@@ -4,14 +4,14 @@ namespace PracticeManagement.MAUI.Controls;
 
 public partial class SearchBarControl : ContentView
 {
- 
 
-    public static readonly BindableProperty SearchCommandProperty
-        = BindableProperty.Create(
-            nameof(SearchCommand)
-            , typeof(ICommand)
-            , typeof(SearchBarControl)
-            , default(ICommand));
+
+    public static readonly BindableProperty LocalSearchCommandProperty
+       = BindableProperty.Create(
+           nameof(LocalSearchCommand)
+           , typeof(ICommand)
+           , typeof(SearchBarControl)
+           , default(ICommand));
 
     public static readonly BindableProperty RefreshCommandProperty
        = BindableProperty.Create(
@@ -20,6 +20,12 @@ public partial class SearchBarControl : ContentView
            , typeof(SearchBarControl)
            , default(ICommand));
 
+    public static readonly BindableProperty ResetCommandProperty
+     = BindableProperty.Create(
+         nameof(ResetCommand)
+         , typeof(ICommand)
+         , typeof(SearchBarControl)
+         , default(ICommand));
 
     public static readonly BindableProperty QueryTextProperty
         = BindableProperty.Create(nameof(QueryText)
@@ -34,18 +40,23 @@ public partial class SearchBarControl : ContentView
         set => SetValue(QueryTextProperty, value);
     }
 
-    public ICommand SearchCommand
-    {
-        get => (ICommand)GetValue(SearchCommandProperty);
-        set => SetValue(SearchCommandProperty, value);
-    }
-
     public ICommand RefreshCommand
     {
         get => (ICommand)GetValue(RefreshCommandProperty);
         set => SetValue(RefreshCommandProperty, value);
     }
 
+    public ICommand LocalSearchCommand
+    {
+        get => (ICommand)GetValue(LocalSearchCommandProperty);
+        set => SetValue(LocalSearchCommandProperty, value);
+    }
+
+    public ICommand ResetCommand
+    {
+        get => (ICommand)GetValue(ResetCommandProperty);
+        set => SetValue(ResetCommandProperty, value);
+    }
 
     public SearchBarControl()
     {
@@ -55,6 +66,14 @@ public partial class SearchBarControl : ContentView
 
     private void Query_TextChanged(object sender, TextChangedEventArgs e)
     {
-     SearchCommand?.Execute(this);
+        if(QueryText != string.Empty)
+            LocalSearchCommand?.Execute(this);
+        else
+            RefreshCommand?.Execute(this);
+    }
+
+    private void Reset_Clicked(object sender, EventArgs e)
+    {
+        QueryText = string.Empty;
     }
 }

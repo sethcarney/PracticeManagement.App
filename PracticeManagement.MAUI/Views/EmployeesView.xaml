@@ -11,7 +11,7 @@
                 <RowDefinition Height="8*"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchCommand="{Binding SearchCommand}"/>
+         <!--   <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchCommand="{Binding SearchCommand}"/> -->
             <Grid Grid.Row="1" >
                 <ListView ItemsSource="{Binding Path=Employees}" SelectedItem="{Binding Path=SelectedEmployee}">
                     <ListView.ItemTemplate>

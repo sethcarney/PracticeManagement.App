@@ -106,10 +106,11 @@ namespace PracticeManagement.Library.Services
         }
         public void Delete(int id)
         {
+            clients.Remove(clients.FirstOrDefault(c => c.Id == id));
             
-           
             //Remove from server
             var response = new WebRequestHandler().Delete($"/Client/{id}").Result;
+            
             //clients.Remove(clients.FirstOrDefault(c => c.Id == id));
 
         }
@@ -126,6 +127,13 @@ namespace PracticeManagement.Library.Services
 
         }
 
-       
+        public void LocalSearch(string query)
+        {
+            var result = clients.Where(c => c.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 || c.Notes.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            if (result.Count > 0)
+                clients = result;
+            else if(clients.Count == 0)
+                RefreshData();
+        }
     }
 }

@@ -13,8 +13,8 @@
                 <RowDefinition Height="7*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchCommand="{Binding SearchCommand}"/>
-            <c:FilterBarControl Grid.Row="1" SearchFilters="{Binding PageFilters}" UpdateCommand="{Binding SearchCommand}" />
+          <!--  <c:SearchBarControl Grid.Row="0" QueryText="{Binding Query}" SearchCommand="{Binding SearchCommand}"/>
+            <c:FilterBarControl Grid.Row="1" SearchFilters="{Binding PageFilters}" UpdateCommand="{Binding SearchCommand}" /> -->
             <Grid Grid.Row="2" >
                 <ListView ItemsSource="{Binding Path=Projects}" SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
                     <ListView.ItemTemplate>
